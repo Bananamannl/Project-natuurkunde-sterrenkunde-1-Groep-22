@@ -1,3 +1,4 @@
+# Ignore the data file
 20260421_HoQIs.txt
-
-/manimations/
+# Ignore the Media Files
+media/
