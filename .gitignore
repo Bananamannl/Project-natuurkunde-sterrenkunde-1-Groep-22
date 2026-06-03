@@ -2,3 +2,5 @@
 20260421_HoQIs.txt
 # Ignore the Media Files
 media/
+__pycache__/scene.cpython-314.pyc
+__pycache__/scene2.cpython-314.pyc
