@@ -1,12 +1,15 @@
 #from ellips_fitting_and_reshaping_4_5 import transform
 import numpy as np
+import matplotlib.pyplot as plt
+#from ellips_fitting_and_reshaping_4_5 import transform
+Q1 = np.load("1xQ1.npy")
+Q2 = np.load("1xQ2.npy")
+#Q1_new, Q2_new = transform(Q1, Q2)
 
-Q1 = np.load("Q1.npy")
-Q2 = np.load("Q2.npy")
-print(Q1)
-#plt.figure()
-#plt.scatter(Q1, Q2, s=3)
-#plt.scatter(Q1_new, Q2_new, s=5)
-#plt.axis("equal") 
-#plt.grid()
-#plt.show()
+plt.figure()
+#plt.scatter(Q1[0:1000], Q2[0:1000], s=3)
+plt.scatter(Q1, Q2, s=3)
+#plt.scatter(Q1_new, Q2_new, s=2)
+plt.axis("equal") 
+plt.grid()
+plt.show()

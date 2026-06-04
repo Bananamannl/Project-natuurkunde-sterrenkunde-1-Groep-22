@@ -21,6 +21,8 @@ def get_asd(data, fs, segment_time):
 # Vervolgens kun je de asd op de volgende manier plotten
 # Bijvoorbeeld voor de x-lijst:
 asd = get_asd(x_lijst, fs=1000, segment_time=10)
+#Vervolgens kun je de asd op de volgende manier plotten
+asd = get_asd(displacement_dof()[0], fs=1000, segment_time=10)
 
 plt.figure()
 plt.loglog(asd.frequencies.value, asd.value)
