@@ -36,3 +36,11 @@ Q1_1z, Q2_1z = bepaling_Q1_Q2(PD1_1z, PD2_1z, PD3_1z)
 Q1_2z, Q2_2z = bepaling_Q1_Q2(PD1_2z, PD2_2z, PD3_2z)
 Q1_3z, Q2_3z = bepaling_Q1_Q2(PD1_3z, PD2_3z, PD3_3z)
 
+#sla de eerste 3 op zodat we ze niet steeds hoeven op te halen
+Q1, Q2 = bepaling_Q1_Q2(PD1_1x, PD2_1x, PD3_1x)
+Q1_kopie = Q1.copy()
+Q2_kopie = Q2.copy()
+
+np.save("Q1.npy", Q1_kopie)
+np.save("Q2.npy", Q2_kopie)
+
