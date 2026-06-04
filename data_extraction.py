@@ -7,6 +7,7 @@ def Data_Extract(name):
     with open(name, 'r') as file:
         column_line = file.readline()
         column_names = column_line.split()
+        # Removing the # at the start of the column names
         column_names.pop(0)
 
         dictionairy_columns = {column: [] for column in column_names}
@@ -35,5 +36,3 @@ with open('20260421_HoQIs.txt', 'r') as file:
         
         ## Testing print command
         ## print(dictionairy_columns[column_names[0]])
-        
-# %%
