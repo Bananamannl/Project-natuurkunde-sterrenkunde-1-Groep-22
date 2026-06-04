@@ -4,7 +4,7 @@ import matplotlib as mt
 from data_extraction_1 import *
 from bepaling_Q1_Q2_2 import *
 
-
+# note that this function uses lists as input arguments
 def Q1_Q2_Length(Q1, Q2):
     """
     Q1_Q2_Length( np.array, np.array ) - > np.array
@@ -18,13 +18,10 @@ def Q1_Q2_Length(Q1, Q2):
 
     return length
 
-## Testing the function
-
-# First HoQI PD1, PD2, PD3: 
-# SENS_HOQI_1_H_INP_SIN_IN SENS_HOQI_1_H_INP_COS_IN SENS_HOQI_1_H_INP_MCOS_IN
+# testing the function for one HoQI: 
 HoQI_1_Q1, HoQI_1_Q2 = np.load('3zQ1.npy'), np.load('3zQ2.npy')
 
 displacement_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)*10**6
 
-#print(HoQI_data['SENS_HOQI_1_H_INP_SIN_IN'])
-print(displacement_list_HoQI_1[0]-displacement_list_HoQI_1[1])
+# print test (if necessary):
+# print(displacement_list_HoQI_1[0]-displacement_list_HoQI_1[1])

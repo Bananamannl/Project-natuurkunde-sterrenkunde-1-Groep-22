@@ -6,7 +6,8 @@ def residuals(params, x, y):
     xp = (x - x0) * np.cos(theta) + (y - y0) * np.sin(theta)
     yp = - (x - x0) * np.sin(theta) + (y - y0) * np.cos(theta)
     return xp ** 2 / a ** 2 + yp ** 2 / b ** 2 - 1
-#Totale functie
+
+# totale functie
 def transform(x, y):
     """
     Takes two np arrays (Q1, Q1) as input, fits it to an ellips and transforms the data to be on the unit circle
@@ -27,4 +28,3 @@ def transform(x, y):
     rotated = centred @ R 
     unit_vectors = rotated / squeeze
     return unit_vectors[:, 0], unit_vectors[:, 1]
-
