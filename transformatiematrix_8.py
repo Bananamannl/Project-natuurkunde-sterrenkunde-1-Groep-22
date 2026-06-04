@@ -17,15 +17,16 @@ length_2z_lijst = Q1_Q2_Length(Q1_2z, Q2_2z)
 
 length_3z_lijst = Q1_Q2_Length(Q1_3z, Q2_3z)
 
-R = 0.815
-def transoformatiematrix (ax, bx, cx, az, bz, cz):
+def transformatiematrix (ax, bx, cx, az, bz, cz):
+    R = 0.815
+
     x = (1/3) * (-ax + 2 * bx + 2 * cx)
     y = (1/2) * (-2 * (1/np.sqrt(3)) * bx + 2 * (1/np.sqrt(3)) * cx)
     z = (1/3) * (az + bz + cz)
     Rx = (2/(3*R)) * (az - (1/2) * bz -(1/2) * cz)
     Ry = (1/(np.sqrt(3) * R)) * (bz - cz)
     Rz = (1/(3*R)) * (ax + bx + cx)
+    
     return x, y, z, Rx, Ry, Rz
 
-x_lijst, y_lijst, z_lijst, Rx_lijst, Ry_lijst, Rz_lijst  = transoformatiematrix(length_1x_lijst, length_2x_lijst, length_3x_lijst, length_1z_lijst, length_2z_lijst, length_3z_lijst)
- 
+x_lijst, y_lijst, z_lijst, Rx_lijst, Ry_lijst, Rz_lijst  = transformatiematrix(length_1x_lijst, length_2x_lijst, length_3x_lijst, length_1z_lijst, length_2z_lijst, length_3z_lijst)
