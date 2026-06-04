@@ -3,6 +3,7 @@ from gwpy.timeseries import TimeSeries
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 from data_extraction_1 import *
+from transformatiematrix_8 import displacement_dof
 
 def get_asd(data, fs, segment_time):
     """
@@ -16,7 +17,7 @@ def get_asd(data, fs, segment_time):
     return ASD
 
 #Vervolgens kun je de asd op de volgende manier plotten
-asd = get_asd(lijst, fs=1000, segment_time=10)
+asd = get_asd(displacement_dof()[0], fs=1000, segment_time=10)
 
 plt.figure()
 plt.loglog(asd.frequencies.value, asd.value)
