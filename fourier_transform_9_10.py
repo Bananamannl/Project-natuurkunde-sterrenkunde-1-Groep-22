@@ -13,7 +13,7 @@ def get_asd(data, fs, segment_time):
     get_asd(datalijst, samplerate, duur van de meting in sec) 
     """
     data = np.asarray(data)
-    data = data - np.mean(data) #trek het gemiddelde eraf om te voorkomen dat je een ziek grote piek rond 0 Hz krijgt
+    data = data - np.mean(data) #trek het gemiddelde eraf om te voorkomen dat je een enorm grote piek rond 0 Hz krijgt
     ts = TimeSeries(data, sample_rate=fs)
     ASD = ts.asd(seconds=segment_time)
     return ASD
@@ -21,8 +21,6 @@ def get_asd(data, fs, segment_time):
 # Vervolgens kun je de asd op de volgende manier plotten
 # Bijvoorbeeld voor de x-lijst:
 asd = get_asd(x_lijst, fs=1000, segment_time=10)
-#Vervolgens kun je de asd op de volgende manier plotten
-asd = get_asd(displacement_dof()[0], fs=1000, segment_time=10)
 
 plt.figure()
 plt.loglog(asd.frequencies.value, asd.value)

@@ -1,20 +1,9 @@
 import numpy as np
 import matplotlib as mt
 from arctan_Q1_Q2_5_6_7 import Q1_Q2_Length
-from bepaling_Q1_Q2_2 import Q_lijst
+from bepaling_Q1_Q2_2 import Q_lijsten
 
-Q1_1x = Q_lijst[0] 
-Q2_1x = Q_lijst[1]
-Q1_2x = Q_lijst[2]
-Q2_2x = Q_lijst[3]
-Q1_3x = Q_lijst[4]
-Q2_3x = Q_lijst[5]
-Q1_1z = Q_lijst[6]
-Q2_1z = Q_lijst[7]
-Q1_2z = Q_lijst[8]
-Q2_2z = Q_lijst[9]
-Q1_3z = Q_lijst[10]
-Q2_3z = Q_lijst[11]
+Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = Q_lijsten
 
 length_1x_lijst = []
 for i in range(0, len(Q1_1x)):

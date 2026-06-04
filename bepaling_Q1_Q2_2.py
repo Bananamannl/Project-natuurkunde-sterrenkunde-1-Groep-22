@@ -29,7 +29,7 @@ def bepaling_Q1_Q2(PD1, PD2, PD3):
     Q2 = np.array(PD1)-np.array(PD3)
     return Q1, Q2
 
-def Q_lijst():
+def Q_lijsten():
     Q1_1x, Q2_1x = bepaling_Q1_Q2(PD1_1x, PD2_1x, PD3_1x)
     Q1_2x, Q2_2x = bepaling_Q1_Q2(PD1_2x, PD2_2x, PD3_2x)
     Q1_3x, Q2_3x = bepaling_Q1_Q2(PD1_3x, PD2_3x, PD3_3x)
@@ -37,8 +37,7 @@ def Q_lijst():
     Q1_2z, Q2_2z = bepaling_Q1_Q2(PD1_2z, PD2_2z, PD3_2z)
     Q1_3z, Q2_3z = bepaling_Q1_Q2(PD1_3z, PD2_3z, PD3_3z)
     
-    Q_lijst = [Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z]
-    return Q_lijst
+    return Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z
 
 #sla de eerste 3 op zodat we ze niet steeds hoeven op te halen
 Q1_2x, Q2_2x = bepaling_Q1_Q2(PD1_2x, PD2_2x, PD3_2x)
