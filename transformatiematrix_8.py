@@ -5,17 +5,18 @@ from bepaling_Q1_Q2_2 import Q_lijsten
 
 Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = np.load('1xQ1.npy'), np.load('1xQ2.npy'), np.load('2xQ1.npy'), np.load('2xQ2.npy'), np.load('3xQ1.npy'), np.load('3xQ2.npy'), np.load('1zQ1.npy'), np.load('1zQ2.npy'), np.load('2zQ1.npy'), np.load('2zQ2.npy'), np.load('3zQ1.npy'), np.load('3zQ2.npy')
 
-length_1x_lijst = Q1_Q2_Length(Q1_1x, Q2_1x)
+# Some of these will be negative, due too the polarization plate being turned wrong in the original experiment
+length_1x_lijst = -Q1_Q2_Length(Q1_1x, Q2_1x)
 
 length_2x_lijst = Q1_Q2_Length(Q1_2x, Q2_2x)
 
 length_3x_lijst = Q1_Q2_Length(Q1_3x, Q2_3x)
 
-length_1z_lijst = Q1_Q2_Length(Q1_1z, Q2_1z)
+length_1z_lijst = -Q1_Q2_Length(Q1_1z, Q2_1z)
 
-length_2z_lijst = Q1_Q2_Length(Q1_2z, Q2_2z)
+length_2z_lijst = -Q1_Q2_Length(Q1_2z, Q2_2z)
 
-length_3z_lijst = Q1_Q2_Length(Q1_3z, Q2_3z)
+length_3z_lijst = -Q1_Q2_Length(Q1_3z, Q2_3z)
 
 def transformatiematrix (ax, bx, cx, az, bz, cz):
     R = 0.815

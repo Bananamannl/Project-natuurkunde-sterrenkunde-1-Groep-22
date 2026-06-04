@@ -22,7 +22,7 @@ def Q1_Q2_Length(Q1, Q2):
 
 # First HoQI PD1, PD2, PD3: 
 # SENS_HOQI_1_H_INP_SIN_IN SENS_HOQI_1_H_INP_COS_IN SENS_HOQI_1_H_INP_MCOS_IN
-HoQI_1_Q1, HoQI_1_Q2 = np.load('1xQ1.npy'), np.load('1xQ2.npy')
+HoQI_1_Q1, HoQI_1_Q2 = np.load('3zQ1.npy'), np.load('3zQ2.npy')
 
 displacement_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)*10**6
 
