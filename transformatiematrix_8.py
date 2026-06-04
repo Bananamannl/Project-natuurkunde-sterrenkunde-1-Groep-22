@@ -72,4 +72,4 @@ def displacement_dof():
         Rx_lijst.append(Rx)
         Ry_lijst.append(Ry)
         Rz_lijst.append(Rz)
-    return displacement_dof
+    return x_lijst, y_lijst, z_lijst, Rx_lijst, Ry_lijst, Rz_lijst
