@@ -19,14 +19,12 @@ def Q1_Q2_Length(Q1, Q2):
     return length
 
 ## Testing the function
-HoQI_data = Data_Extract('20260421_HoQIs.txt') 
 
 # First HoQI PD1, PD2, PD3: 
 # SENS_HOQI_1_H_INP_SIN_IN SENS_HOQI_1_H_INP_COS_IN SENS_HOQI_1_H_INP_MCOS_IN
-HoQI_1_Q1, HoQI_1_Q2 = bepaling_Q1_Q2(HoQI_data['SENS_HOQI_1_H_INP_SIN_IN'], HoQI_data['SENS_HOQI_1_H_INP_COS_IN'], HoQI_data['SENS_HOQI_1_H_INP_MCOS_IN'])
+HoQI_1_Q1, HoQI_1_Q2 = np.load('1xQ1.npy'), np.load('1xQ2.npy')
 
-displacement_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)*10**9
+displacement_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)*10**6
 
 #print(HoQI_data['SENS_HOQI_1_H_INP_SIN_IN'])
 print(displacement_list_HoQI_1[0]-displacement_list_HoQI_1[1])
-print(HoQI_data['SENS_HOQI_1_H_DISP_LEN'][0]-HoQI_data['SENS_HOQI_1_H_DISP_LEN'][1])
