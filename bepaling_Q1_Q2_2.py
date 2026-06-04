@@ -37,10 +37,14 @@ Q1_2z, Q2_2z = bepaling_Q1_Q2(PD1_2z, PD2_2z, PD3_2z)
 Q1_3z, Q2_3z = bepaling_Q1_Q2(PD1_3z, PD2_3z, PD3_3z)
 
 #sla de eerste 3 op zodat we ze niet steeds hoeven op te halen
-Q1, Q2 = bepaling_Q1_Q2(PD1_1x, PD2_1x, PD3_1x)
-Q1_kopie = Q1.copy()
-Q2_kopie = Q2.copy()
+Q1_2x, Q2_2x = bepaling_Q1_Q2(PD1_2x, PD2_2x, PD3_2x)
+Q1_2x_kopie = Q1_2x.copy()
+Q2_2x_kopie = Q2_2x.copy()
+np.save("2xQ1.npy", Q1_2x_kopie)
+np.save("2xQ2.npy", Q2_2x_kopie)
 
-np.save("Q1.npy", Q1_kopie)
-np.save("Q2.npy", Q2_kopie)
-
+Q1_3x, Q2_3x = bepaling_Q1_Q2(PD1_3x, PD2_3x, PD3_3x)
+Q1_3x_kopie = Q1_3x.copy()
+Q2_3x_kopie = Q2_3x.copy()
+np.save("3xQ1.npy", Q1_3x_kopie)
+np.save("3xQ2.npy", Q2_3x_kopie)
