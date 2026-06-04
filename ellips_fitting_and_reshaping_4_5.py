@@ -2,6 +2,7 @@ import numpy as np
 from scipy.optimize import least_squares
 import matplotlib.pyplot as plt
 
+
 #Zorg dat Q1 en Q2 numpy arrays zijn
 #eerst het de modelfunctie definieren
 def residuals(params, x, y):
@@ -12,7 +13,7 @@ def residuals(params, x, y):
 
 results = least_squares(
     residuals, #we fitten de modelfunctie
-    x0 = [0, 0, 1, 1, 0] #dit zijn de startcondities voor de fit
+    x0 = [0, 0, 1, 1, 0], #dit zijn de startcondities voor de fit
     args = (Q1, Q2) #Dit wordt dus de data die gefit wordt
 )
 
@@ -63,4 +64,20 @@ def transform(Q1, Q2):
     return unit_vectors[:, 0], unit_vectors[:, 1]
 Q1_new, Q2_new = transform(Q1, Q2)
 
+plt.figure()
+plt.scatter(Q1, Q2, s=3)
+plt.scatter(Q1_new, Q2_new, s=5)
+plt.axis("equal")
+plt.grid()
+plt.show()
+#%%
+import numpy as np
+from data_extraction_1 import *
+from bepaling_Q1_Q2_2 import *
+HoQI_data = Data_Extract('20260421_HoQIs.txt') 
 
+# First HoQI PD1, PD2, PD3: 
+# SENS_HOQI_1_H_INP_SIN_IN SENS_HOQI_1_H_INP_COS_IN SENS_HOQI_1_H_INP_MCOS_IN
+HoQI_1_Q1, HoQI_1_Q2 = bepaling_Q1_Q2(HoQI_data['SENS_HOQI_1_H_INP_SIN_IN'], HoQI_data['SENS_HOQI_1_H_INP_COS_IN'], HoQI_data['SENS_HOQI_1_H_INP_MCOS_IN'])
+print(HoQI_1_Q1, HoQI_1_Q2)
+Q1, Q2 = transform(HoQI_1_Q1, HoQI_1_Q2)
