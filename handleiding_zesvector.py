@@ -7,6 +7,8 @@ tijd_lijst = []
 for tijd in range(0, 3000000, 1):
     tijd_lijst.append(tijd)
 
+# zesvector_matrix is een matrix met drie miljoen vectoren, waarbij elke vector de verplaatsing in elk van de zes vrijheidsgraden bevat
+# voorbeeld: de x_lijst trekt van kolom 1 tot kolom 3 miljoen telkens het eerste element (de verplaatsing in de x-richting) uit de matrix en stopt die in een lijst
 x_lijst_gefit = zesvector_matrix[0:int(3e6), 0]
 y_lijst_gefit = zesvector_matrix[0:int(3e6), 1]
 z_lijst_gefit = zesvector_matrix[0:int(3e6), 2]

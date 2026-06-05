@@ -75,4 +75,3 @@ plt.xlabel("window index")
 plt.ylabel("waarde")
 plt.title("Snelle test ellipsparameters")
 plt.show()
-
