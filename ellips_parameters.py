@@ -59,9 +59,9 @@ def period_data(data, window_size=None, step_size=None, lag=None):
 
     return period_data
 
-# Snelle test
-vectors = parameters_timeseries(Q1, Q2, window_size=1000, step_size=1000)
-vectors = np.squeeze(vectors)
+# # Snelle test
+# vectors = parameters_timeseries(Q1, Q2, window_size=1000, step_size=1000)
+vectors = np.load("fitted_six_vct_list.npy")
 print("Shape:", vectors.shape)
 print("Eerste 5 vectors:")
 print(vectors[:5])
@@ -75,3 +75,4 @@ plt.xlabel("window index")
 plt.ylabel("waarde")
 plt.title("Snelle test ellipsparameters")
 plt.show()
+
