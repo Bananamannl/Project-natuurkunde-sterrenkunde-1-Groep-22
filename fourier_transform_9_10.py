@@ -77,9 +77,9 @@ plt.xlabel("Frequency (Hz)")
 if (asd == get_asd(x_lijst, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(y_lijst, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(z_lijst, fs=1000, segment_time=1000)).all():
-    plt.ylabel("ASD (m Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
+    plt.ylabel("ASD (um Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
 else:
-    plt.ylabel("ASD (rad Hz^(-1/2))")
+    plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e2)
 plt.grid(True, which="both")
 plt.show()
@@ -100,9 +100,9 @@ plt.xlabel("Frequency (Hz)")
 if (asd == get_asd(x_lijst_gefit, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(y_lijst_gefit, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(z_lijst_gefit, fs=1000, segment_time=1000)).all():
-    plt.ylabel("ASD (m Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
+    plt.ylabel("ASD (um Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
 else:
-    plt.ylabel("ASD (rad Hz^(-1/2))")
+    plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e2)
 plt.grid(True, which="both")
 plt.show()
