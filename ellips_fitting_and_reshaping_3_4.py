@@ -8,14 +8,18 @@ def residuals(params, x, y):
     return xp ** 2 / a ** 2 + yp ** 2 / b ** 2 - 1
 
 # totale functie
-def transform(x, y):
+def transform(x, y, start_parameters=None):
+
     """
-    Takes two np arrays (Q1, Q1) as input, fits it to an ellips and transforms the data to be on the unit circle
+    Takes two np arrays (Q1, Q1) as input. You can also give starting paramaters by adding: start)parameters=[a, b, c, d, e]. Than the function
+    fits the data to an ellips and transforms the data to be on the unit circle
     Output is again two np arrays which are the transformed versions of the input arrays
     """
+    if initial_guess is None:
+        initial_guess = [0, 0, 1, 1, 0]
     results = least_squares(
         residuals,
-        x0 = [0, 0, 1, 1, 0],
+        x0 = start_parameters,
         args = (x, y)
     )
     x0, y0, a, b, theta = results.x
