@@ -1,4 +1,4 @@
-## Function itself
+# Function itself
 def Data_Extract(name):
     """
     Data_Extract( str ) -> dictionairy

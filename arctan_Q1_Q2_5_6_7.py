@@ -12,7 +12,7 @@ def Q1_Q2_Length(Q1, Q2):
     """
     w_length = 1064e-9 # The wavelength of the HoQI laser is 1064 nm
 
-    opt_phase = np.arctan2(Q1, Q2)
+    opt_phase = np.unwrap(np.arctan2(Q1, Q2))
 
     length = (opt_phase * w_length)/(4*np.pi)
 
