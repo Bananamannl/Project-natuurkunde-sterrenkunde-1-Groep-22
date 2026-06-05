@@ -1,4 +1,5 @@
-# Ignore the data file
+# Ignore the data files
+fitted_six_vct_list.npy
 20260421_HoQIs.txt
 # Ignore the Media Files
 media/
