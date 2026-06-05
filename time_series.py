@@ -53,5 +53,3 @@ axes[2].plot(time, data_z, ',')
 
 plt.subplots_adjust(hspace=0.312)
 plt.show()
-
-
