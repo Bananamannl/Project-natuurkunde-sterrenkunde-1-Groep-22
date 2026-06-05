@@ -57,11 +57,11 @@ plt.show()
 ## Creating a quickacces file for the coordinates
 # uncomment these by slecting and pressing ctrl + /, then run, then re-comment
 
-# six_vct_list = []
-# for i in range(0, len(fitted_x)):
-#     six_vct = np.array([fitted_x[i], fitted_y[i], fitted_z[i], fitted_Rx[i], fitted_Ry[i], fitted_Rz[i]])
-#     six_vct_list.append(six_vct)
+six_vct_list = []
+for i in range(0, len(fitted_x)):
+    six_vct = np.array([fitted_x[i], fitted_y[i], fitted_z[i], fitted_Rx[i], fitted_Ry[i], fitted_Rz[i]])
+    six_vct_list.append(six_vct)
 
-# six_vct_list = np.squeeze(np.array(six_vct_list))
+six_vct_list = np.squeeze(np.array(six_vct_list))
 
-# np.save('fitted_six_vct_list.npy', six_vct_list)
+np.save('fitted_six_vct_list.npy', six_vct_list)
