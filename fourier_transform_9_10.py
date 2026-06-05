@@ -63,16 +63,22 @@ x_lijst_gefit, y_lijst_gefit, z_lijst_gefit, Rx_lijst_gefit, Ry_lijst_gefit, Rz_
 
 # segment time: eventuele uitschieters door ruis worden eruit gemiddeld door de data op te delen in verschillende segmenten, waarna voor elke frequentie de gemiddelde amplitude van al deze segmenten wordt genomen; 1000 betekent dat T_max = 1000 s, dus f_min = 0,001 Hz
 # (kies er telkens één)
-# asd = get_asd(x_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(x_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(z_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(z_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5)
 
 # vervolgens kan de asd (van de zelf afgeleide data) op de volgende manier worden geplot (f_min = 1/segment_time):
 plt.figure()
 plt.loglog(asd.frequencies.value, asd.value)
+plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd.value[asd.frequencies.value <= 100][peaks], "rv")
+for frequency in asd.frequencies.value[peaks]:
+    plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
+print("Peak frequencies (Hz) of the derivated data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
+print("Prominences (strengths of the associated peaks):", np.array2string(properties["prominences"], separator=", "))
 plt.xlabel("Frequency (Hz)")
 if (asd == get_asd(x_lijst, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(y_lijst, fs=1000, segment_time=1000)).all() or \
@@ -86,16 +92,22 @@ plt.show()
 
 # ditzelfde kunnen we doen voor de asd van de gefitte data:
 # (kies er telkens één)
-# asd = get_asd(x_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(x_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(z_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(z_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5)
 
 # het plotten:
 plt.figure()
 plt.loglog(asd.frequencies.value, asd.value)
+plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd.value[asd.frequencies.value <= 100][peaks], "rv")
+for frequency in asd.frequencies.value[peaks]:
+    plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
+print("Peak frequencies (Hz) of the ellipse fitted data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
+print("Prominences (strengths of the associated peaks):", np.array2string(properties["prominences"], separator=", "))
 plt.xlabel("Frequency (Hz)")
 if (asd == get_asd(x_lijst_gefit, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(y_lijst_gefit, fs=1000, segment_time=1000)).all() or \
@@ -118,16 +130,22 @@ Ry_lijst_dataset = data_20260421["RM_HOQI_RY"]
 Rz_lijst_dataset = data_20260421["RM_HOQI_RZ"] 
 
 # (kies er telkens één)
-# asd = get_asd(x_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(x_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(z_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(z_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5)
 
 # en het plotten:
 plt.figure()
 plt.loglog(asd.frequencies.value, asd.value)
+plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd.value[asd.frequencies.value <= 100][peaks], "rv")
+for frequency in asd.frequencies.value[peaks]:
+    plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
+print("Peak frequencies (Hz) of the raw data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
+print("Prominences (strengths of the associated peaks):", np.array2string(properties["prominences"], separator=", "))
 plt.xlabel("Frequency (Hz)")
 if (asd == get_asd(x_lijst_dataset, fs=1000, segment_time=1000)).all() or \
    (asd == get_asd(y_lijst_dataset, fs=1000, segment_time=1000)).all() or \
