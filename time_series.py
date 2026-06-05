@@ -37,9 +37,31 @@ time = data_20260421['T']
 data_x, data_y, data_z, data_Rx, data_Ry, data_Rz = data_20260421['RM_HOQI_X'], data_20260421['RM_HOQI_Y'], data_20260421['RM_HOQI_Z'], data_20260421['RM_HOQI_RX'], data_20260421['RM_HOQI_RY'], data_20260421['RM_HOQI_RZ']
 
 ## And now we plot the timeseries
-fig, axes = plt.subplots(2, 1)
-axes[0,0].set_title('x motion timeseries')
-axes[0,0].set_ylabel('motion')
-axes[0,0].set_xlabel('time')
-axes[0,0].plot(time, unfitted_x, ',')
+fig, axes = plt.subplots(3, 1)
+axes[0].set_title('unfitted z motion timeseries')
+axes[0].set_ylabel('motion')
+axes[0].set_xlabel('time')
+axes[0].plot(time, unfitted_z, ',')
+axes[1].set_title('fitted z motion timeseries')
+axes[1].set_ylabel('motion')
+axes[1].set_xlabel('time')
+axes[1].plot(time, fitted_z, ',')
+axes[2].set_title('data z motion timeseries')
+axes[2].set_ylabel('motion')
+axes[2].set_xlabel('time')
+axes[2].plot(time, data_z, ',')
+
+plt.subplots_adjust(hspace=0.312)
 plt.show()
+
+## Creating a quickacces file for the coordinates
+# uncomment these by slecting and pressing ctrl + /, then run, then re-comment
+
+# six_vct_list = []
+# for i in range(0, len(fitted_x)):
+#     six_vct = np.array([fitted_x[i], fitted_y[i], fitted_z[i], fitted_Rx[i], fitted_Ry[i], fitted_Rz[i]])
+#     six_vct_list.append(six_vct)
+
+# six_vct_list = np.squeeze(np.array(six_vct_list))
+
+# np.save('fitted_six_vct_list.npy', six_vct_list)
