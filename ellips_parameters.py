@@ -1,8 +1,5 @@
 import numpy as np
 from ellips_fitting_and_reshaping_3_4 import *
-import matplotlib.pyplot as plt
-
-Q1, Q2 = np.load("1xQ1.npy"), np.load("1xQ2.npy")
 
 def parameters(x, y, start_parameters=None):
     """
@@ -54,8 +51,8 @@ def period_data(data, window_size=None, step_size=None, lag=None):
         lag = 0
     starts = np.arange(0, len(data) - window_size + 1, step_size)
     indices = starts + lag
-
-    period_data = data[indices < len(data)]
+    indices = indices[indices < len(data)]
+    period_data = data[indices]
 
     return period_data
 
