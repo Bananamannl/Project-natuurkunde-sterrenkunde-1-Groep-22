@@ -89,6 +89,7 @@ else:
 plt.xlim(1e-3, 1e2)
 plt.grid(True, which="both")
 plt.show()
+# plt.savefig('x_lijst.png')
 
 # ditzelfde kunnen we doen voor de asd van de gefitte data:
 # (kies er telkens één)
@@ -118,6 +119,7 @@ else:
 plt.xlim(1e-3, 1e2)
 plt.grid(True, which="both")
 plt.show()
+# plt.savefig('x_lijst_gefit.png')
 
 # zo ook voor de verplaatsingen afkomstig uit de ruwe data:
 data_20260421 = Data_Extract('20260421_HoQIs.txt')
@@ -156,3 +158,4 @@ else:
 plt.xlim(1e-3, 1e2)
 plt.grid(True, which="both")
 plt.show()
+# plt.savefig('x_lijst_dataset.png')
