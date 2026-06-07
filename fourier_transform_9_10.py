@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 
 from data_extraction_1 import Data_Extract
-from ellips_fitting_and_reshaping_3_4 import transform
+from ellipse_fitting_and_reshaping_3_4 import transform
 from arctan_Q1_Q2_5_6_7 import Q1_Q2_Length
 from transformatiematrix_8 import transformatiematrix
 

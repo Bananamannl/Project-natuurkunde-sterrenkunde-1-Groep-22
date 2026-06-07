@@ -1,5 +1,6 @@
 import numpy as np
 from ellips_fitting_and_reshaping_3_4 import *
+import matplotlib.pyplot as plt
 
 def parameters(x, y, start_parameters=None):
     """
@@ -56,19 +57,19 @@ def period_data(data, window_size=None, step_size=None, lag=None):
 
     return period_data
 
-# # Snelle test
-vectors = parameters_timeseries(Q1, Q2, window_size=1000, step_size=500)
-#vectors = np.load("fitted_six_vct_list.npy")
-print("Shape:", vectors.shape)
-print("Eerste 5 vectors:")
-print(vectors[:5])
+# # # Snelle test
+# vectors = parameters_timeseries(Q1, Q2, window_size=1000, step_size=500)
+# #vectors = np.load("fitted_six_vct_list.npy")
+# print("Shape:", vectors.shape)
+# print("Eerste 5 vectors:")
+# print(vectors[:5])
 
-print("NaN?", np.isnan(vectors).any())
-print("Inf?", np.isinf(vectors).any())
+# print("NaN?", np.isnan(vectors).any())
+# print("Inf?", np.isinf(vectors).any())
 
-plt.plot(vectors)
-plt.legend(["x0", "y0", "theta", "a", "b", "area"])
-plt.xlabel("window index")
-plt.ylabel("waarde")
-plt.title("Snelle test ellipsparameters")
-plt.show()
+# plt.plot(vectors)
+# plt.legend(["x0", "y0", "theta", "a", "b", "area"])
+# plt.xlabel("window index")
+# plt.ylabel("waarde")
+# plt.title("Snelle test ellipsparameters")
+# plt.show()
