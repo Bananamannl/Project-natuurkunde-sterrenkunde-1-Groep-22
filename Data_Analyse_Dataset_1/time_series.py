@@ -2,16 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from data_extraction_1 import *
 from bepaling_Q1_Q2_2 import *
-from ellips_fitting_and_reshaping_3_4 import *
+from ellipse_fitting_and_reshaping_3_4 import *
 from arctan_Q1_Q2_5_6_7 import *
 from transformatiematrix_8 import *
 
 ## First we extract all the data from the HoQI data file:
 
-data_20260421 = Data_Extract('20260421_HoQIs.txt')
+data_20260421 = Data_Extract('Data_Analyse_Dataset_1/20260421_HoQIs.txt')
 
 ## We use the saved Q1 and Q2 lists to import the data
-unfitted_Q1_1x, unfitted_Q2_1x, unfitted_Q1_2x, unfitted_Q2_2x, unfitted_Q1_3x, unfitted_Q2_3x, unfitted_Q1_1z, unfitted_Q2_1z, unfitted_Q1_2z, unfitted_Q2_2z, unfitted_Q1_3z, unfitted_Q2_3z = np.load('1xQ1.npy'), np.load('1xQ2.npy'), np.load('2xQ1.npy'), np.load('2xQ2.npy'), np.load('3xQ1.npy'), np.load('3xQ2.npy'), np.load('1zQ1.npy'), np.load('1zQ2.npy'), np.load('2zQ1.npy'), np.load('2zQ2.npy'), np.load('3zQ1.npy'), np.load('3zQ2.npy')
+unfitted_Q1_1x, unfitted_Q2_1x, unfitted_Q1_2x, unfitted_Q2_2x, unfitted_Q1_3x, unfitted_Q2_3x, unfitted_Q1_1z, unfitted_Q2_1z, unfitted_Q1_2z, unfitted_Q2_2z, unfitted_Q1_3z, unfitted_Q2_3z = np.load('Data_Analyse_Dataset_1/1xQ1.npy'), np.load('Data_Analyse_Dataset_1/1xQ2.npy'), np.load('Data_Analyse_Dataset_1/2xQ1.npy'), np.load('Data_Analyse_Dataset_1/2xQ2.npy'), np.load('Data_Analyse_Dataset_1/3xQ1.npy'), np.load('Data_Analyse_Dataset_1/3xQ2.npy'), np.load('Data_Analyse_Dataset_1/1zQ1.npy'), np.load('Data_Analyse_Dataset_1/1zQ2.npy'), np.load('Data_Analyse_Dataset_1/2zQ1.npy'), np.load('Data_Analyse_Dataset_1/2zQ2.npy'), np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
 
 ## We then use the ellips fitting to adjust this data
 fitted_Q1_1x, fitted_Q2_1x = transform(unfitted_Q1_1x, unfitted_Q2_1x)

@@ -1,8 +1,8 @@
 import numpy as np
-from ellips_fitting_and_reshaping_3_4 import *
+from ellipse_fitting_and_reshaping_3_4 import *
 from arctan_Q1_Q2_5_6_7 import *
 
-unfitted_Q1_1x, unfitted_Q2_1x, unfitted_Q1_2x, unfitted_Q2_2x, unfitted_Q1_3x, unfitted_Q2_3x, unfitted_Q1_1z, unfitted_Q2_1z, unfitted_Q1_2z, unfitted_Q2_2z, unfitted_Q1_3z, unfitted_Q2_3z = np.load('1xQ1.npy'), np.load('1xQ2.npy'), np.load('2xQ1.npy'), np.load('2xQ2.npy'), np.load('3xQ1.npy'), np.load('3xQ2.npy'), np.load('1zQ1.npy'), np.load('1zQ2.npy'), np.load('2zQ1.npy'), np.load('2zQ2.npy'), np.load('3zQ1.npy'), np.load('3zQ2.npy')
+unfitted_Q1_1x, unfitted_Q2_1x, unfitted_Q1_2x, unfitted_Q2_2x, unfitted_Q1_3x, unfitted_Q2_3x, unfitted_Q1_1z, unfitted_Q2_1z, unfitted_Q1_2z, unfitted_Q2_2z, unfitted_Q1_3z, unfitted_Q2_3z = np.load('Data_Analyse_Dataset_1/1xQ1.npy'), np.load('Data_Analyse_Dataset_1/1xQ2.npy'), np.load('Data_Analyse_Dataset_1/2xQ1.npy'), np.load('Data_Analyse_Dataset_1/2xQ2.npy'), np.load('Data_Analyse_Dataset_1/3xQ1.npy'), np.load('Data_Analyse_Dataset_1/3xQ2.npy'), np.load('Data_Analyse_Dataset_1/1zQ1.npy'), np.load('Data_Analyse_Dataset_1/1zQ2.npy'), np.load('Data_Analyse_Dataset_1/2zQ1.npy'), np.load('Data_Analyse_Dataset_1/2zQ2.npy'), np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
 
 fitted_Q1_1x, fitted_Q2_1x = transform(unfitted_Q1_1x, unfitted_Q2_1x)
 fitted_Q1_2x, fitted_Q2_2x = transform(unfitted_Q1_2x, unfitted_Q2_2x)
@@ -23,7 +23,7 @@ for i in range(0, len(fitted_1x)):
 
 HoQI_six_vct_list = np.squeeze(np.array(HoQI_six_vct_list))
 
-np.save('HoQI_fitted_six_vct_list.npy', HoQI_six_vct_list)
+np.save('Data_Analyse_Dataset_1/HoQI_fitted_six_vct_list.npy', HoQI_six_vct_list)
 
 # six_vct_list = []
 # for i in range(0, len(fitted_x)):
@@ -32,4 +32,4 @@ np.save('HoQI_fitted_six_vct_list.npy', HoQI_six_vct_list)
 
 # six_vct_list = np.squeeze(np.array(six_vct_list))
 
-# np.save('fitted_six_vct_list.npy', six_vct_list)
+# np.save('Data_Analyse_Dataset_1/fitted_six_vct_list.npy', six_vct_list)

@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-zesvector_matrix = np.load("fitted_six_vct_list.npy")
+zesvector_matrix = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
 
 tijd_lijst = []
 for tijd in range(0, 3000000, 1):

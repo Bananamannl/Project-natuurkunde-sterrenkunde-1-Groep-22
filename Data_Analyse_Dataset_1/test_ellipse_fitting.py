@@ -2,8 +2,8 @@ from ellipse_fitting_and_reshaping_3_4 import transform
 import numpy as np
 import matplotlib.pyplot as plt
 
-Q1 = np.load("1xQ1.npy")
-Q2 = np.load("1xQ2.npy")
+Q1 = np.load("Data_Analyse_Dataset_1/1xQ1.npy")
+Q2 = np.load("Data_Analyse_Dataset_1/1xQ2.npy")
 Q1_new, Q2_new = transform(Q1, Q2)
 
 plt.figure()

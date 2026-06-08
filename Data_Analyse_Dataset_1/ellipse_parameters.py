@@ -1,5 +1,5 @@
 import numpy as np
-from ellips_fitting_and_reshaping_3_4 import *
+from ellipse_fitting_and_reshaping_3_4 import *
 import matplotlib.pyplot as plt
 
 def parameters(x, y, start_parameters=None):
@@ -59,7 +59,7 @@ def period_data(data, window_size=None, step_size=None, lag=None):
 
 # # # Snelle test
 # vectors = parameters_timeseries(Q1, Q2, window_size=1000, step_size=500)
-# #vectors = np.load("fitted_six_vct_list.npy")
+# #vectors = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
 # print("Shape:", vectors.shape)
 # print("Eerste 5 vectors:")
 # print(vectors[:5])

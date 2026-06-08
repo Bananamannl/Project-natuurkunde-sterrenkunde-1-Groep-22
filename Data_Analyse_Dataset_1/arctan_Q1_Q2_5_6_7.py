@@ -20,7 +20,7 @@ def Q1_Q2_Length(Q1, Q2):
     return length
 
 # testing the function for one HoQI: 
-HoQI_1_Q1, HoQI_1_Q2 = np.load('3zQ1.npy'), np.load('3zQ2.npy')
+HoQI_1_Q1, HoQI_1_Q2 = np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
 
 displacement_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)
 
