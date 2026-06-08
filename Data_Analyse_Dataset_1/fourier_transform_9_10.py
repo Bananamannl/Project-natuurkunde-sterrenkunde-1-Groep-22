@@ -63,9 +63,9 @@ x_lijst_gefit, y_lijst_gefit, z_lijst_gefit, Rx_lijst_gefit, Ry_lijst_gefit, Rz_
 
 # segment time: eventuele uitschieters door ruis worden eruit gemiddeld door de data op te delen in verschillende segmenten, waarna voor elke frequentie de gemiddelde amplitude van al deze segmenten wordt genomen; 1000 betekent dat T_max = 1000 s, dus f_min = 0,001 Hz
 # (kies er telkens één)
-asd = get_asd(x_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(x_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-# asd = get_asd(z_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(z_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
@@ -86,16 +86,16 @@ if (asd == get_asd(x_lijst, fs=1000, segment_time=1000)).all() or \
     plt.ylabel("ASD (um Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
 else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
-plt.xlim(1e-3, 1e2)
+plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
 plt.show()
 # plt.savefig('x_lijst.png')
 
 # ditzelfde kunnen we doen voor de asd van de gefitte data:
 # (kies er telkens één)
-asd = get_asd(x_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(x_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-# asd = get_asd(z_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(z_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
@@ -116,7 +116,7 @@ if (asd == get_asd(x_lijst_gefit, fs=1000, segment_time=1000)).all() or \
     plt.ylabel("ASD (um Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
 else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
-plt.xlim(1e-3, 1e2)
+plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
 plt.show()
 # plt.savefig('x_lijst_gefit.png')
@@ -132,9 +132,9 @@ Ry_lijst_dataset = data_20260421["RM_HOQI_RY"]
 Rz_lijst_dataset = data_20260421["RM_HOQI_RZ"] 
 
 # (kies er telkens één)
-asd = get_asd(x_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(x_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-# asd = get_asd(z_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(z_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
@@ -155,7 +155,7 @@ if (asd == get_asd(x_lijst_dataset, fs=1000, segment_time=1000)).all() or \
     plt.ylabel("ASD (um Hz^(-1/2))") # de eenheid is m Hz^(-1/2), omdat: m is afkomstig van het feit dat we een amplitude meten; per Hz is afkomstig van het feit dat we door de breedte van een segmentje delen om de amplitude onafhankelijk van de segment_time te maken (^(-1/2) komt doordat we van vermogen naar amplitude gaan (vermogen = amplitude^2))
 else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
-plt.xlim(1e-3, 1e2)
+plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
 plt.show()
 # plt.savefig('x_lijst_dataset.png')
