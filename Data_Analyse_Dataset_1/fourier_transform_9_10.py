@@ -69,12 +69,17 @@ asd = get_asd(z_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample 
 # asd = get_asd(Rx_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5)
+
+# 'smoothen' het diagram door van elke vijf opeenvolgende punten de gemiddelde ASD te nemen:
+window = 10
+asd_smooth = np.convolve(asd.value, np.ones(window)/window, mode='same')
+
+peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5) # het is onwenselijk dat de piekdetectie beïnvloed wordt door het 'smoothen'
 
 # vervolgens kan de asd (van de zelf afgeleide data) op de volgende manier worden geplot (f_min = 1/segment_time):
 plt.figure()
-plt.loglog(asd.frequencies.value, asd.value)
-plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd.value[asd.frequencies.value <= 100][peaks], "rv")
+plt.loglog(asd.frequencies.value, asd_smooth)
+plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv") # de rode markeringen moeten wel netjes op de 'gesmoothede' functie vallen
 for frequency in asd.frequencies.value[peaks]:
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
 print("Peak frequencies (Hz) of the derivated data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
@@ -99,12 +104,17 @@ asd = get_asd(z_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de s
 # asd = get_asd(Rx_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst_gefit, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+
+# het 'smoothen':
+window = 10
+asd_smooth = np.convolve(asd.value, np.ones(window)/window, mode='same')
+
 peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5)
 
 # het plotten:
 plt.figure()
-plt.loglog(asd.frequencies.value, asd.value)
-plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd.value[asd.frequencies.value <= 100][peaks], "rv")
+plt.loglog(asd.frequencies.value, asd_smooth)
+plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv")
 for frequency in asd.frequencies.value[peaks]:
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
 print("Peak frequencies (Hz) of the ellipse fitted data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
@@ -138,12 +148,17 @@ asd = get_asd(z_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de
 # asd = get_asd(Rx_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rz_lijst_dataset, fs=1000, segment_time=1000) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+
+# het 'smoothen':
+window = 10
+asd_smooth = np.convolve(asd.value, np.ones(window)/window, mode='same')
+
 peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100]), prominence=1.5)
 
 # en het plotten:
 plt.figure()
-plt.loglog(asd.frequencies.value, asd.value)
-plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd.value[asd.frequencies.value <= 100][peaks], "rv")
+plt.loglog(asd.frequencies.value, asd_smooth)
+plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv")
 for frequency in asd.frequencies.value[peaks]:
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
 print("Peak frequencies (Hz) of the raw data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
