@@ -1,3 +1,6 @@
+import numpy as np
+from scipy.optimize import least_squares
+
 def residuals(params, x, y):
     x0, y0, a, b, theta = params
     xp = (x - x0) * np.cos(theta) + (y - y0) * np.sin(theta)
