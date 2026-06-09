@@ -34,6 +34,7 @@ def transform(x, y, start_parameters=None):
     return unit_vectors[:, 0], unit_vectors[:, 1]
 
 # functie die optical phase en norm terug geeft
+
 def Q1_Q2_Length_opt_phase_norm_Q(Q1, Q2):
     """
     Q1_Q2_Length( np.array, np.array ) - > np.array
@@ -43,6 +44,8 @@ def Q1_Q2_Length_opt_phase_norm_Q(Q1, Q2):
     w_length = 1064e-3 
 
     opt_phase = np.unwrap(np.arctan2(Q1, Q2))
+
+    opt_phase_wrap = np.arctan(Q1, Q2)
 
     length = (opt_phase * w_length)/(4*np.pi)
 
