@@ -18,9 +18,9 @@ You will definitly need to adjust a few things, mostly within the data extractio
 
 * Confirmed to run on windows 10 and 11, Python 3.14
 * User needs to have the following python libraries installed to run some of these files:
-* Manim Community (https://docs.manim.community/en/stable/installation.html)
-* GWpy (https://gwpy.readthedocs.io/en/stable/getting-started/)
-* PyVista (https://docs.pyvista.org/)
+  * Manim Community (https://docs.manim.community/en/stable/installation.html)
+  * GWpy (https://gwpy.readthedocs.io/en/stable/getting-started/)
+  * PyVista (https://docs.pyvista.org/)
 
 ### Installing
 
@@ -28,10 +28,10 @@ You should be able to download or copy the repository and make a virtual envirom
 
 ## Authors
 
-Timo Boomsma, Bachelor in Mathematics and Physics at the University of Amsterdam
-Kesse Donders, Bachelor in Physics and Astronomy at the University of Amsterdam
-Janne Lemmens, Bachelor in Physics and Astronomy at the University of Amsterdam
-Merijn Post, Bachelor in Mathematics and Physics at the University of Amsterdam
+* Timo Boomsma, Bachelor in Mathematics and Physics at the University of Amsterdam
+* Kesse Donders, Bachelor in Physics and Astronomy at the University of Amsterdam
+* Janne Lemmens, Bachelor in Physics and Astronomy at the University of Amsterdam
+* Merijn Post, Bachelor in Mathematics and Physics at the University of Amsterdam
 
 ## Acknowledgments
 
