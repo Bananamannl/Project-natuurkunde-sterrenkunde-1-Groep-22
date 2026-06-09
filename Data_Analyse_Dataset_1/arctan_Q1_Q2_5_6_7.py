@@ -36,9 +36,9 @@ def Q1_Q2_Length_opt_phase_norm_Q(Q1, Q2):
     return length, opt_phase, Q_absoluut
 
 # testing the function for one HoQI: 
-HoQI_1_Q1, HoQI_1_Q2 = np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
+HoQI_3z_Q1, HoQI_3z_Q2 = np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
 
-displacement_list_HoQI_1, optical_phase_list_HoQI_1, Q_absoluut_list_HoQI_1 = Q1_Q2_Length_opt_phase_norm_Q(HoQI_1_Q1, HoQI_1_Q2)
+length_list_HoQI_3z, optical_phase_list_HoQI_3z, norm_list_HoQI_3z = Q1_Q2_Length_opt_phase_norm_Q(HoQI_1_Q1, HoQI_1_Q2)
 
 # print test (if necessary):
 # print(displacement_list_HoQI_1[0]-displacement_list_HoQI_1[1])
