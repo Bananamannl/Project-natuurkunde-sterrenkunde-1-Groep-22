@@ -1,8 +1,10 @@
 import numpy as np
 from ellipse_fitting_and_reshaping_3_4 import transform
 from scipy.optimize import least_squares
+import matplotlib.pyplot as plt
 
 Q1, Q2 = np.load("Data_Analyse_Dataset_1\\1xQ1.npy"), np.load("Data_Analyse_Dataset_1\\1xQ2.npy")
+Q1, Q2 = Q1[:1000], Q2[:1000]
 
 def residuals(params, x, y):
     x0, y0, r = params
@@ -19,3 +21,7 @@ def circle_fit(x, y):
 Q1, Q2 = transform(Q1, Q2)
 
 print(circle_fit(Q1, Q2))
+
+
+plt.scatter(Q1, Q2, s=1)
+plt.show()
