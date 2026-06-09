@@ -15,8 +15,8 @@ fs_set = 1000
 # de volgende funcite gebruikt de methode van Welch (met overlap)
 def get_asd(data, fs, segment_time):
     """
-    Maak van een lijst met displacements een amplitude spectral density grafiek.
-    get_asd(datalijst, samplerate, duur van de meting in sec) 
+    Maakt van een lijst met verplaatsingen een 'amplitude spectral density diagram' (ASD-diagram).
+    get_asd(datalijst, sample rate, duur van de meting in sec) 
     """
     data = np.asarray(data)
     data = data - np.mean(data) # trek het gemiddelde af van elk element in de lijst om een enorm grote piek rond 0 Hz (= geen trilling, een constante waarde) te voorkomen (in andere woorden: centreer de trilling rond om de y-as)
@@ -97,6 +97,7 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
+plt.title('Niet gefitte data')
 plt.show()
 # plt.savefig('x_lijst.png')
 
@@ -132,6 +133,7 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
+plt.title('Gefitte data')
 plt.show()
 # plt.savefig('x_lijst_gefit.png')
 
@@ -176,5 +178,6 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
+plt.title('Ruwe data')
 plt.show()
 # plt.savefig('x_lijst_dataset.png')

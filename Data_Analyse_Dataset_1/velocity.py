@@ -1,8 +1,12 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-from ellipse_fitting_and_reshaping_3_4 import transform
 from arctan_Q1_Q2_5_6_7 import Q1_Q2_Length
 from transformatiematrix_8 import transformatiematrix
+
+time = []
+for i in range(2999999):
+    time.append(i)
 
 # aanhalen van de matrix met alle zesvectoren:
 zesvector_matrix = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
@@ -64,4 +68,7 @@ for i in range(0, len(x_lijst)-1):
     velocity_Rz_gefit.append(v_Rz_gefit)
 
 # print statement as a quick test
-print([float(v_x) for v_x in velocity_x])
+# print([float(v_x) for v_x in velocity_x])
+
+plt.plot(time, velocity_z_gefit)
+plt.show()
