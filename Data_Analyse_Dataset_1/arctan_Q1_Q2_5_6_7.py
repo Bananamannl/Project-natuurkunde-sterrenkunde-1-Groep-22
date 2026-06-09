@@ -17,7 +17,7 @@ def Q1_Q2_Length(Q1, Q2):
 
     length = (opt_phase * w_length)/(4*np.pi)
 
-    Q_absoluut = np.sqrt((Q1)^2 + (Q2)^2)
+    Q_absoluut = np.sqrt((Q1)**2 + (Q2)**2)
 
     return length, opt_phase, Q_absoluut
 
