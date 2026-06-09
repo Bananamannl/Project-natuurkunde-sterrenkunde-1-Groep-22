@@ -20,15 +20,15 @@ def orthagonal_displacement_and_norms(HoQIs, matrix, x, y):
     The function's output is a (3.000.000, 3) np array that has the ortogonal positions in row 1 and 2 and the norm of every data point in row 3
     """
     vectors = HoQIs @ matrix.T
-    norms = np.sqrt(x**2 + y **2)
+    norms = (np.sqrt(x**2 + y **2) -1 ) * 100
     return np.hstack((vectors, norms[:, None]))
 
 
-HoQIs, Q1, Q2 = np.load("Data_Analyse_Dataset_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analyse_Dataset_1\\1xQ1.npy"), np.load("Data_Analyse_Dataset_1\\1xQ2.npy")
-
+HoQIs, Q1, Q2 = np.load("Data_Analyse_Dataset_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analyse_Dataset_1\\1zQ1.npy"), np.load("Data_Analyse_Dataset_1\\1zQ2.npy")
+Q1, Q2 = transform(Q1, Q2)
 #code voor de plot
-points = orthagonal_displacement_and_norms(HoQIs, matrix_1x, Q1, Q2)
-less_points = points[:2000000]
+points = orthagonal_displacement_and_norms(HoQIs, matrix_1z, Q1, Q2)
+less_points = points[:1430]
 
 cloud = pv.PolyData(less_points)
 
@@ -37,7 +37,7 @@ plotter = pv.Plotter()
 plotter.add_mesh(
     cloud,
     render_points_as_spheres=False,
-    point_size=2
+    point_size=5
 )
 
 # Bepaal schaal voor assenlijnen
@@ -52,14 +52,27 @@ plotter.add_mesh(y_axis, line_width=3)
 plotter.add_mesh(z_axis, line_width=3)
 
 # Nulpunt
-origin = pv.Sphere(radius=max_range * 0.02, center=(0, 0, 0))
+origin = pv.Sphere(radius=max_range * 0.01, center=(0, 0, 0))
 plotter.add_mesh(origin, color="red")
 
 plotter.add_axes(
-    xlabel="component 1",
-    ylabel="component 2",
+    xlabel="y",
+    ylabel="z",
     zlabel="norm"
 )
 
+
+plane = pv.Plane(
+    center=(0, 0, 0),
+    direction=(0, 0, 1),
+    i_size=2 * max_range,
+    j_size=2 * max_range
+)
+
+plotter.add_mesh(
+    plane,
+    opacity=0.25,
+    color="gray"
+)
 plotter.show()
 #cloud.save(r"C:\Users\timob\OneDrive - UvA\Project 1\3d plots\puntenwolk_1x.ply")
