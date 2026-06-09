@@ -17,12 +17,15 @@ def Q1_Q2_Length(Q1, Q2):
 
     length = (opt_phase * w_length)/(4*np.pi)
 
-    return length
+    Q_absoluut = np.sqrt((Q1)^2 + (Q2)^2)
+
+    return length, opt_phase, Q_absoluut
 
 # testing the function for one HoQI: 
 HoQI_1_Q1, HoQI_1_Q2 = np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
 
-displacement_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)
+displacement_list_HoQI_1, optical_phase_list_HoQI_1, Q_absoluut_list_HoQI_1 = Q1_Q2_Length(HoQI_1_Q1, HoQI_1_Q2)
 
 # print test (if necessary):
 # print(displacement_list_HoQI_1[0]-displacement_list_HoQI_1[1])
+print (optical_phase_list_HoQI_1)
