@@ -15,7 +15,7 @@ def get_asd(data, fs, segment_time):
     ASD = ts.asd(segment_time, overlap=segment_time/2) # inzake de overlap: de wiskunde achter de code gaat er blindelings vanuit dat segmenten zich herhalen, waardoor de code de data naar 0 'duwt' aan de randen van een segment om eventuele sprongen (heel kleine, niet daadwerkelijk aanwezige frequenties) te voorkomen - de 50/50 overlap zorgt ervoor dat elk datapunt ten minste één keer goed wordt meegenomen
     return ASD
 
-zesvector_matrix = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
+zesvector_matrix = np.load("Data_Analysis_Part_1/fitted_six_vct_list.npy")
 x_lijst_gefit = zesvector_matrix[0:int(3e6), 0]
 y_lijst_gefit = zesvector_matrix[0:int(3e6), 1]
 z_lijst_gefit = zesvector_matrix[0:int(3e6), 2]
@@ -29,11 +29,11 @@ chunk_size = chunk_duration * fs
 
 # kies er telkens één:
 # data = x_lijst_gefit
-data = y_lijst_gefit
+# data = y_lijst_gefit
 # data = z_lijst_gefit
 # data = Rx_lijst_gefit
 # data = Ry_lijst_gefit
-# data = Rz_lijst_gefit
+data = Rz_lijst_gefit
 
 asds = []
 times = []
@@ -62,5 +62,6 @@ plt.xlim(0, 3000)
 plt.ylim(1e-3, 5e2)
 plt.xlabel('time (s)')
 plt.ylabel('freqeuncy (Hz)')
-plt.title('Spectrogram')
+plt.title('Spectrogram (Rz) - Fitted Data')
+# plt.savefig('Spectrogram_Rz.png')
 plt.show()

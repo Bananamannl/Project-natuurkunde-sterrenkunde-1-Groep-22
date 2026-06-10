@@ -109,7 +109,7 @@ else:
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
 plt.title('Smoothened ASD diagram for the non-fitted data (Rz)')
-plt.savefig('ASD_Rz_non_fitted_data.png')
+# plt.savefig('ASD_Rz_non_fitted_data.png')
 plt.show()
 
 # ditzelfde kunnen we doen voor de asd van de gefitte data:
@@ -156,7 +156,7 @@ else:
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
 plt.title('Smoothened ASD diagram for the fitted data (Rz)')
-plt.savefig('ASD_Rz_fitted_data')
+# plt.savefig('ASD_Rz_fitted_data')
 plt.show()
 
 # zo ook voor de verplaatsingen afkomstig uit de ruwe data:
@@ -212,5 +212,5 @@ else:
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
 plt.title('Smoothened ASD diagram for the raw data (Rz)')
-plt.savefig('ASD_Rz_raw_data.png')
+# plt.savefig('ASD_Rz_raw_data.png')
 plt.show()

@@ -1,9 +1,9 @@
-from functies import *
+from functions import *
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-Q1, Q2 = np.load("Data_Analyse_Dataset_1\\1zQ1.npy"), np.load("Data_Analyse_Dataset_1\\1zQ2.npy")
+Q1, Q2 = np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
 Q1, Q2 = transform(Q1[:2000], Q2[:2000])
 
 # plt.plot(Q1, Q2)
@@ -25,7 +25,7 @@ print(groter_dan_1)
 
 opt_fase = Q1_Q2_Opt_Fase(Q1, Q2)
 
-positions = np.load("Data_Analyse_Dataset_1\HoQI_fitted_six_vct_list.npy")
+positions = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
 x_HoQI = positions[0:int(2000), 0]
 
 plt.figure(figsize=(10, 4))

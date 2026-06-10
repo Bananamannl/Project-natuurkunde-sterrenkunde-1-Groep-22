@@ -24,7 +24,7 @@ def orthagonal_displacement_and_norms(HoQIs, matrix, x, y):
     return np.hstack((vectors, norms[:, None]))
 
 
-HoQIs, Q1, Q2 = np.load("Data_Analyse_Dataset_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analyse_Dataset_1\\1zQ1.npy"), np.load("Data_Analyse_Dataset_1\\1zQ2.npy")
+HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
 Q1, Q2 = transform(Q1, Q2)
 #code voor de plot
 points = orthagonal_displacement_and_norms(HoQIs, matrix_1z, Q1, Q2)
