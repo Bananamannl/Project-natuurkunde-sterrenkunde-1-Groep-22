@@ -28,7 +28,7 @@ HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np
 Q1, Q2 = transform(Q1, Q2)
 #code voor de plot
 points = orthagonal_displacement_and_norms(HoQIs, matrix_1z, Q1, Q2)
-less_points = points[:1430]
+less_points = points[:1530]
 
 cloud = pv.PolyData(less_points)
 
