@@ -16,8 +16,8 @@ fitted_1x, fitted_2x, fitted_3x, fitted_1z, fitted_2z, fitted_3z = Q1_Q2_Length(
 
 fitted_x, fitted_y, fitted_z, fitted_Rx, fitted_Ry, fitted_Rz = transformatiematrix(fitted_1x, fitted_2x, fitted_3x, fitted_1z, fitted_2z, fitted_3z)
 
-## Creating a quickacces file for the coordinates
-# uncomment these by slecting and pressing ctrl + /, then run, then re-comment
+# creating a quick access file for the coordinates
+# uncomment these lines by selecting and pressing ctrl + /, then run, then re-comment them
 
 # HoQI_six_vct_list = []
 # for i in range(0, len(fitted_1x)):

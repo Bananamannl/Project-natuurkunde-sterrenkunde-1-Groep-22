@@ -8,7 +8,7 @@ from ellipse_fitting_and_reshaping_3_4 import transform
 from arctan_Q1_Q2_5_6_7 import Q1_Q2_Length
 from transformatiematrix_8 import transformatiematrix
 
-# Belangerijke Variabelen
+# introductie van belangrijke variabelen
 segment_time_set = 1000
 fs_set = 1000
 
@@ -69,10 +69,10 @@ x_lijst_gefit, y_lijst_gefit, z_lijst_gefit, Rx_lijst_gefit, Ry_lijst_gefit, Rz_
 # (kies er telkens één)
 # asd = get_asd(x_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(z_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(z_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-# asd = get_asd(Rz_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(Rz_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 
 # 'smoothen' het diagram door van elke vijf opeenvolgende punten de gemiddelde ASD te nemen:
 window = 50
@@ -84,8 +84,19 @@ peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100])
 plt.figure()
 plt.loglog(asd.frequencies.value, asd_smooth)
 plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv") # de rode markeringen moeten wel netjes op de 'gesmoothede' functie vallen
-for frequency in asd.frequencies.value[peaks]:
+for i, frequency in enumerate(asd.frequencies.value[asd.frequencies.value <= 100][peaks]):
+    prominence = properties["prominences"][i]
+    y_val = asd_smooth[asd.frequencies.value <= 100][peaks][i]
+    
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
+    plt.text(
+        frequency * 1.1,     
+        y_val,
+        f"f = {frequency:.2f} Hz\nprominence = {prominence:.2f}",
+        fontsize=9,
+        color='r',
+        va='center',
+        rotation=0)
 print("Peak frequencies (Hz) of the derivated data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
 print("Prominences (strengths of the associated peaks):", np.array2string(properties["prominences"], separator=", "))
 plt.xlabel("Frequency (Hz)")
@@ -97,18 +108,18 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
-plt.title('Niet gefitte data')
+plt.title('Smoothened ASD diagram for the non-fitted data (Rz)')
+plt.savefig('ASD_Rz_non_fitted_data.png')
 plt.show()
-# plt.savefig('x_lijst.png')
 
 # ditzelfde kunnen we doen voor de asd van de gefitte data:
 # (kies er telkens één)
 # asd = get_asd(x_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(z_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(z_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-# asd = get_asd(Rz_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(Rz_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 
 # het 'smoothen':
 window = 50
@@ -120,8 +131,19 @@ peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100])
 plt.figure()
 plt.loglog(asd.frequencies.value, asd_smooth)
 plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv")
-for frequency in asd.frequencies.value[peaks]:
+for i, frequency in enumerate(asd.frequencies.value[asd.frequencies.value <= 100][peaks]):
+    prominence = properties["prominences"][i]
+    y_val = asd_smooth[asd.frequencies.value <= 100][peaks][i]
+    
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
+    plt.text(
+        frequency * 1.1,       
+        y_val,
+        f"f = {frequency:.2f} Hz\nprominence = {prominence:.2f}",
+        fontsize=9,
+        color='r',
+        va='center',
+        rotation=0)
 print("Peak frequencies (Hz) of the ellipse fitted data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
 print("Prominences (strengths of the associated peaks):", np.array2string(properties["prominences"], separator=", "))
 plt.xlabel("Frequency (Hz)")
@@ -133,9 +155,9 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
-plt.title('Gefitte data')
+plt.title('Smoothened ASD diagram for the fitted data (Rz)')
+plt.savefig('ASD_Rz_fitted_data')
 plt.show()
-# plt.savefig('x_lijst_gefit.png')
 
 # zo ook voor de verplaatsingen afkomstig uit de ruwe data:
 data_20260421 = Data_Extract('Data_Analyse_Dataset_1/20260421_HoQIs.txt')
@@ -150,10 +172,10 @@ Rz_lijst_dataset = data_20260421["RM_HOQI_RZ"]
 # (kies er telkens één)
 # asd = get_asd(x_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(z_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(z_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-# asd = get_asd(Rz_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(Rz_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 
 # het 'smoothen':
 window = 50
@@ -165,8 +187,19 @@ peaks, properties = find_peaks(np.log10(asd.value[asd.frequencies.value <= 100])
 plt.figure()
 plt.loglog(asd.frequencies.value, asd_smooth)
 plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv")
-for frequency in asd.frequencies.value[peaks]:
+for i, frequency in enumerate(asd.frequencies.value[asd.frequencies.value <= 100][peaks]):
+    prominence = properties["prominences"][i]
+    y_val = asd_smooth[asd.frequencies.value <= 100][peaks][i]
+    
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
+    plt.text(
+        frequency * 1.1,      
+        y_val,
+        f"f = {frequency:.2f} Hz\nprominence = {prominence:.2f}",
+        fontsize=9,
+        color='r',
+        va='center',
+        rotation=0)
 print("Peak frequencies (Hz) of the raw data:", np.array2string(asd.frequencies.value[peaks], separator=", "))
 print("Prominences (strengths of the associated peaks):", np.array2string(properties["prominences"], separator=", "))
 plt.xlabel("Frequency (Hz)")
@@ -178,6 +211,6 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
-plt.title('Ruwe data')
+plt.title('Smoothened ASD diagram for the raw data (Rz)')
+plt.savefig('ASD_Rz_raw_data.png')
 plt.show()
-# plt.savefig('x_lijst_dataset.png')
