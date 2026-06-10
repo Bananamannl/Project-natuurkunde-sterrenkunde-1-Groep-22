@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib as mt
 import matplotlib.pyplot as plt 
 
-from functies import *
+from functions import *
 
 HoQI_3z_Q1, HoQI_3z_Q2 = np.load('Data_Analyse_Dataset_1/1xQ1.npy'), np.load('Data_Analyse_Dataset_1/1xQ2.npy')
 HoQI_3z_Q1, HoQI_3z_Q2 = transform(HoQI_3z_Q1[0:300000], HoQI_3z_Q2[0:300000])

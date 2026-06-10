@@ -1,4 +1,4 @@
-from functies import *
+from functions import *
 from ellipse_parameters import parameters_timeseries
 import matplotlib.pyplot as plt
 

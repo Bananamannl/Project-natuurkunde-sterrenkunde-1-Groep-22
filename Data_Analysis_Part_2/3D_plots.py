@@ -1,5 +1,5 @@
 import numpy as np
-from functies import *
+from functions import *
 import pyvista as pv
 
 matrix_1x = np.array([
