@@ -21,7 +21,7 @@ def Data_Extract(name):
     return dictionairy_columns
 
 # Testing code of the function in abstraction
-with open('Data_Analyse_Dataset_1/20260421_HoQIs.txt', 'r') as file:
+with open('Data_Analysis_Part_1/20260421_HoQIs.txt', 'r') as file:
         column_line = file.readline()
         column_names = column_line.split()
         column_names.pop(0)

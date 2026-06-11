@@ -59,7 +59,7 @@ def period_data(data, window_size=None, step_size=None, lag=None):
 
 # # # Snelle test
 # vectors = parameters_timeseries(Q1, Q2, window_size=1000, step_size=500)
-# #vectors = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
+# #vectors = np.load("Data_Analysis_Part_1/fitted_six_vct_list.npy")
 # print("Shape:", vectors.shape)
 # print("Eerste 5 vectors:")
 # print(vectors[:5])
