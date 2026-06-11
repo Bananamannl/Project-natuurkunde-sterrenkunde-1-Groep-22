@@ -4,7 +4,7 @@ from ellipse_parameters import *
 import numpy as np
 import pyvista as pv
 
-HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\1xQ1.npy"), np.load("Data_Analysis_Part_1\\1xQ2.npy")
+HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
 # Q1, Q2 = transform(Q1[0:10000], Q2[0:10000])
 Q1, Q2 = (Q1[0:10000], Q2[0:10000])
 parameters = parameters_timeseries(Q1, Q2, window_size=100, step_size=1)
@@ -30,7 +30,7 @@ def orthagonal_displacement_and_parameter(HoQIs, matrix, a):
     a = (a - np.mean(a)) * 1000
     return np.hstack((vectors, a[:, None]))
 
-points = orthagonal_displacement_and_parameter(HoQIs, matrix_1x, a)
+points = orthagonal_displacement_and_parameter(HoQIs, matrix_1z, a)
 
 # Data
 x_data = points[:, 0]
