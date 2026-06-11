@@ -90,9 +90,9 @@ Q1_variable_transformed = [0]*6
 Q2_variable_transformed = [0]*6
 for h in range(0,6):
     if h <= 2:
-        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=1000, step_size=1000)
+        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=1000, step_size=100)
     else:
-        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=100, step_size=100)
+        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=100, step_size=10)
     Q1_variable_transformed[h] = fitted_Q1
     Q2_variable_transformed[h] = fitted_Q2
 
