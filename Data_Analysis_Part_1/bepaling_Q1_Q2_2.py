@@ -2,7 +2,7 @@ import numpy as np
 from data_extraction_1 import Data_Extract
 
 # import the HoQI data from the data extraction file
-data_20260421 = Data_Extract('Data_Analyse_Dataset_1/20260421_HoQIs.txt')
+data_20260421 = Data_Extract('Data_Analysis_Part_1/20260421_HoQIs.txt')
 tijd = data_20260421["T"]
 
 # use the dictionairy to store the data per HoQI per PD in separate lists

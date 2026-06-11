@@ -9,14 +9,14 @@ for i in range(2999999):
     time.append(i)
 
 # aanhalen van de matrix met alle zesvectoren:
-zesvector_matrix = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
+zesvector_matrix = np.load("Data_Analysis_Part_1/fitted_six_vct_list.npy")
 
 # aanmaken van de benodigde snelheidslijsten:
 velocity_x, velocity_y, velocity_z, velocity_Rx, velocity_Ry, velocity_Rz, velocity_x_gefit, velocity_y_gefit, velocity_z_gefit, velocity_Rx_gefit, velocity_Ry_gefit, velocity_Rz_gefit = [[] for j in range(12)]
 
 # aanhalen van de benodigde verplaatsingslijsten:
 # extracting the Q lists from the saved data files to prevent Python from having to read all the raw data first
-Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = np.load('Data_Analyse_Dataset_1/1xQ1.npy'), np.load('Data_Analyse_Dataset_1/1xQ2.npy'), np.load('Data_Analyse_Dataset_1/2xQ1.npy'), np.load('Data_Analyse_Dataset_1/2xQ2.npy'), np.load('Data_Analyse_Dataset_1/3xQ1.npy'), np.load('Data_Analyse_Dataset_1/3xQ2.npy'), np.load('Data_Analyse_Dataset_1/1zQ1.npy'), np.load('Data_Analyse_Dataset_1/1zQ2.npy'), np.load('Data_Analyse_Dataset_1/2zQ1.npy'), np.load('Data_Analyse_Dataset_1/2zQ2.npy'), np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
+Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = np.load('Data_Analysis_Part_1/1xQ1.npy'), np.load('Data_Analysis_Part_1/1xQ2.npy'), np.load('Data_Analysis_Part_1/2xQ1.npy'), np.load('Data_Analysis_Part_1/2xQ2.npy'), np.load('Data_Analysis_Part_1/3xQ1.npy'), np.load('Data_Analysis_Part_1/3xQ2.npy'), np.load('Data_Analysis_Part_1/1zQ1.npy'), np.load('Data_Analysis_Part_1/1zQ2.npy'), np.load('Data_Analysis_Part_1/2zQ1.npy'), np.load('Data_Analysis_Part_1/2zQ2.npy'), np.load('Data_Analysis_Part_1/3zQ1.npy'), np.load('Data_Analysis_Part_1/3zQ2.npy')
 
 # note: some of these lists contain minus signs due to the polarization plate being turned in the oppositie direction in the original experiment
 length_1x_lijst = -Q1_Q2_Length(Q1_1x, Q2_1x)

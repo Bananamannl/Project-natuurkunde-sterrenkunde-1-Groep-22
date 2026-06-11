@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from ellipse_parameters import *
-displacements = np.load("Data_Analyse_Dataset_1/fitted_six_vct_list.npy")
-HoQIs = np.load("Data_Analyse_Dataset_1/HoQI_fitted_six_vct_list.npy")
-Q1_1x, Q2_1x = np.load("Data_Analyse_Dataset_1/1xQ1.npy"), np.load("Data_Analyse_Dataset_1/1xQ2.npy")
-Q1_2x, Q2_2x = np.load("Data_Analyse_Dataset_1/2xQ1.npy"), np.load("Data_Analyse_Dataset_1/2xQ2.npy")
-Q1_3x, Q2_3x = np.load("Data_Analyse_Dataset_1/3xQ1.npy"), np.load("Data_Analyse_Dataset_1/3xQ2.npy")
-Q1_1z, Q2_1z = np.load("Data_Analyse_Dataset_1/1zQ1.npy"), np.load("Data_Analyse_Dataset_1/1zQ2.npy")
-Q1_2z, Q2_2z = np.load("Data_Analyse_Dataset_1/2zQ1.npy"), np.load("Data_Analyse_Dataset_1/2zQ2.npy")
-Q1_3z, Q2_3z = np.load("Data_Analyse_Dataset_1/3zQ1.npy"), np.load("Data_Analyse_Dataset_1/3zQ2.npy")
+displacements = np.load("Data_Analysis_Part_1/fitted_six_vct_list.npy")
+HoQIs = np.load("Data_Analysis_Part_1/HoQI_fitted_six_vct_list.npy")
+Q1_1x, Q2_1x = np.load("Data_Analysis_Part_1/1xQ1.npy"), np.load("Data_Analysis_Part_1/1xQ2.npy")
+Q1_2x, Q2_2x = np.load("Data_Analysis_Part_1/2xQ1.npy"), np.load("Data_Analysis_Part_1/2xQ2.npy")
+Q1_3x, Q2_3x = np.load("Data_Analysis_Part_1/3xQ1.npy"), np.load("Data_Analysis_Part_1/3xQ2.npy")
+Q1_1z, Q2_1z = np.load("Data_Analysis_Part_1/1zQ1.npy"), np.load("Data_Analysis_Part_1/1zQ2.npy")
+Q1_2z, Q2_2z = np.load("Data_Analysis_Part_1/2zQ1.npy"), np.load("Data_Analysis_Part_1/2zQ2.npy")
+Q1_3z, Q2_3z = np.load("Data_Analysis_Part_1/3zQ1.npy"), np.load("Data_Analysis_Part_1/3zQ2.npy")
 
 vectors = parameters_timeseries(Q1_3z, Q2_3z, window_size=500, step_size=100)
 displacements = period_data(displacements, window_size=500, step_size=100)

@@ -25,7 +25,7 @@ def get_asd(data, fs, segment_time):
     return ASD
 
 # extracting the Q lists from the saved data files to prevent Python from having to read all the raw data first
-Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = np.load('Data_Analyse_Dataset_1/1xQ1.npy'), np.load('Data_Analyse_Dataset_1/1xQ2.npy'), np.load('Data_Analyse_Dataset_1/2xQ1.npy'), np.load('Data_Analyse_Dataset_1/2xQ2.npy'), np.load('Data_Analyse_Dataset_1/3xQ1.npy'), np.load('Data_Analyse_Dataset_1/3xQ2.npy'), np.load('Data_Analyse_Dataset_1/1zQ1.npy'), np.load('Data_Analyse_Dataset_1/1zQ2.npy'), np.load('Data_Analyse_Dataset_1/2zQ1.npy'), np.load('Data_Analyse_Dataset_1/2zQ2.npy'), np.load('Data_Analyse_Dataset_1/3zQ1.npy'), np.load('Data_Analyse_Dataset_1/3zQ2.npy')
+Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = np.load('Data_Analysis_Part_1/1xQ1.npy'), np.load('Data_Analysis_Part_1/1xQ2.npy'), np.load('Data_Analysis_Part_1/2xQ1.npy'), np.load('Data_Analysis_Part_1/2xQ2.npy'), np.load('Data_Analysis_Part_1/3xQ1.npy'), np.load('Data_Analysis_Part_1/3xQ2.npy'), np.load('Data_Analysis_Part_1/1zQ1.npy'), np.load('Data_Analysis_Part_1/1zQ2.npy'), np.load('Data_Analysis_Part_1/2zQ1.npy'), np.load('Data_Analysis_Part_1/2zQ2.npy'), np.load('Data_Analysis_Part_1/3zQ1.npy'), np.load('Data_Analysis_Part_1/3zQ2.npy')
 
 # the same for the ellips fitted Q lists:
 Q1_1x_gefit, Q2_1x_gefit = transform(Q1_1x, Q2_1x)
@@ -160,7 +160,7 @@ plt.title('Smoothened ASD diagram for the fitted data (Rz)')
 plt.show()
 
 # zo ook voor de verplaatsingen afkomstig uit de ruwe data:
-data_20260421 = Data_Extract('Data_Analyse_Dataset_1/20260421_HoQIs.txt')
+data_20260421 = Data_Extract('Data_Analysis_Part_1/20260421_HoQIs.txt')
 
 x_lijst_dataset = data_20260421["RM_HOQI_X"] 
 y_lijst_dataset = data_20260421["RM_HOQI_Y"] 

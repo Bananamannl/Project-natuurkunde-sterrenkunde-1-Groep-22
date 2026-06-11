@@ -3,9 +3,9 @@ import numpy as np
 from ellipse_fitting_and_reshaping_3_4 import *
 
 # Import all the Q1 and Q2
-Q1_list = [np.load('Data_Analyse_Dataset_1/1xQ1.npy')[:3000000], np.load('Data_Analyse_Dataset_1/2xQ1.npy')[:3000000], np.load('Data_Analyse_Dataset_1/3xQ1.npy')[:3000000], np.load('Data_Analyse_Dataset_1/1zQ1.npy')[:3000000], np.load('Data_Analyse_Dataset_1/2zQ1.npy')[:3000000], np.load('Data_Analyse_Dataset_1/3zQ1.npy')[:3000000]]
+Q1_list = [np.load('Data_Analysis_Part_1/1xQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/2xQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/3xQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/1zQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/2zQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/3zQ1.npy')[:3000000]]
 
-Q2_list = [np.load('Data_Analyse_Dataset_1/1xQ2.npy')[:3000000], np.load('Data_Analyse_Dataset_1/2xQ2.npy')[:3000000], np.load('Data_Analyse_Dataset_1/3xQ2.npy')[:3000000], np.load('Data_Analyse_Dataset_1/1zQ2.npy')[:3000000], np.load('Data_Analyse_Dataset_1/2zQ2.npy')[:3000000], np.load('Data_Analyse_Dataset_1/3zQ2.npy')[:3000000]]
+Q2_list = [np.load('Data_Analysis_Part_1/1xQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/2xQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/3xQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/1zQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/2zQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/3zQ2.npy')[:3000000]]
 
 Q1_transformed = [0]*6
 Q2_transformed = [0]*6
