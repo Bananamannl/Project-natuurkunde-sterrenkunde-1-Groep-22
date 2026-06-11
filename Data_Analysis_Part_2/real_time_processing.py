@@ -9,7 +9,7 @@ Q1, Q2 = transform(Q1[0:10000], Q2[0:10000])
 # Q1, Q2 = (Q1[0:10000], Q2[0:10000])
 parameters = parameters_timeseries(Q1, Q2, window_size=100, step_size=1)
 
-a = parameters[:, 2]
+a = parameters[:, 0]
 
 matrix_1z = np.array([
     [-2/3, 1/3, 1/3, 0, 0, 0],
@@ -58,7 +58,6 @@ plotter.add_axes(
     zlabel="a"
 )
 
-
 plane = pv.Plane(
     center=(0, 0, 0),
     direction=(0, 0, 1),
@@ -77,9 +76,10 @@ plotter.add_mesh(
 # Fit-oppervlak toevoegen
 # -------------------------
 
-coeffs = np.array([ 8.57334684e-01,  2.75617523e-01, -4.17557290e-03, -1.12518106e-03,
-  1.33102732e-03, -5.72146792e-04, -3.27906403e-05, -6.62192067e-02,
-  2.14643885e-03])
+coeffs = np.array([ 3.68099136e+00, -7.32190117e-01, -4.86147173e-02,  6.83632969e-02,
+ -5.79910027e-03, -8.67903078e-03,  2.07983732e-03, -3.12460831e-01,
+ -1.34574678e-02,  3.76610395e-02,  4.62106058e-04, -2.87757872e-04,
+ -7.93645286e-05,  2.56754595e-06, -6.50433795e-05,  2.59515093e-04])
 def fitted_surface(x, y):
     return (
         coeffs[0]
@@ -91,6 +91,13 @@ def fitted_surface(x, y):
         + coeffs[6] * x**2 * y**2
         + coeffs[7] * x**2
         + coeffs[8] * y**2
+        + coeffs[9] * x**3
+        + coeffs[10] * y**3
+        + coeffs[11] * x**3 * y
+        + coeffs[12] * x**3 * y**2
+        + coeffs[13] * x**3 * y**3
+        + coeffs[14] * y**3 * x**2
+        + coeffs[15] * y**3 * x
     )
 
 x_data = HoQI1z_a[:, 0]
