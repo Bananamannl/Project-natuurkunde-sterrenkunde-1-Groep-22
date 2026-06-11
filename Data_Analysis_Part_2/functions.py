@@ -108,3 +108,17 @@ def transform(x, y, start_parameters=None):
     rotated = centred @ R 
     unit_vectors = rotated / squeeze
     return unit_vectors[:, 0], unit_vectors[:, 1]
+
+import numpy as np
+from gwpy.timeseries import TimeSeries
+
+def get_asd(data, fs, segment_time):
+    """
+    Maakt van een lijst met verplaatsingen een 'amplitude spectral density diagram' (ASD-diagram).
+    get_asd(datalijst, sample rate, duur van de meting in sec) 
+    """
+    data = np.asarray(data)
+    data = data - np.mean(data) # trek het gemiddelde af van elk element in de lijst om een enorm grote piek rond 0 Hz (= geen trilling, een constante waarde) te voorkomen (in andere woorden: centreer de trilling rond om de y-as)
+    ts = TimeSeries(data, sample_rate=fs)
+    ASD = ts.asd(segment_time, overlap=segment_time/2) # inzake de overlap: de wiskunde achter de code gaat er blindelings vanuit dat segmenten zich herhalen, waardoor de code de data naar 0 'duwt' aan de randen van een segment om eventuele sprongen (heel kleine, niet daadwerkelijk aanwezige frequenties) te voorkomen - de 50/50 overlap zorgt ervoor dat elk datapunt ten minste één keer goed wordt meegenomen
+    return ASD
