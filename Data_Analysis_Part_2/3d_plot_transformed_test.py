@@ -1,6 +1,7 @@
 import numpy as np
 from functions import *
 import pyvista as pv
+from windowed_ellipse_fitting import *
 
 matrix_1x = np.array([
     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0],
@@ -14,6 +15,10 @@ matrix_1z = np.array([
 ])
 #output: (x, y)
 
+matrix_3z = np.array([
+    [-1/np.sqrt(3), 1/np.sqrt(3), 0, 0, 0, 0],
+    [1/3, 1/3, -2/3, 0, 0, 0]])
+
 def orthagonal_displacement_and_norms(HoQIs, matrix, x, y):
     """
     a function that takes in: the HoQI displacements list, a particular othogonal transformation matrix, the Q1, Q2 for the HoQI you are looking at.
@@ -24,11 +29,12 @@ def orthagonal_displacement_and_norms(HoQIs, matrix, x, y):
     return np.hstack((vectors, norms[:, None]))
 
 
-HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
-Q1, Q2 = transform(Q1, Q2)
+HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\3zQ1.npy"), np.load("Data_Analysis_Part_1\\3zQ2.npy")
+Q1, Q2 = standard_step_window_ellipse_fitting(Q1, Q2, window_size=250)
+
 #code voor de plot
-points = orthagonal_displacement_and_norms(HoQIs, matrix_1z, Q1, Q2)
-less_points = points[:1530]
+points = orthagonal_displacement_and_norms(HoQIs, matrix_3z, Q1, Q2)
+less_points = points[10000:12000]
 
 cloud = pv.PolyData(less_points)
 

@@ -53,37 +53,37 @@ y_valid = y[train_end + gap:valid_end - gap]
 X_test = X[valid_end + gap:]
 y_test = y[valid_end + gap:]
 
-print(X_train.shape, y_train.shape)
-print(X_valid.shape, y_valid.shape)
-print(X_test.shape, y_test.shape)
+# print(X_train.shape, y_train.shape)
+# print(X_valid.shape, y_valid.shape)
+# print(X_test.shape, y_test.shape)
 
-results = []
+# results = []
 
-for k in [1, 3, 5, 10, 20, 50, 100, 200]:
-    for weights in ["uniform", "distance"]:
-        for p in [1, 2]:
+# for k in [1, 3, 5, 10, 20, 50, 100, 200]:
+#     for weights in ["uniform", "distance"]:
+#         for p in [1, 2]:
 
-            model = make_pipeline(
-                StandardScaler(),
-                KNeighborsRegressor(
-                    n_neighbors=k,
-                    weights=weights,
-                    p=p
-                )
-            )
+#             model = make_pipeline(
+#                 StandardScaler(),
+#                 KNeighborsRegressor(
+#                     n_neighbors=k,
+#                     weights=weights,
+#                     p=p
+#                 )
+#             )
 
-            model.fit(X_train, y_train)
-            y_valid_pred = model.predict(X_valid)
+#             model.fit(X_train, y_train)
+#             y_valid_pred = model.predict(X_valid)
 
-            mse = mean_squared_error(y_valid, y_valid_pred)
-            rmse = np.sqrt(mse)
+#             mse = mean_squared_error(y_valid, y_valid_pred)
+#             rmse = np.sqrt(mse)
 
-            results.append((mse, rmse, k, weights, p))
+#             results.append((mse, rmse, k, weights, p))
 
-results = sorted(results, key=lambda x: x[0])
+# results = sorted(results, key=lambda x: x[0])
 
-for mse, rmse, k, weights, p in results[:10]:
-    print(f"k={k:3d}, weights={weights:8s}, p={p}, MSE={mse:.8e}, RMSE={rmse:.8e}")
+# for mse, rmse, k, weights, p in results[:10]:
+#     print(f"k={k:3d}, weights={weights:8s}, p={p}, MSE={mse:.8e}, RMSE={rmse:.8e}")
 
 
 #Hiermee is besloten dat de parameters: 

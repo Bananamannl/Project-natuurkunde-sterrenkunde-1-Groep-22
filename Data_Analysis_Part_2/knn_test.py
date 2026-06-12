@@ -5,6 +5,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from ellipse_parameters import *
+import matplotlib.pyplot as plt
 
 ####Let op, we beginnen met 1z!!!
 matrix_1z = np.array([
@@ -14,15 +15,22 @@ matrix_1z = np.array([
 HoQIs = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
 Q1, Q2 = np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
 
-orth_movement = HoQIs[:40000] @ matrix_1z.T
+train_start = 0
+train_lenght = 10000
 
-parameters = parameters_timeseries(Q1[:40099], Q2[:40099], window_size=100, step_size=1)
+
+training_parameters = parameters_timeseries(Q1[train_start:train_start + train_lenght + 99], 
+                                            Q2[train_start:train_start + train_lenght + 99], 
+                                            window_size=100, 
+                                            step_size=1)
+
+orth_movement_train = HoQIs[train_start:train_start + train_lenght] @ matrix_1z.T
 
 # X = input: displacements / HoQI vectors
-X = orth_movement          # shape (N, 2)
+X = orth_movement_train          # shape (N, 2)
 
 # y = output: ellipse parameters
-y = parameters[:, :5]     # shape (N, 5)
+y = training_parameters[:, :5]     # shape (N, 5)
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, shuffle=False
@@ -30,7 +38,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 model = make_pipeline(
     StandardScaler(),
-    KNeighborsRegressor(n_neighbors=10, weights="distance")
+    KNeighborsRegressor(
+        n_neighbors=200,
+        weights="distance",
+        p=1
+    )
 )
 
 model.fit(X_train, y_train)
@@ -38,25 +50,17 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 
+###Voor als we willen plotten
 labels = ["x0", "y0", "a", "b", "theta"]
 
-import matplotlib.pyplot as plt
+param_index = 0  # 0=x0, 1=y0, 2=a, 3=b, 4=theta
 
-labels = ["x0", "y0", "a", "b", "theta"]
-
-param_index = 0  # verander naar 0 t/m 4
-
-plt.figure(figsize=(5, 5))
-plt.scatter(y_test[:, param_index], y_pred[:, param_index], s=5)
-
-min_val = min(y_test[:, param_index].min(), y_pred[:, param_index].min())
-max_val = max(y_test[:, param_index].max(), y_pred[:, param_index].max())
-
-plt.plot([min_val, max_val], [min_val, max_val], linestyle="--")
-
-plt.xlabel("Real")
-plt.ylabel("Predicted")
-plt.title(f"Real vs predicted: {labels[param_index]}")
-plt.axis("equal")
+plt.figure(figsize=(10, 4))
+plt.plot(y_test[:, param_index], label="real")
+plt.plot(y_pred[:, param_index], label="KNN predicted")
+plt.xlabel("Test index")
+plt.ylabel(labels[param_index])
+plt.title(f"KNN prediction for {labels[param_index]}")
+plt.legend()
 plt.tight_layout()
 plt.show()
