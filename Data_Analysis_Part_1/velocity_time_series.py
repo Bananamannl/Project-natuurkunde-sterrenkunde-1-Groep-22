@@ -70,5 +70,29 @@ for i in range(0, len(x_lijst)-1):
 # print statement as a quick test
 # print([float(v_x) for v_x in velocity_x])
 
-plt.plot(time, velocity_z_gefit)
+figure, axes = plt.subplots(2, 3)
+
+axes[0, 0].plot(time, velocity_x_gefit)
+axes[0, 0].set_title('velocity x')
+
+axes[0, 1].plot(time, velocity_y_gefit)
+axes[0, 1].set_title('velocity y')
+
+axes[0, 2].plot(time, velocity_z_gefit)
+axes[0, 2].set_title('velocity z')
+
+axes[1, 0].plot(time, velocity_Rx_gefit)
+axes[1, 0].set_title('velocity Rx')
+
+axes[1, 1].plot(time, velocity_Ry_gefit)
+axes[1, 1].set_title('velocity Ry')
+
+axes[1, 2].plot(time, velocity_Rz_gefit)
+axes[1, 2].set_title('velocity Rz')
+
+for ax in axes.flat:
+    ax.set_xlabel('time (ms)')
+    ax.set_ylabel('velocity (μm s$^{-1}$)')
+
+plt.savefig('velocity_time_series.png')
 plt.show()
