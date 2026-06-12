@@ -3,17 +3,12 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import RBFInterpolator
 import time
 
-from ellipse_parameters import *
-
-"This code takes two lists (Q1 and Q2) of a certain HoQI, both with three million elements."
-"The data is then split up into 300 chunks, which makes the chunk size equal to 10.000."
-"For each of these chunks, there are 9.901 windows (window size = 100), of which everyime the five ellipse parameters are being calculated."
-"After this real-time ellipse fitting, the code fits an rbf (an interpolating function) through the 9901 relevant data points."
-"This rbf is used to predict the ellipse parameters of the next chunk of data, after which the (Q1, Q2) points get transformed real-time."
-"So, except for chunk 0, the (Q1, Q2) points of each chunk are transformed using the rbf of the previous chunk."
+from windowed_ellipse_fitting import *
+from functions import *
+from orthogonal_matrices import *
 
 # importing the HoQI data, and the Q1 and Q2 lists
-HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\2xQ1.npy"), np.load("Data_Analysis_Part_1\\2xQ2.npy")
+HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\3xQ1.npy"), np.load("Data_Analysis_Part_1\\3xQ2.npy")
 block_size = 300000 # the amount of data points being used for the plot
 HoQIs_block, Q1_block, Q2_block = HoQIs[0:block_size], Q1[0:block_size], Q2[0:block_size]
 
@@ -80,7 +75,7 @@ for i in range(int(n_chunks)): # for loop for each chunk individually
     HoQIs_chunk = HoQIs_block[start:end-(window_size - 1)]
 
     # berekent voor elke HoQI-vector de positie in het orthogonale vlak (in de huidige chunk)
-    orthogonal_position = HoQIs_chunk @ matrix_2x.T
+    orthogonal_position = HoQIs_chunk @ matrix_3x.T
 
     # the transformation of the previous Q1 and Q2:
     if i > 0: # i > 0, omdat er voor de eerste ('nulde') chunk nog geen vorige chunk is, dus nog geen rbf op basis waarvan de parameters voorspeld kunnen worden
@@ -164,16 +159,34 @@ Q2_nt_plot = np.concatenate(Q2_chunk_0)
 Q1_t_plot = np.concatenate(Q1_transformed_list)
 Q2_t_plot = np.concatenate(Q2_transformed_list)
 
-# the plot
-plt.figure(figsize=(6, 6))
-plt.scatter(Q1_nt_plot, Q2_nt_plot, s=0.1, color='red', label='non-transformed')
-plt.scatter(Q1_t_plot, Q2_t_plot, s=0.1, color='green', label='transformed')
-plt.xlim(-2.5, 2.5)
-plt.ylim(-2.5, 2.5)
-plt.xlabel('Q1')
-plt.ylabel('Q2')
-plt.axis('equal')
-plt.legend(fontsize=8, loc= 'upper right')
-plt.title('(Q1, Q2) plot using rbf predicting')
-plt.savefig("Q1_Q2_RDF_Predicted_1.png")
+segment_time_set = 100
+fs_set = 1000
+
+# length_3x_lijst = Q1_Q2_Length(Q1_block, Q2_block)
+Q1_block_transform, Q2_block_transform = transform(Q1_block, Q2_block)
+length_3x_lijst = Q1_Q2_Length(Q1_block_transform, Q2_block_transform)
+transformed_asd = get_asd(length_3x_lijst, fs=fs_set, segment_time=segment_time_set)
+
+rbf_transformed_length_3x_lijst = Q1_Q2_Length(Q1_t_plot, Q2_t_plot)
+rbf_transformed_asd = get_asd(rbf_transformed_length_3x_lijst, fs=fs_set, segment_time=segment_time_set)
+
+figure, axes =plt.subplots(2, 1)
+axes[0].loglog(transformed_asd.frequencies.value, transformed_asd, 'b')
+axes[0].set_xlabel("Frequency (Hz)")
+axes[0].set_ylabel("ASD (um Hz^(-1/2))")
+axes[0].set_xlim(1e-3, 1e3)
+axes[1].set_ylim(1e-8, 1e2)
+axes[0].grid(True, which="both")
+axes[0].set_title('ASD diagram for the simple transformed data (3x)')
+
+axes[1].loglog(rbf_transformed_asd.frequencies.value, rbf_transformed_asd, 'r')
+axes[0].set_xlabel("Frequency (Hz)")
+axes[1].set_ylabel("ASD (um Hz^(-1/2))")
+axes[1].set_xlim(1e-3, 1e3)
+axes[1].set_ylim(1e-8, 1e2)
+axes[1].grid(True, which="both")
+axes[1].set_title('ASD diagram for the real time transformed data (RBF) (3x)')
+
+plt.subplots_adjust(hspace=0.312)
+plt.savefig('ASD_RBF_Predicted_Fit.png')
 plt.show()

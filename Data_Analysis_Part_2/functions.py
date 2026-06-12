@@ -65,7 +65,6 @@ def Q1_Q2_Opt_Fase(Q1, Q2):
 
     return opt_phase
 
-
 # note that this function uses lists as input arguments
 def Q1_Q2_Length(Q1, Q2):
     """
@@ -122,3 +121,36 @@ def get_asd(data, fs, segment_time):
     ts = TimeSeries(data, sample_rate=fs)
     ASD = ts.asd(segment_time, overlap=segment_time/2) # inzake de overlap: de wiskunde achter de code gaat er blindelings vanuit dat segmenten zich herhalen, waardoor de code de data naar 0 'duwt' aan de randen van een segment om eventuele sprongen (heel kleine, niet daadwerkelijk aanwezige frequenties) te voorkomen - de 50/50 overlap zorgt ervoor dat elk datapunt ten minste één keer goed wordt meegenomen
     return ASD
+
+def Data_Extract(name):
+    """
+    Data_Extract( str ) -> dictionairy
+    This function takes the name (or path) of a raw HoQI data file and extracts the collumns of this file as lists embedded in a dictionairy, using the headers of columns as keys for the lists that are made up of the values of said columns
+    """
+    with open(name, 'r') as file:
+        column_line = file.readline()
+        column_names = column_line.split()
+        # Removing the # at the start of the column names
+        column_names.pop(0)
+
+        dictionairy_columns = {column: [] for column in column_names}
+        next(file)
+
+        for line in file:
+            line_split = line.split()
+            for i in range(0,len(line_split)):
+                 dictionairy_columns[column_names[i]].append(float(line_split[i]))
+    
+    return dictionairy_columns
+
+def transformatiematrix (ax, bx, cx, az, bz, cz):
+    R = 0.815
+
+    x = (1/3) * (-2 * ax + bx + cx)
+    y = (1/np.sqrt(3)) * (-bx + cx)
+    z = (1/3) * (az + bz + cz)
+    Rx = (1/(3*R)) * (2 * az - bz - cz)
+    Ry = (1/(np.sqrt(3) * R)) * (bz - cz)
+    Rz = (1/(3*R)) * (ax + bx + cx)
+
+    return x, y, z, Rx, Ry, Rz
