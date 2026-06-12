@@ -121,8 +121,6 @@ def get_asd(data, fs, segment_time):
     ts = TimeSeries(data, sample_rate=fs)
     ASD = ts.asd(segment_time, overlap=segment_time/2) # inzake de overlap: de wiskunde achter de code gaat er blindelings vanuit dat segmenten zich herhalen, waardoor de code de data naar 0 'duwt' aan de randen van een segment om eventuele sprongen (heel kleine, niet daadwerkelijk aanwezige frequenties) te voorkomen - de 50/50 overlap zorgt ervoor dat elk datapunt ten minste één keer goed wordt meegenomen
     return ASD
-<<<<<<< Updated upstream
-=======
 
 def Data_Extract(name):
     """
@@ -156,4 +154,3 @@ def transformatiematrix (ax, bx, cx, az, bz, cz):
     Rz = (1/(3*R)) * (ax + bx + cx)
 
     return x, y, z, Rx, Ry, Rz
->>>>>>> Stashed changes
