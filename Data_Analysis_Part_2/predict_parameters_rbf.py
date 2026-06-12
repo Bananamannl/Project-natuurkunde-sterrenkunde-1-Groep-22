@@ -17,8 +17,8 @@ HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np
 block_size = 300000 # the amount of data points being used for the plot
 HoQIs_block, Q1_block, Q2_block = HoQIs[0:block_size], Q1[0:block_size], Q2[0:block_size]
 
-# window_size = 500 # use for 1x and 2x
-window_size = 210 # use for 3x
+window_size = 500 # use for 1x and 2x
+# window_size = 210 # use for 3x
 # window_size = 250 # use for 1z, 2z and 3z
 
 # the transformation matrix for HoQI 1x
