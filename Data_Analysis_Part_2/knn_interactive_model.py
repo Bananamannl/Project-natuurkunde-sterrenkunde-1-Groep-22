@@ -4,20 +4,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from ellipse_parameters import *
 import matplotlib.pyplot as plt 
+from orthogonal_matrices import *
 
-matrix_1z = np.array([
-    [-2/3, 1/3, 1/3, 0, 0, 0],
-    [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0]
-])
-
-Q1, Q2 = np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
-Q1, Q2 = Q1[:1000000], Q2[:1000000]
-HoQIs = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
-HoQIs = HoQIs[:1000000]
-
-orth_plane = HoQIs @ matrix_1z.T
-parameters = parameters_timeseries(Q1, Q2, window_size=250, step_size=250)
-# parameters = parameters[0:5, :]
 
 def expand_window_parameters(parameters, window_size):
     """
@@ -26,11 +14,23 @@ def expand_window_parameters(parameters, window_size):
     """
     return np.repeat(parameters, window_size, axis=0)
 
+def keep_recent_data(X_train, y_train, memory_size):
+    """
+    Houdt alleen de laatste memory_size datapunten in de training set.
+    """
+    if len(X_train) > memory_size:
+        X_train = X_train[-memory_size:]
+        y_train = y_train[-memory_size:]
+    
+    return X_train, y_train
+
+
 def rolling_knn_predict_points(
     positions,
     parameters,
     train_points=10000,
-    window_size=250):
+    window_size=250,
+    memory=20000):
 
     model = make_pipeline(
         StandardScaler(),
@@ -54,7 +54,6 @@ def rolling_knn_predict_points(
 
     predictions = []
 
-
     for start in range(train_points, N, window_size):
         end = start + window_size
 
@@ -69,13 +68,12 @@ def rolling_knn_predict_points(
         X_train = np.vstack([X_train, X_window])
         y_train = np.vstack([y_train, y_window])
 
+        X_train, y_train = keep_recent_data(X_train, y_train, memory)
+
         #train het model opnieuw
         model.fit(X_train, y_train)
 
     return np.vstack(predictions)
-
-tested_parameters = rolling_knn_predict_points(orth_plane, parameters)
-
 
 def transform_with_parameters(Q1, Q2, parameters):
     Q1, Q2 = Q1[10000:], Q2[10000:]
@@ -94,10 +92,40 @@ def transform_with_parameters(Q1, Q2, parameters):
     Q_transformed = np.array(Q_transformed)
     return Q_transformed[:, 0], Q_transformed[:, 1]
 
+
+Q1, Q2 = np.load("Data_Analysis_Part_1\\3xQ1.npy"), np.load("Data_Analysis_Part_1\\3xQ2.npy")
+# Q1, Q2 = Q1[1700000:2300000], Q2[1700000:2300000]
+HoQIs = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
+# HoQIs = HoQIs[1700000:2300000]
+
+
+
+start = 0
+end = 1000000
+
+orth_plane = HoQIs[:end] @ matrix_3x.T
+# orth_plane = HoQIs @ matrix_3x.T
+Q1, Q2 = Q1[:end], Q2[:end]
+parameters = parameters_timeseries(Q1, Q2, window_size=500, step_size=500)
+
+tested_parameters = rolling_knn_predict_points(orth_plane, parameters, window_size=500)
+
 Q1_new, Q2_new = transform_with_parameters(Q1, Q2, tested_parameters)
+kleur = np.arange(len(Q1_new[start:end]))
 
 plt.figure()
-plt.scatter(Q1_new, Q2_new, s=3)
+plt.scatter(Q1_new[start:end], Q2_new[start:end], c=kleur, s=3, cmap="viridis")
+plt.colorbar(label="Datapunt index")
 plt.axis("equal") 
 plt.grid()
 plt.show()
+
+
+# Q1, Q2 = np.load("Data_Analysis_Part_1\\3xQ1.npy"), np.load("Data_Analysis_Part_1\\3xQ2.npy")
+# HoQIs = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
+# orth_plane = HoQIs @ matrix_3x.T
+
+# parameters = parameters_timeseries(Q1, Q2, window_size=250, step_size=250)
+
+# tested_parameters = rolling_knn_predict_points(orth_plane, parameters)
+# Q1_new, Q2_new = transform_with_parameters(Q1, Q2, tested_parameters)
