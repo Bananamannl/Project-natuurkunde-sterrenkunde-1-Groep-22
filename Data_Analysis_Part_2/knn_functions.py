@@ -74,10 +74,11 @@ def rolling_knn_predict_points(
 
 
 def transform_with_parameters(Q1, Q2, parameters):
-    Q1, Q2 = Q1[10000:], Q2[10000:]
-    vectors = np.column_stack((Q1, Q2))
     Q_transformed = []
-    for i in range(0, len(Q1)):
+    vectors = np.column_stack((Q1, Q2))
+    n = min(len(Q1), len(parameters))
+    Q1, Q2, parameters = Q1[:n], Q2[:n], parameters[:n]
+    for i in range(n):
         x0, y0, a, b, theta = parameters[i, :5]
         centre = np.array([x0, y0])
         squeeze = np.array([a, b])
