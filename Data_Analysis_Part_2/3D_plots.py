@@ -75,4 +75,3 @@ plotter.add_mesh(
     color="gray"
 )
 plotter.show()
-#cloud.save(r"C:\Users\timob\OneDrive - UvA\Project 1\3d plots\puntenwolk_1x.ply")
