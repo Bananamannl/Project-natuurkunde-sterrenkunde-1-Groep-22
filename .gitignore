@@ -2,6 +2,9 @@
 HoQI_fitted_six_vct_list.npy
 fitted_six_vct_list.npy
 20260421_HoQIs.txt
+20260501_HoQI_quietdata.txt
+Data2_Q1.npy
+Data2_Q2.npy
 # Ignore the Media Files
 media/
 __pycache__/
