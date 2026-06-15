@@ -15,18 +15,6 @@ window_size_1x_2x = 500
 window_size_3x = 210
 window_size_1z_2z_3z = 250
 
-# the following function makes use of Welch's method (including overlap)
-def get_asd(data, fs, segment_time):
-    """
-    Maakt van een list met verplaatsingen een 'amplitude spectral density diagram' (ASD-diagram).
-    get_asd(datalist, sample rate, duur van de meting in sec) 
-    """
-    data = np.asarray(data)
-    data = data - np.mean(data) # trek het gemiddelde af van elk element in de list om een enorm grote piek rond 0 Hz (= geen trilling, een constante waarde) te voorkomen (in andere woorden: centreer de trilling rond om de y-as)
-    ts = TimeSeries(data, sample_rate=fs)
-    ASD = ts.asd(segment_time, overlap=segment_time/2) # inzake de overlap: de wiskunde achter de code gaat er blindelings vanuit dat segmenten zich herhalen, waardoor de code de data naar 0 'duwt' aan de randen van een segment om eventuele sprongen (heel kleine, niet daadwerkelijk aanwezige frequenties) te voorkomen - de 50/50 overlap zorgt ervoor dat elk datapunt ten minste één keer goed wordt meegenomen
-    return ASD
-
 # extracting the Q lists from the np.saves to prevent Python from having to read the raw data file first
 Q1_1x, Q2_1x, Q1_2x, Q2_2x, Q1_3x, Q2_3x, Q1_1z, Q2_1z, Q1_2z, Q2_2z, Q1_3z, Q2_3z = np.load('Data_Analysis_Part_1/1xQ1.npy'), np.load('Data_Analysis_Part_1/1xQ2.npy'), np.load('Data_Analysis_Part_1/2xQ1.npy'), np.load('Data_Analysis_Part_1/2xQ2.npy'), np.load('Data_Analysis_Part_1/3xQ1.npy'), np.load('Data_Analysis_Part_1/3xQ2.npy'), np.load('Data_Analysis_Part_1/1zQ1.npy'), np.load('Data_Analysis_Part_1/1zQ2.npy'), np.load('Data_Analysis_Part_1/2zQ1.npy'), np.load('Data_Analysis_Part_1/2zQ2.npy'), np.load('Data_Analysis_Part_1/3zQ1.npy'), np.load('Data_Analysis_Part_1/3zQ2.npy')
 
@@ -105,6 +93,14 @@ asd_Rx, f_Rz = asd_smooth(Rx_list, 1/fs_set)
 asd_Ry, f_Ry = asd_smooth(Ry_list, 1/fs_set)
 asd_Rz, f_Rz = asd_smooth(Rz_list, 1/fs_set)
 
+# defining the different raw (so the non-smoothened) ASD's as well, using the get_asd function (homemade) instead of the asd2 function (adopted)
+gwpy = get_asd(x_list, fs_set, segment_time_set); asd_x_raw, f_x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(y_list, fs_set, segment_time_set); asd_y_raw, f_y_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(z_list, fs_set, segment_time_set); asd_z_raw, f_z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rx_list, fs_set, segment_time_set); asd_Rx_raw, f_Rx_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Ry_list, fs_set, segment_time_set); asd_Ry_raw, f_Ry_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rz_list, fs_set, segment_time_set); asd_Rz_raw, f_Rz_raw = gwpy.value, gwpy.frequencies.value
+
 # defining the different ASD's for the direct HoQI displacements
 asd_1x, f_1x = asd_smooth(length_1x_list, 1/fs_set)
 asd_2x, f_2x = asd_smooth(length_2x_list, 1/fs_set)
@@ -113,16 +109,28 @@ asd_1z, f_1z = asd_smooth(length_1z_list, 1/fs_set)
 asd_2z, f_2z = asd_smooth(length_2z_list, 1/fs_set)
 asd_3z, f_3z = asd_smooth(length_3z_list, 1/fs_set)
 
-# at each run, change this accordingly to select the desired degree of freedom
+# defining the different raw (so the non-smoothened) ASD's as well
+gwpy = get_asd(length_1x_list, fs_set, segment_time_set); asd_1x_raw, f_1x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2x_list, fs_set, segment_time_set); asd_2x_raw, f_2x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3x_list, fs_set, segment_time_set); asd_3x_raw, f_3x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_1z_list, fs_set, segment_time_set); asd_1z_raw, f_1z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2z_list, fs_set, segment_time_set); asd_2z_raw, f_2z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3z_list, fs_set, segment_time_set); asd_3z_raw, f_3z_raw = gwpy.value, gwpy.frequencies.value
+
+# at each run, change this accordingly to select the desired degree of freedom or the desired HoQI
 asd, f = asd_3x, f_3x
+asd_raw, f_raw, = asd_3x_raw, f_3x_raw
 
 # finding the peak frequencies including the corresponding prominences
-peaks, properties = find_peaks(np.log10(asd[f <= 100]), prominence=1.5) # het is onwenselijk dat de piekdetectie beïnvloed wordt door het 'smoothen'
+peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3) # it is undesirable for the peak detection to be (potentially) affected by the smoothing
 
-# subsequently, the ASD of the non-fitted data can be plotted in the following way (note that f_min = 1/segment_time):
+# creating the figure in which the overlapping ASD's will be plotted
 figure = plt.figure()
+
+# subsequently, the ASD of the non-fitted data (both the smoothened and the non-smoothened ('raw') one) can be plotted in the following way (note that f_min = 1/segment_time)
 plt.loglog(f, asd, color='red', label='non-fitted data')
-print("Peak frequencies (Hz) of the non-fitted data:", np.array2string(f[f <= 100][peaks], separator=", "))
+plt.loglog(f_raw, asd_raw, color='red', alpha=0.5, label='non-fitted data (raw)')
+print("Peak frequencies (Hz) of the non-fitted data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
 
 # we can do the exact same analysis for the single ellipse fitted data
@@ -133,6 +141,13 @@ asd_Rx, f_Rx = asd_smooth(Rx_list_single, 1/fs_set)
 asd_Ry, f_Ry = asd_smooth(Ry_list_single, 1/fs_set)
 asd_Rz, f_Rz = asd_smooth(Rz_list_single, 1/fs_set)
 
+gwpy = get_asd(x_list_single, fs_set, segment_time_set); asd_x_raw, f_x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(y_list_single, fs_set, segment_time_set); asd_y_raw, f_y_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(z_list_single, fs_set, segment_time_set); asd_z_raw, f_z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rx_list_single, fs_set, segment_time_set); asd_Rx_raw, f_Rx_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Ry_list_single, fs_set, segment_time_set); asd_Ry_raw, f_Ry_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rz_list_single, fs_set, segment_time_set); asd_Rz_raw, f_Rz_raw = gwpy.value, gwpy.frequencies.value
+
 asd_1x, f_1x = asd_smooth(length_1x_list_single, 1/fs_set)
 asd_2x, f_2x = asd_smooth(length_2x_list_single, 1/fs_set)
 asd_3x, f_3x = asd_smooth(length_3x_list_single, 1/fs_set)
@@ -140,13 +155,22 @@ asd_1z, f_1z = asd_smooth(length_1z_list_single, 1/fs_set)
 asd_2z, f_2z = asd_smooth(length_2z_list_single, 1/fs_set)
 asd_3z, f_3z = asd_smooth(length_3z_list_single, 1/fs_set)
 
-# at each run, change this accordingly to select the desired degree of freedom
-asd, f = asd_3x, f_3x
+gwpy = get_asd(length_1x_list_single, fs_set, segment_time_set); asd_1x_raw, f_1x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2x_list_single, fs_set, segment_time_set); asd_2x_raw, f_2x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3x_list_single, fs_set, segment_time_set); asd_3x_raw, f_3x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_1z_list_single, fs_set, segment_time_set); asd_1z_raw, f_1z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2z_list_single, fs_set, segment_time_set); asd_2z_raw, f_2z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3z_list_single, fs_set, segment_time_set); asd_3z_raw, f_3z_raw = gwpy.value, gwpy.frequencies.value
 
-peaks, properties = find_peaks(np.log10(asd[f <= 100]), prominence=1.5)
+# at each run, change this accordingly to select the desired degree of freedom or the desired HoQI
+asd, f = asd_3x, f_3x
+asd_raw, f_raw, = asd_3x_raw, f_3x_raw
+
+peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3)
 
 plt.loglog(f, asd, color='orange', label='single ellipse fitted data')
-print("Peak frequencies (Hz) of the single ellipse fitted data:", np.array2string(f[f <= 100][peaks], separator=", "))
+plt.loglog(f_raw, asd_raw, color='orange', alpha=0.5, label='single ellipse fitted data (raw)')
+print("Peak frequencies (Hz) of the single ellipse fitted data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
     
 # we can again do the exact same analysis for the windowed ellipse fitted data
@@ -157,6 +181,13 @@ asd_Rx, f_Rx = asd_smooth(Rx_list_windowed, 1/fs_set)
 asd_Ry, f_Ry = asd_smooth(Ry_list_windowed, 1/fs_set)
 asd_Rz, f_Rz = asd_smooth(Rz_list_windowed, 1/fs_set)
 
+gwpy = get_asd(x_list_windowed, fs_set, segment_time_set); asd_x_raw, f_x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(y_list_windowed, fs_set, segment_time_set); asd_y_raw, f_y_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(z_list_windowed, fs_set, segment_time_set); asd_z_raw, f_z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rx_list_windowed, fs_set, segment_time_set); asd_Rx_raw, f_Rx_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Ry_list_windowed, fs_set, segment_time_set); asd_Ry_raw, f_Ry_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rz_list_windowed, fs_set, segment_time_set); asd_Rz_raw, f_Rz_raw = gwpy.value, gwpy.frequencies.value
+
 asd_1x, f_1x = asd_smooth(length_1x_list_windowed, 1/fs_set)
 asd_2x, f_2x = asd_smooth(length_2x_list_windowed, 1/fs_set)
 asd_3x, f_3x = asd_smooth(length_3x_list_windowed, 1/fs_set)
@@ -164,20 +195,29 @@ asd_1z, f_1z = asd_smooth(length_1z_list_windowed, 1/fs_set)
 asd_2z, f_2z = asd_smooth(length_2z_list_windowed, 1/fs_set)
 asd_3z, f_3z = asd_smooth(length_3z_list_windowed, 1/fs_set)
 
-# at each run, change this accordingly to select the desired degree of freedom
-asd, f = asd_3x, f_3x
+gwpy = get_asd(length_1x_list_windowed, fs_set, segment_time_set); asd_1x_raw, f_1x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2x_list_windowed, fs_set, segment_time_set); asd_2x_raw, f_2x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3x_list_windowed, fs_set, segment_time_set); asd_3x_raw, f_3x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_1z_list_windowed, fs_set, segment_time_set); asd_1z_raw, f_1z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2z_list_windowed, fs_set, segment_time_set); asd_2z_raw, f_2z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3z_list_windowed, fs_set, segment_time_set); asd_3z_raw, f_3z_raw = gwpy.value, gwpy.frequencies.value
 
-peaks, properties = find_peaks(np.log10(asd[f <= 100]), prominence=1.5)
+# at each run, change this accordingly to select the desired degree of freedom or the desired HoQI
+asd, f = asd_3x, f_3x
+asd_raw, f_raw, = asd_3x_raw, f_3x_raw
+
+peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3)
 
 plt.loglog(f, asd, color='green', label='windowed ellipse fitted data')
-print("Peak frequencies (Hz) of the windowed ellipse fitted data:", np.array2string(f[f <= 100][peaks], separator=", "))
+plt.loglog(f_raw, asd_raw, color='green', alpha=0.5, label='windowed ellipse fitted data (raw)')
+print("Peak frequencies (Hz) of the windowed ellipse fitted data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
 
 # highlighting (and indicating) the peak frequencies in the created plot
-plt.plot(f[f <= 100][peaks], asd[f <= 100][peaks], "gv")
-for i, frequency in enumerate(f[f <= 100][peaks]):
+plt.plot(f_raw[f_raw <= 100][peaks], asd_raw[f_raw <= 100][peaks], "gv")
+for i, frequency in enumerate(f_raw[f_raw <= 100][peaks]):
     prominence = properties["prominences"][i]
-    y_text = asd[f <= 100][peaks][i]
+    y_text = asd_raw[f_raw <= 100][peaks][i]
     
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
     plt.text(
@@ -197,6 +237,13 @@ asd_Rx, f_Rx = asd_smooth(Rx_list_dataset, 1/fs_set)
 asd_Ry, f_Ry = asd_smooth(Ry_list_dataset, 1/fs_set)
 asd_Rz, f_Rz = asd_smooth(Rz_list_dataset, 1/fs_set)
 
+gwpy = get_asd(x_list_dataset, fs_set, segment_time_set); asd_x_raw, f_x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(y_list_dataset, fs_set, segment_time_set); asd_y_raw, f_y_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(z_list_dataset, fs_set, segment_time_set); asd_z_raw, f_z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rx_list_dataset, fs_set, segment_time_set); asd_Rx_raw, f_Rx_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Ry_list_dataset, fs_set, segment_time_set); asd_Ry_raw, f_Ry_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(Rz_list_dataset, fs_set, segment_time_set); asd_Rz_raw, f_Rz_raw = gwpy.value, gwpy.frequencies.value
+
 asd_1x, f_1x = asd_smooth(length_1x_list_dataset, 1/fs_set)
 asd_2x, f_2x = asd_smooth(length_2x_list_dataset, 1/fs_set)
 asd_3x, f_3x = asd_smooth(length_3x_list_dataset, 1/fs_set)
@@ -204,13 +251,22 @@ asd_1z, f_1z = asd_smooth(length_1z_list_dataset, 1/fs_set)
 asd_2z, f_2z = asd_smooth(length_2z_list_dataset, 1/fs_set)
 asd_3z, f_3z = asd_smooth(length_3z_list_dataset, 1/fs_set)
 
-# at each run, change this accordingly to select the desired degree of freedom
-asd, f = asd_3x, f_3x
+gwpy = get_asd(length_1x_list_dataset, fs_set, segment_time_set); asd_1x_raw, f_1x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2x_list_dataset, fs_set, segment_time_set); asd_2x_raw, f_2x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3x_list_dataset, fs_set, segment_time_set); asd_3x_raw, f_3x_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_1z_list_dataset, fs_set, segment_time_set); asd_1z_raw, f_1z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_2z_list_dataset, fs_set, segment_time_set); asd_2z_raw, f_2z_raw = gwpy.value, gwpy.frequencies.value
+gwpy = get_asd(length_3z_list_dataset, fs_set, segment_time_set); asd_3z_raw, f_3z_raw = gwpy.value, gwpy.frequencies.value
 
-peaks, properties = find_peaks(np.log10(asd[f <= 100]), prominence=1.5)
+# at each run, change this accordingly to select the desired degree of freedom or the desired HoQI
+asd, f = asd_3x, f_3x
+asd_raw, f_raw, = asd_3x_raw, f_3x_raw
+
+peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3)
 
 plt.loglog(f, asd, color='blue', label='pre-analysed data')
-print("Peak frequencies (Hz) of the pre-analysed data:", np.array2string(f[f <= 100][peaks], separator=", "))
+plt.loglog(f_raw, asd_raw, color='blue', alpha=0.5, label='pre-analysed data (raw)')
+print("Peak frequencies (Hz) of the pre-analysed data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
 
 # creating the actual plot with the overlapping ASD's
@@ -221,10 +277,10 @@ if (asd == asd_smooth(Rx_list_dataset, 1/fs_set)[0]).all() or \
     plt.ylabel("ASD (urad Hz^(-1/2))")
 else:
     plt.ylabel("ASD (um Hz^(-1/2))")
-plt.xlim(1e-3, 1e3)
-plt.ylim(1e-7, 1e2)
+plt.xlim(1e-3, 5e2)
+plt.ylim(1e-7, 1e3)
 plt.grid(True, which="both")
-plt.title('Smoothened ASD diagrams (3x)')
+plt.title('Smoothened and non-smoothened ASD diagrams (3x)')
 plt.legend(fontsize=12, loc='upper right')
-plt.savefig('Overlapping_ASDs.png')
+plt.savefig('Overlapping_ASDs_2.png')
 plt.show()
