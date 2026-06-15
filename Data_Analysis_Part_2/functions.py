@@ -154,3 +154,107 @@ def transformatiematrix (ax, bx, cx, az, bz, cz):
     Rz = (1/(3*R)) * (ax + bx + cx)
 
     return x, y, z, Rx, Ry, Rz
+
+def parameters(x, y, start_parameters=None):
+    """
+    Takes Q1 and Q2 data (np.array's) and spits out the fitting parameters
+    the output is in the form of a 6-dim vector:
+    (x0, y0, theta, a, b, area)
+    """
+    if start_parameters is None:
+        start_parameters = [0, 0, 1, 1, 0]
+    results = least_squares(
+        residuals,
+        x0 = start_parameters,
+        args = (x, y)
+    )
+    x0, y0, a, b, theta = results.x
+    if b > a:
+        a, b = b, a
+        theta += np.pi / 2
+    area = np.pi * a * b
+    vector = np.column_stack((x0, y0, theta, a, b, area))
+    start_parameters = [x0, y0, a, b, theta]
+    return vector, start_parameters
+
+def parameters_timeseries(x, y, window_size=None, step_size=None):
+    if window_size is None:
+        window_size = 1000
+    if step_size is None:
+        step_size = 100
+
+    vectoren = []
+    fit_parameters = [0, 0, 1, 1, 0]
+
+    for start in range(0, len(x) - window_size + 1, step_size):
+        end = start + window_size
+
+        part_Q1 = x[start:end]
+        part_Q2 = y[start:end]
+        
+        vector, fit_parameters = parameters(part_Q1, part_Q2, start_parameters= fit_parameters)
+        vectoren.append(np.ravel(vector))
+    return np.array(vectoren)
+
+def standard_step_window_ellipse_fitting(Q1, Q2, window_size):
+
+    # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
+    params_matrix = parameters_timeseries(Q1,Q2, window_size=window_size, step_size=window_size)[ : , 0:5]
+
+    return_Q1 = []
+    return_Q2 = []
+    for start in range(0, len(Q1) - window_size + 1, window_size):
+        end = start + window_size
+
+        part_Q1 = Q1[start:end]
+        part_Q2 = Q2[start:end]
+        
+        x0, y0, a, b, theta = params_matrix[int(start / window_size), : ]
+        vectors = np.column_stack((part_Q1, part_Q2))
+        centre = np.array([x0, y0])
+        squeeze = np.array([a, b])
+        R = np.array([[np.cos(theta), - np.sin(theta)], 
+                    [np.sin(theta), np.cos(theta)]])
+        centred = vectors - centre
+        rotated = centred @ R
+        unit_vectors = rotated / squeeze
+        transformed_part_Q1, transformed_part_Q2 = unit_vectors[:, 0], unit_vectors[:, 1]
+        return_Q1.append(list(transformed_part_Q1))
+        return_Q2.append(list(transformed_part_Q2))
+
+    return np.array(return_Q1).flatten(), np.array(return_Q2).flatten()
+
+# Defining function with overlap
+def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
+    # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
+    params_matrix = parameters_timeseries(Q1,Q2, window_size=window_size, step_size=step_size)[ : , 0:5]
+
+    return_Q1 = []
+    return_Q2 = []
+    for start in range(window_size-step_size, len(Q1) - window_size + 1, step_size):
+        end = start + step_size
+
+        part_Q1 = Q1[start:end]
+        part_Q2 = Q2[start:end]
+        
+        list_x0, list_y0, list_a, list_b, list_theta = np.transpose(params_matrix[int((start / step_size) - (window_size / step_size) + 1) : int((start / step_size) + (window_size / step_size)), : ])
+        vectors = np.column_stack((part_Q1, part_Q2))
+
+        x0 = np.average(list_x0)
+        y0 = np.average(list_y0)
+        a = np.average(list_a)
+        b = np.average(list_b)
+        theta = np.average(list_theta)
+
+        centre = np.array([x0, y0])
+        squeeze = np.array([a, b])
+        R = np.array([[np.cos(theta), - np.sin(theta)], 
+                    [np.sin(theta), np.cos(theta)]])
+        centred = vectors - centre
+        rotated = centred @ R
+        unit_vectors = rotated / squeeze
+        transformed_part_Q1, transformed_part_Q2 = unit_vectors[:, 0], unit_vectors[:, 1]
+        return_Q1.append(list(transformed_part_Q1))
+        return_Q2.append(list(transformed_part_Q2))
+
+    return np.array(return_Q1).flatten(), np.array(return_Q2).flatten()

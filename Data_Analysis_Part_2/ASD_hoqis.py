@@ -83,12 +83,12 @@ plt.loglog(asd.frequencies.value, asd_smooth)
 plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv") # de rode markeringen moeten wel netjes op de 'gesmoothede' functie vallen
 for i, frequency in enumerate(asd.frequencies.value[asd.frequencies.value <= 100][peaks]):
     prominence = properties["prominences"][i]
-    y_val = asd_smooth[asd.frequencies.value <= 100][peaks][i]
+    y_text = asd_smooth[asd.frequencies.value <= 100][peaks][i]
     
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
     plt.text(
         frequency * 1.1,     
-        y_val,
+        y_text,
         f"f = {frequency:.2f} Hz\nprominence = {prominence:.2f}",
         fontsize=9,
         color='r',
@@ -125,12 +125,12 @@ plt.loglog(asd.frequencies.value, asd_smooth)
 plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv")
 for i, frequency in enumerate(asd.frequencies.value[asd.frequencies.value <= 100][peaks]):
     prominence = properties["prominences"][i]
-    y_val = asd_smooth[asd.frequencies.value <= 100][peaks][i]
+    y_text = asd_smooth[asd.frequencies.value <= 100][peaks][i]
     
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
     plt.text(
         frequency * 1.1,       
-        y_val,
+        y_text,
         f"f = {frequency:.2f} Hz\nprominence = {prominence:.2f}",
         fontsize=9,
         color='r',
@@ -176,12 +176,12 @@ plt.loglog(asd.frequencies.value, asd_smooth)
 plt.plot(asd.frequencies.value[asd.frequencies.value <= 100][peaks], asd_smooth[asd.frequencies.value <= 100][peaks], "rv")
 for i, frequency in enumerate(asd.frequencies.value[asd.frequencies.value <= 100][peaks]):
     prominence = properties["prominences"][i]
-    y_val = asd_smooth[asd.frequencies.value <= 100][peaks][i]
+    y_text = asd_smooth[asd.frequencies.value <= 100][peaks][i]
     
     plt.axvline(x=frequency, color='r', linestyle='--', linewidth=0.8, alpha=0.8)
     plt.text(
         frequency * 1.1,      
-        y_val,
+        y_text,
         f"f = {frequency:.2f} Hz\nprominence = {prominence:.2f}",
         fontsize=9,
         color='r',
