@@ -21,15 +21,15 @@ def Data_Extract(name):
     return dictionairy_columns
 
 # Testing code of the function in abstraction
-with open('Data_Analysis_Part_1/20260421_HoQIs.txt', 'r') as file:
-        column_line = file.readline()
-        column_names = column_line.split()
-        column_names.pop(0)
+# with open('Data_Analysis_Part_1/20260421_HoQIs.txt', 'r') as file:
+#         column_line = file.readline()
+#         column_names = column_line.split()
+#         column_names.pop(0)
 
-        dictionairy_columns = {column: [] for column in column_names}
-        next(file)
+#         dictionairy_columns = {column: [] for column in column_names}
+#         next(file)
 
-        for line in file:
-            line_split = line.split()
-            for i in range(0,len(line_split)):
-                 dictionairy_columns[column_names[i]].append(float(line_split[i]))
+#         for line in file:
+#             line_split = line.split()
+#             for i in range(0,len(line_split)):
+#                  dictionairy_columns[column_names[i]].append(float(line_split[i]))

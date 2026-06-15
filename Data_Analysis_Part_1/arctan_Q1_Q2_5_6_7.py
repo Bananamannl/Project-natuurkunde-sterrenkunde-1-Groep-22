@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib as mt
 
-from data_extraction_1 import *
 from bepaling_Q1_Q2_2 import *
 
 # note that this function uses lists as input arguments
