@@ -9,79 +9,85 @@ point_size = 3
 point_color = "dodgerblue"
 background_color = "white"
 
-#Data laden
-points_all = np.load(data_path)
+#Load the data
+data = np.load(data_path)
 
-#Plot maken met eerste window 
-plotter = pv.Plotter()
-plotter.set_background(background_color)
+def slider_plot(data, window_size, point_size=3, point_color="dodgerblue", background_color = "white"):
+    """
+    
+    """
 
-cloud = pv.PolyData(points_all[0:window_size])
+    #Set the first window
+    plotter = pv.Plotter()
+    plotter.set_background(background_color)
 
-#Kleur aanpassen in windows
-time_colors = np.linspace(0, 1, window_size)
-cloud["time"] = time_colors
+    cloud = pv.PolyData(data[0:window_size])
 
-plotter.add_mesh(
-    cloud,
-    scalars="time",
-    cmap="viridis",
-    render_points_as_spheres=True,
-    point_size=point_size,
-    opacity=0.9,
-    scalar_bar_args={"title": "Time in window"}
-)
+    #Set the color transotion
+    time_colors = np.linspace(0, 1, window_size)
+    cloud["time"] = time_colors
 
-#Bounds van de assen bepalen
-x_min, y_min, z_min = np.min(points_all, axis=0)
-x_max, y_max, z_max = np.max(points_all, axis=0)
+    #Plot the first window
+    plotter.add_mesh(
+        cloud,
+        scalars="time",
+        cmap="viridis",
+        render_points_as_spheres=True,
+        point_size=point_size,
+        opacity=0.9,
+        scalar_bar_args={"title": "Time in window"}
+    )
 
-#Assen plotten
-plotter.show_bounds(
-    bounds=(x_min, x_max, y_min, y_max, z_min, z_max),
-    grid="front",
-    location="outer",
-    all_edges=True,
-    xlabel="Q1",
-    ylabel="Q2",
-    zlabel="Norm",
-    font_size=12
-)
+    #Determine axes bounds
+    x_min, y_min, z_min = np.min(data, axis=0)
+    x_max, y_max, z_max = np.max(data, axis=0)
 
-#Klein assenstelsel in de hoek
-plotter.add_axes(
-    xlabel="Q1",
-    ylabel="Q2",
-    zlabel="Norm",
-    line_width=2,
-    labels_off=False
-)
+    #Plot axes
+    plotter.show_bounds(
+        bounds=(x_min, x_max, y_min, y_max, z_min, z_max),
+        grid="front",
+        location="outer",
+        all_edges=True,
+        xlabel="Q1",
+        ylabel="Q2",
+        zlabel="Norm",
+        font_size=12
+    )
 
-# Titel
-plotter.add_text(
-    "3D point cloud over time",
-    position="upper_left",
-    font_size=12,
-    color="black"
-)
-plotter.view_isometric()
+    #Plot a small coordinate system in te botom left
+    plotter.add_axes(
+        xlabel="Q1",
+        ylabel="Q2",
+        zlabel="Norm",
+        line_width=2,
+        labels_off=False
+    )
 
-#Slider functie
-def update_window(value):
-    start = int(value)
-    end = start + window_size
-    cloud.points = points_all[start:end]
+    #Titel
+    plotter.add_text(
+        "3D point cloud over time",
+        position="upper_left",
+        font_size=12,
+        color="black"
+    )
+    plotter.view_isometric() #Set the standard viewing angle
 
-    plotter.render()
+    #Slider functie
+    def update_window(value):
+        start = int(value)
+        end = start + window_size
+        cloud.points = data[start:end]
 
-plotter.add_slider_widget(
-    callback=update_window,
-    rng=[0, len(points_all) - window_size],
-    value=0,
-    title="Start index",
-    interaction_event="always",
-    style="modern",
-    fmt="%.0f"
-)
+        plotter.render()
 
-plotter.show()
+    plotter.add_slider_widget(
+        callback=update_window,
+        rng=[0, len(data) - window_size],
+        value=0,
+        title="Start index",
+        interaction_event="always",
+        style="modern",
+        fmt="%.0f"
+    )
+
+    plotter.show()
