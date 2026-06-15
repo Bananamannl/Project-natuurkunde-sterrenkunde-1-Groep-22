@@ -13,8 +13,8 @@ from ellipse_parameters import *
 "So, except for chunk 0, the (Q1, Q2) points of each chunk are transformed using the rbf of the previous chunk."
 
 # importing the HoQI data, and the Q1 and Q2 lists
-HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\2xQ1.npy"), np.load("Data_Analysis_Part_1\\2xQ2.npy")
-block_size = 300000 # the amount of data points being used for the plot
+HoQIs, Q1, Q2 = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy"), np.load("Data_Analysis_Part_1\\3xQ1.npy"), np.load("Data_Analysis_Part_1\\3xQ2.npy")
+block_size = 3000000 # the amount of data points being used for the plot
 HoQIs_block, Q1_block, Q2_block = HoQIs[0:block_size], Q1[0:block_size], Q2[0:block_size]
 
 # window_size = 500 # use for 1x and 2x
@@ -80,7 +80,7 @@ for i in range(int(n_chunks)): # for loop for each chunk individually
     HoQIs_chunk = HoQIs_block[start:end-(window_size - 1)]
 
     # berekent voor elke HoQI-vector de positie in het orthogonale vlak (in de huidige chunk)
-    orthogonal_position = HoQIs_chunk @ matrix_2x.T
+    orthogonal_position = HoQIs_chunk @ matrix_3x.T
 
     # the transformation of the previous Q1 and Q2:
     if i > 0: # i > 0, omdat er voor de eerste ('nulde') chunk nog geen vorige chunk is, dus nog geen rbf op basis waarvan de parameters voorspeld kunnen worden
