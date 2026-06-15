@@ -19,20 +19,20 @@ fitted_x, fitted_y, fitted_z, fitted_Rx, fitted_Ry, fitted_Rz = transformatiemat
 # creating a quick access file for the coordinates
 # uncomment these lines by selecting and pressing ctrl + /, then run, then re-comment them
 
-HoQI_six_vct_list = []
-for i in range(0, len(fitted_1x)):
-    six_vct = np.array([fitted_1x[i], fitted_2x[i], fitted_3x[i], fitted_1z[i], fitted_2z[i], fitted_3z[i]])
-    HoQI_six_vct_list.append(six_vct)
+# HoQI_six_vct_list = []
+# for i in range(0, len(fitted_1x)):
+#     six_vct = np.array([fitted_1x[i], fitted_2x[i], fitted_3x[i], fitted_1z[i], fitted_2z[i], fitted_3z[i]])
+#     HoQI_six_vct_list.append(six_vct)
 
-HoQI_six_vct_list = np.squeeze(np.array(HoQI_six_vct_list))
+# HoQI_six_vct_list = np.squeeze(np.array(HoQI_six_vct_list))
 
-np.save('Data_Analysis_Part_1/HoQI_fitted_six_vct_list.npy', HoQI_six_vct_list)
+# np.save('Data_Analysis_Part_1/HoQI_fitted_six_vct_list.npy', HoQI_six_vct_list)
 
-six_vct_list = []
-for i in range(0, len(fitted_x)):
-    six_vct = np.array([fitted_x[i], fitted_y[i], fitted_z[i], fitted_Rx[i], fitted_Ry[i], fitted_Rz[i]])
-    six_vct_list.append(six_vct)
+# six_vct_list = []
+# for i in range(0, len(fitted_x)):
+#     six_vct = np.array([fitted_x[i], fitted_y[i], fitted_z[i], fitted_Rx[i], fitted_Ry[i], fitted_Rz[i]])
+#     six_vct_list.append(six_vct)
 
-six_vct_list = np.squeeze(np.array(six_vct_list))
+# six_vct_list = np.squeeze(np.array(six_vct_list))
 
-np.save('Data_Analysis_Part_1/fitted_six_vct_list.npy', six_vct_list)
+# np.save('Data_Analysis_Part_1/fitted_six_vct_list.npy', six_vct_list)
