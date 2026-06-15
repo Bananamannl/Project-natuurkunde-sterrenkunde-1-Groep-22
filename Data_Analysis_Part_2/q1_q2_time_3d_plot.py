@@ -31,6 +31,9 @@ def plot_Q1_Q2_time(Q1, Q2, n_points=None, transform_data=False):
 
     points = np.column_stack((t_scaled, Q1, Q2))
 
+    # Om zonder schaling te proberen 
+    # points = np.column_stack((t,Q1,Q2)) 
+
     cloud = pv.PolyData(points)
 
     plotter = pv.Plotter()
@@ -80,5 +83,30 @@ def plot_Q1_Q2_time(Q1, Q2, n_points=None, transform_data=False):
 
 Q1, Q2 = np.load("Data_Analysis_Part_1\\1xQ1.npy"), np.load("Data_Analysis_Part_1\\1xQ2.npy")
 plot_Q1_Q2_time(
-    Q1[:1530], Q2[:1530]
+    Q1[:1000], Q2[:1000],  transform_data=True
 )
+
+# Q1, Q2 = np.load("Data_Analysis_Part_1\\2xQ1.npy"), np.load("Data_Analysis_Part_1\\2xQ2.npy")
+# plot_Q1_Q2_time(
+#     Q1[20:100], Q2[20:100],  transform_data=True
+# )
+
+# Q1, Q2 = np.load("Data_Analysis_Part_1\\3xQ1.npy"), np.load("Data_Analysis_Part_1\\3xQ2.npy")
+# plot_Q1_Q2_time(
+#     Q1[:3000], Q2[:3000],  transform_data=True
+# )
+
+# Q1, Q2 = np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
+# plot_Q1_Q2_time(
+#     Q1[1460:1520], Q2[1460:1520],  transform_data=True
+# )
+
+# Q1, Q2 = np.load("Data_Analysis_Part_1\\2zQ1.npy"), np.load("Data_Analysis_Part_1\\2zQ2.npy")
+# plot_Q1_Q2_time(
+#     Q1[1460:1520], Q2[1460:1520],  transform_data=True
+# )
+
+# Q1, Q2 = np.load("Data_Analysis_Part_1\\3zQ1.npy"), np.load("Data_Analysis_Part_1\\3zQ2.npy")
+# plot_Q1_Q2_time(
+#     Q1[1460:1520], Q2[1460:1520],  transform_data=True
+# )
