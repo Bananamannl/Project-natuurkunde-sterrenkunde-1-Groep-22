@@ -6,20 +6,17 @@ data_path = "Data_Analysis_Part_2\\test_3d_vector_norms_3z.npy"
 window_size = 50000
 point_size = 3
 
-point_color = "dodgerblue"
-background_color = "white"
-
 #Load the data
 data = np.load(data_path)
 
-def slider_plot(data, window_size, point_size=3, point_color="dodgerblue", background_color = "white"):
+def slider_plot(data, window_size=50000, point_size=3):
     """
-    
+    A function for creating a 
     """
 
     #Set the first window
     plotter = pv.Plotter()
-    plotter.set_background(background_color)
+    plotter.set_background("white")
 
     cloud = pv.PolyData(data[0:window_size])
 
