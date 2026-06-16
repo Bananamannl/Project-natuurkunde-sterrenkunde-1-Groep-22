@@ -11,4 +11,3 @@ for i in range(0,6):
     Q1_temp, Q2_temp = transform(Q1_list[i, : ], Q2_list[i, : ])
     transformed_Q1_list[i] = Q1_temp
     transformed_Q2_list[i] = Q2_temp
-
