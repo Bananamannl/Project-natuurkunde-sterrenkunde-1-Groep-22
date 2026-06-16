@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 # bepaald snelheid
 afstand = np.load ("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
 dt = 0.001
-snelheid = np.gradient(afstand, dt, axis =0) # berekent de afgeleide 
-
 
 #----------- PLOT ----------
 t = np.arange(afstand.shape[0]) * dt
@@ -76,7 +74,7 @@ titels = [          #geeft de goede naam aan het bijbehorende figuur
 fig, axs = plt.subplots(2, 3, figsize=(12, 8))
 
 for i, ax in enumerate(axs.flat):
-    ax.plot(t[::1000], afstand[::1000, i])
+    ax.plot(t[:], afstand[:, i])
     ax.set_title(titels[i])
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Position')
