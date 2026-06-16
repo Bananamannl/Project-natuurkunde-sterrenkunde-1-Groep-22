@@ -11,7 +11,8 @@ data = np.load(data_path)
 
 def slider_plot(data, window_size=50000, point_size=3):
     """
-    A function for creating a 
+    A function for creating a 3d plot with a slider.
+    Input: data (N, 3) matrix, windowsize=50000 , point_size=3
     """
 
     #Set the first window

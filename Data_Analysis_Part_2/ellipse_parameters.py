@@ -1,11 +1,17 @@
 import numpy as np
 from functions import *
 
+def residuals(params, x, y):
+    x0, y0, a, b, theta = params
+    xp = (x - x0) * np.cos(theta) + (y - y0) * np.sin(theta)
+    yp = - (x - x0) * np.sin(theta) + (y - y0) * np.cos(theta)
+    return xp ** 2 / a ** 2 + yp ** 2 / b ** 2 - 1
+
 def parameters(x, y, start_parameters=None):
     """
     Takes Q1 and Q2 data (np.array's) and spits out the fitting parameters
-    the output is in the form of a 6-dim vector:
-    (x0, y0, a, b, theta, area)
+    the output is in the form of a 5-dim vector:
+    (x0, y0, a, b, theta)
     """
     
     if start_parameters is None:
@@ -19,8 +25,9 @@ def parameters(x, y, start_parameters=None):
     if b > a:
         a, b = b, a
         theta += np.pi / 2
-    area = np.pi * a * b
-    vector = np.column_stack((x0, y0, a, b, theta, area))
+    if a > 10:
+        raise ValueError("a > 10, kies een groter window_size")
+    vector = np.column_stack((x0, y0, a, b, theta))
     start_parameters = [x0, y0, a, b, theta]
     return vector, start_parameters
 
@@ -37,6 +44,7 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
     fit_parameters = [0, 0, 1, 1, 0]
 
     for start in range(0, len(x) - window_size + 1, step_size):
+        print(start)
         end = start + window_size
 
         part_Q1 = x[start:end]

@@ -6,12 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from ellipse_parameters import *
 import matplotlib.pyplot as plt
+from orthogonal_matrices import *
 
-####Let op, we beginnen met 1z!!!
-matrix_1z = np.array([
-    [-2/3, 1/3, 1/3, 0, 0, 0],
-    [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0]
-])
+
 HoQIs = np.load("Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
 Q1, Q2 = np.load("Data_Analysis_Part_1\\1zQ1.npy"), np.load("Data_Analysis_Part_1\\1zQ2.npy")
 

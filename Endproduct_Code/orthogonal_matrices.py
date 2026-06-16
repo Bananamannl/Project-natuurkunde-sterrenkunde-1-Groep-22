@@ -10,11 +10,6 @@ matrix_1z = np.array([
     [1, 0, 0, 0, 0, 0],
     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0]])
 
-# matrix_1z = np.array([
-#     [-2/3, 1/3, 1/3, 0, 0, 0],
-#     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0]
-# ])
-
 # the transformation matrix for HoQI 2x
 matrix_2x = np.array([
     [np.sqrt(1/3), 0, -np.sqrt(1/3), 0, 0, 0],
