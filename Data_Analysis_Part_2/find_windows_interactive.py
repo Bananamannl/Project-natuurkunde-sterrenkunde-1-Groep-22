@@ -1,61 +1,68 @@
 from ellipse_parameters import *
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
 
 
-def parameters_with_signal(x, y, start_parameters=None):
-    """
-    Takes Q1 and Q2 data (np.array's) and spits out the fitting parameters
-    the output is in the form of a 5-dim vector:
-    (x0, y0, a, b, theta)
-    """
-    
-    if start_parameters is None:
-        start_parameters = [0, 0, 1, 1, 0]
-    results = least_squares(
-        residuals,
-        x0 = start_parameters,
-        args = (x, y)
-    )
-    x0, y0, a, b, theta = results.x
-    if b > a:
-        a, b = b, a
-        theta += np.pi / 2
-    if a > 10:
-        vector = None
-    elif b > 10:
-        vector = None
-    elif x0 > 10:
-        vector = None
-    elif y0 > 10:
-        vector = None
-    else:
-        vector = np.column_stack((x0, y0, a, b, theta))
-    start_parameters = [x0, y0, a, b, theta]
-    return vector, start_parameters
 
-def parameters_timeseries(x, y, window_size=None, step_size=None):
+
+def parameters_with_signal(x, y, start_parameters):
     """
-    output: lijst met 6-dim vectoren
+    Input: Q1, Q2, starting parameters [x0, y0, a, b, theta]
+    Output: [x0, y0, a, b, theta], [x0, y0, a, b, theta]
+    This fits a given set Q1, Q2 with starting parameters
     """
+    try:
+        fit = least_squares(
+            residuals,
+            start_parameters,
+            args=(x, y)
+        )
+
+        if not fit.success:
+            return None, start_parameters
+
+        vector = fit.x.copy()
+        vector[2] = abs(vector[2])
+        vector[3] = abs(vector[3])
+
+        # theta beperken tot [0, pi)
+        vector[4] = vector[4] % np.pi
+
+        return vector, vector
+
+    except ValueError:
+        return None, start_parameters
+
+def parameters_timeseries_interactive(x, y, window_size=None, step_size=None):
+    """
+    Input: Q1, Q2, window_size= , step_size=
+    output: (N, 5) np array with N vectors where: vector = [x0, y0, a, b, theta]
+    """
+
+    counter = 0
     if window_size is None:
-        window_size = 1000
+        window_size = 250
     if step_size is None:
         step_size = 100
-
+    # Start with an empty list and basic starting fit parameters
     vectoren = []
-    fit_parameters = [0, 0, 1, 1, 0]
+    fit_parameters = np.array([0, 0, 1, 1, 0])
 
+    # For every window:
     for start in range(0, len(x) - window_size + 1, step_size):
         print(start)
 
         current_window_size = window_size
 
+
         while True:
             end = start + current_window_size
-
+            if end > len(x):
+                print(f"Geen grotere window meer mogelijk bij start={start}")
+                break
             part_Q1 = x[start:end]
             part_Q2 = y[start:end]
-
             vector, new_fit_parameters = parameters_with_signal(
                 part_Q1,
                 part_Q2,
@@ -64,20 +71,67 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
 
             if vector is None:
                 current_window_size += 50
-                print(
-                    f"Fit fout bij start={start}, probeer opnieuw met "
-                    f"window_size={current_window_size}"
-                )
+                counter += 1
                 continue
 
-            # Alleen als vector goed is, sla je hem op
+            vector = np.ravel(vector)
+
+            # Eerste fit altijd accepteren
+            if len(vectoren) > 0:
+                delta = np.array([0.1, 0.1, 0.25, 0.25])  # zonder theta
+
+                lower_bounds = fit_parameters[:4] - delta
+                upper_bounds = fit_parameters[:4] + delta
+
+                lower_bounds[2] = max(lower_bounds[2], 0.001)
+                lower_bounds[3] = max(lower_bounds[3], 0.001)
+
+                if np.any(vector[:4] < lower_bounds) or np.any(vector[:4] > upper_bounds):
+                    current_window_size += 50
+                    counter += 1
+                    print(
+                        f"Fit buiten toegestane sprong bij start={start}, probeer opnieuw met "
+                        f"window_size={current_window_size}"
+                    )
+                    continue
+
             fit_parameters = new_fit_parameters
-            vectoren.append(np.ravel(vector))
-
-            # Nu pas klaar met deze start
+            vectoren.append(vector)
             break
-    return np.array(vectoren)
+            
+    vectoren = np.array(vectoren)
 
-Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
+    # Repeat the parameters so almost every point has corresponding parameters (except for the last ones)
+    parameters = np.repeat(vectoren, step_size, axis=0)
+    return parameters, counter
 
-params = parameters(Q1, Q2)
+
+# Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\2xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\2xQ2.npy")
+
+# params, counter = parameters_timeseries_interactive(Q1, Q2, window_size=250, step_size=100)
+
+
+# print("counter:", counter)
+
+# names = ["x0", "y0", "a", "b", "theta"]
+
+# fig, axes = plt.subplots(5, 1, figsize=(12, 10), sharex=True)
+# axes = axes.ravel()
+
+# fig.suptitle("Ellipse parameters (2x) (raw)", fontsize=16, fontweight="bold")
+
+# for i in range(5):
+#     axes[i].plot(params[:, i], linewidth=1)
+
+#     axes[i].set_ylabel(names[i], fontsize=11)
+#     axes[i].set_title(f"Parameter {names[i]}", loc="left", fontsize=11)
+#     axes[i].grid(True, alpha=0.3)
+
+#     # precies 3 y-as aanduidingen
+#     axes[i].yaxis.set_major_locator(LinearLocator(3))
+#     axes[i].yaxis.set_major_formatter(FormatStrFormatter("%.2f"))
+
+# axes[-1].set_xlabel("Window index", fontsize=12)
+
+# plt.tight_layout(rect=[0, 0, 1, 0.96])
+# plt.show()

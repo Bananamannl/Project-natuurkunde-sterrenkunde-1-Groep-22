@@ -260,4 +260,4 @@ for i, name in enumerate(parameter_names):
     print()
 
 
-slider_plot_parameters("1z", HoQIs, parameters, window_size=1500)
+slider_plot_parameters("1z", HoQIs, parameters, window_size=10000)
