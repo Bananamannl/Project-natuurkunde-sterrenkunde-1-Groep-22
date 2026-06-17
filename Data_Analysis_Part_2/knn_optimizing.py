@@ -6,32 +6,27 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import mean_squared_error
 
-from ellipse_parameters import *
-
-
-matrix_1z = np.array([
-    [-2/3, 1/3, 1/3, 0, 0, 0],
-    [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0]
-])
+from find_windows_interactive import *
+from orthogonal_matrices import *
 
 HoQIs = np.load("Data_Analysis_Part_1\\HoQI_fitted_six_vct_list.npy")
-Q1 = np.load("Data_Analysis_Part_1\\1zQ1.npy")
-Q2 = np.load("Data_Analysis_Part_1\\1zQ2.npy")
+Q1 = np.load("Data_Analysis_Part_1\\1xQ1.npy")
+Q2 = np.load("Data_Analysis_Part_1\\1xQ2.npy")
 
-window_size = 100
+window_size = 250
 step_size = 1
 
 start = 0
-length = 15000  # totaal stuk dat je gebruikt voor train/valid/test
+length = 50000  # totaal stuk dat je gebruikt voor train/valid/test
 
-parameters = parameters_timeseries(
+parameters, counter = parameters_timeseries_interactive(
     Q1[start:start + length + window_size - 1],
     Q2[start:start + length + window_size - 1],
     window_size=window_size,
     step_size=step_size
 )
 
-X = HoQIs[start:start + length] @ matrix_1z.T
+X = HoQIs[start:start + length] @ matrix_1x.T
 y = parameters[:, :5]  # [x0, y0, a, b, theta]
 
 print("X shape:", X.shape)
