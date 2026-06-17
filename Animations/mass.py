@@ -3,7 +3,7 @@ import numpy as np
 
 def mass(rod_length):
     rod_radius = 0.08
-    cube_size = 0.55
+    cube_size = 0.4
 
     group = VGroup()
 

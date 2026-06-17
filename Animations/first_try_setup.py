@@ -2,7 +2,7 @@ from manim import *
 import numpy as np
 from mass import *
 
-class CylinderScene(ThreeDScene):
+class SetupScene(ThreeDScene):
     def cylinder_between(self, start, end, radius=0.12, color=GREY):
         """
         Maakt een cilinder tussen twee punten.
@@ -81,7 +81,7 @@ class CylinderScene(ThreeDScene):
         setup = VGroup(arm1, arm2, arm3, cable, top_cylinder)
 
         m = mass(0.8)
-        m.move_to(cable_end)
+        m.shift(cable_end)
 
         all_objects = VGroup(base, setup, m)
         all_objects.rotate(20 * DEGREES, axis=OUT, about_point=ORIGIN)
@@ -89,16 +89,34 @@ class CylinderScene(ThreeDScene):
         self.play(Create(base))
         self.play(Create(setup))
         self.play(FadeIn(m))
-
+        self.wait(1)
         self.play(
             Rotate(
-                all_objects,
-                angle=360 * DEGREES,
-                axis=OUT,          # z-as
-                about_point=ORIGIN
-            ),
-            run_time=2,
-            rate_func=linear
+                m, 
+                angle= 10 * DEGREES,
+                axis=OUT,
+                rate_func=there_and_back,
+                run_time=1
+            )
         )
+        self.play(
+            Rotate(
+                m,
+                angle=10 * DEGREES,
+                axis=UP,
+                rate_func=there_and_back,
+                run_time=1
+            )
+        )
+        # self.play(
+        #     Rotate(
+        #         all_objects,
+        #         angle=360 * DEGREES,
+        #         axis=OUT,          # z-as
+        #         about_point=ORIGIN
+        #     ),
+        #     run_time=2,
+        #     rate_func=linear
+        # )
 
         self.wait(2)
