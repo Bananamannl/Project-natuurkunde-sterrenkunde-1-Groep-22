@@ -67,12 +67,12 @@ x_lijst_gefit, y_lijst_gefit, z_lijst_gefit, Rx_lijst_gefit, Ry_lijst_gefit, Rz_
 
 # segment time: eventuele uitschieters door ruis worden eruit gemiddeld door de data op te delen in verschillende segmenten, waarna voor elke frequentie de gemiddelde amplitude van al deze segmenten wordt genomen; 1000 betekent dat T_max = 1000 s, dus f_min = 0,001 Hz
 # (kies er telkens één)
-# asd = get_asd(x_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(x_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(z_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(Rz_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(Rz_lijst, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 
 # 'smoothen' het diagram door van elke vijf opeenvolgende punten de gemiddelde ASD te nemen:
 window = 50
@@ -108,18 +108,18 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
-plt.title('Smoothened ASD diagram for the non-fitted data (Rz)')
+plt.title('Smoothened ASD diagram for the non-fitted data (x)')
 # plt.savefig('ASD_Rz_non_fitted_data.png')
 plt.show()
 
 # ditzelfde kunnen we doen voor de asd van de gefitte data:
 # (kies er telkens één)
-# asd = get_asd(x_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(x_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(z_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(Rz_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(Rz_lijst_gefit, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 
 # het 'smoothen':
 window = 50
@@ -155,7 +155,7 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
-plt.title('Smoothened ASD diagram for the fitted data (Rz)')
+plt.title('Smoothened ASD diagram for the single ellipse fitted data (x)')
 # plt.savefig('ASD_Rz_fitted_data')
 plt.show()
 
@@ -170,12 +170,12 @@ Ry_lijst_dataset = data_20260421["RM_HOQI_RY"]
 Rz_lijst_dataset = data_20260421["RM_HOQI_RZ"] 
 
 # (kies er telkens één)
-# asd = get_asd(x_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+asd = get_asd(x_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(y_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(z_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Rx_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 # asd = get_asd(Ry_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
-asd = get_asd(Rz_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
+# asd = get_asd(Rz_lijst_dataset, fs=fs_set, segment_time=segment_time_set) # fs is gelijk aan de sample rate, en die ligt in ons experiment vast: 1000 metingen per seconde, dus fs = 1000
 
 # het 'smoothen':
 window = 50
@@ -211,6 +211,6 @@ else:
     plt.ylabel("ASD (urad Hz^(-1/2))")
 plt.xlim(1e-3, 1e3)
 plt.grid(True, which="both")
-plt.title('Smoothened ASD diagram for the raw data (Rz)')
+plt.title('Smoothened ASD diagram for the raw data (x)')
 # plt.savefig('ASD_Rz_raw_data.png')
 plt.show()

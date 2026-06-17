@@ -131,7 +131,7 @@ figure = plt.figure()
 
 # subsequently, the ASD of the non-fitted data (both the smoothened and the non-smoothened ('raw') one) can be plotted in the following way (note that f_min = 1/segment_time)
 plt.loglog(f, asd, color='red', label='non-fitted data')
-plt.loglog(f_raw, asd_raw, color='red', alpha=0.5, label='non-fitted data (raw)')
+# plt.loglog(f_raw, asd_raw, color='red', alpha=0.5, label='non-fitted data (raw)')
 print("Peak frequencies (Hz) of the non-fitted data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
 
@@ -171,7 +171,7 @@ asd_raw, f_raw, = asd_3x_raw, f_3x_raw
 peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3)
 
 plt.loglog(f, asd, color='orange', label='single ellipse fitted data')
-plt.loglog(f_raw, asd_raw, color='orange', alpha=0.5, label='single ellipse fitted data (raw)')
+# plt.loglog(f_raw, asd_raw, color='orange', alpha=0.5, label='single ellipse fitted data (raw)')
 print("Peak frequencies (Hz) of the single ellipse fitted data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
     
@@ -211,7 +211,7 @@ asd_raw, f_raw, = asd_3x_raw, f_3x_raw
 peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3)
 
 plt.loglog(f, asd, color='green', label='windowed ellipse fitted data')
-plt.loglog(f_raw, asd_raw, color='green', alpha=0.5, label='windowed ellipse fitted data (raw)')
+# plt.loglog(f_raw, asd_raw, color='green', alpha=0.5, label='windowed ellipse fitted data (raw)')
 print("Peak frequencies (Hz) of the windowed ellipse fitted data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
 
@@ -267,7 +267,7 @@ asd_raw, f_raw, = asd_3x_raw, f_3x_raw
 peaks, properties = find_peaks(np.log10(asd_raw[f_raw <= 100]), prominence=3)
 
 plt.loglog(f, asd, color='blue', label='pre-analysed data')
-plt.loglog(f_raw, asd_raw, color='blue', alpha=0.5, label='pre-analysed data (raw)')
+# plt.loglog(f_raw, asd_raw, color='blue', alpha=0.5, label='pre-analysed data (raw)')
 print("Peak frequencies (Hz) of the pre-analysed data:", np.array2string(f_raw[f_raw <= 100][peaks], separator=", "))
 print("Prominences:", np.array2string(properties["prominences"], separator=", "))
 

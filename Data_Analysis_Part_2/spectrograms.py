@@ -28,12 +28,12 @@ fs = 1000
 chunk_size = chunk_duration * fs
 
 # kies er telkens één:
-# data = x_lijst_gefit
+data = x_lijst_gefit
 # data = y_lijst_gefit
 # data = z_lijst_gefit
 # data = Rx_lijst_gefit
 # data = Ry_lijst_gefit
-data = Rz_lijst_gefit
+# data = Rz_lijst_gefit
 
 asds = []
 times = []
@@ -62,6 +62,6 @@ plt.xlim(0, 3000)
 plt.ylim(1e-3, 5e2)
 plt.xlabel('time (s)')
 plt.ylabel('freqeuncy (Hz)')
-plt.title('Spectrogram (Rz) - Fitted Data')
+plt.title('Spectrogram (x) - Single Ellipse Fitted Data')
 # plt.savefig('Spectrogram_Rz.png')
 plt.show()

@@ -5,3 +5,4 @@
 # Ignore the Media Files
 media/
 __pycache__/
+Plot_files/

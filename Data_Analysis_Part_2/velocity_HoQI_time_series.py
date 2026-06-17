@@ -174,7 +174,7 @@ for ax in axes.flat:
     ax.set_ylabel('velocity (um s$^{-1}$)')
 
 plt.tight_layout(w_pad=5.0)
-plt.savefig('velocity_single_time_series.png')
+# plt.savefig('velocity_single_time_series.png')
 plt.show()
 
 # creating a figure in which the six velocity time series of the windowed ellipse fitted data will be plotted
@@ -245,5 +245,5 @@ ax.set_ylabel('Q2')
 ax.set_zlabel('time (ms)')
 ax.zaxis.labelpad = 20
 ax.set_title(f'HoQI {title}')
-plt.savefig('Q1_Q2_3D_Highv_Lowx.png')
+# plt.savefig('Q1_Q2_3D_Highv_Lowx.png')
 plt.show()
