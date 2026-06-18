@@ -19,9 +19,14 @@ class UnitCirclePoints(Scene):
             axis_config={ "include_tip": False, "font_size": 15},
         )
 
+        x_label = axes.get_x_axis_label("Q1")
+        y_label = axes.get_y_axis_label("Q2")
+
         circle = Circle(radius=1, color=BLUE).move_to(axes.c2p(0, 0))
 
-        self.play(Create(axes), Create(circle))
+        self.play(Create(axes), Create(circle),
+                Write(x_label), Write(y_label)
+                )
 
         # ─────────────────────────────
         # 2. Data laden
@@ -29,8 +34,8 @@ class UnitCirclePoints(Scene):
         Q1, Q2 = np.load(r"C:\Users\janne\OneDrive\Documenten\Studie Natuur- Sterrenkunde\Jaar 1\N&S_Project\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), \
                 np.load(r"C:\Users\janne\OneDrive\Documenten\Studie Natuur- Sterrenkunde\Jaar 1\N&S_Project\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
 
-        Q1_1 = Q1[1820000:1830000]
-        Q2_1 = Q2[1820000:1830000]
+        Q1_1 = Q1[1820000:1820500]
+        Q2_1 = Q2[1820000:1820500]
 
         Qs_1 = np.column_stack((Q1_1, Q2_1))
 
