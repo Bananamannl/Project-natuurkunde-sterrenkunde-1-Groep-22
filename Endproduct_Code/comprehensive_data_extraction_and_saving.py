@@ -265,6 +265,54 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
     parameters = np.repeat(vectoren, step_size, axis=0)
     return parameters
 
+def parameters(x, y, start_parameters=None):
+    """
+    Takes Q1 and Q2 data (np.array's) and spits out the fitting parameters
+    the output is in the form of a 5-dim vector:
+    (x0, y0, a, b, theta)
+    """
+    
+    if start_parameters is None:
+        start_parameters = [0, 0, 1, 1, 0]
+    results = least_squares(
+        residuals,
+        x0 = start_parameters,
+        args = (x, y)
+    )
+    x0, y0, a, b, theta = results.x
+    if b > a:
+        a, b = b, a
+        theta += np.pi / 2
+    if a > 10:
+        raise ValueError("a > 10, kies een groter window_size")
+    vector = np.column_stack((x0, y0, a, b, theta))
+    start_parameters = [x0, y0, a, b, theta]
+    return vector, start_parameters
+
+def parameters_timeseries_backup(x, y, window_size=None, step_size=None):
+    """
+    output: lijst met 6-dim vectoren
+    """
+    if window_size is None:
+        window_size = 1000
+    if step_size is None:
+        step_size = 100
+
+    vectoren = []
+    fit_parameters = [0, 0, 1, 1, 0]
+
+    for start in range(0, len(x) - window_size + 1, step_size):
+        print(start)
+        end = start + window_size
+
+        part_Q1 = x[start:end]
+        part_Q2 = y[start:end]
+        
+        vector, fit_parameters = parameters(part_Q1, part_Q2, start_parameters= fit_parameters)
+        vectoren.append(np.ravel(vector))
+        np.repeat(vectoren, step_size, axis=0)
+    return np.array(vectoren)
+
 
 def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
     # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
@@ -302,18 +350,13 @@ def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
 
 # For this next part, you will unfortunatly have to experiment somewhat depending on which dataset you use, as the smallest window size that works differs between data sets. For now, they will be put at 500 datapoints as that should work on most normal datasets. To check if a windowsize works for a specific HoQI and dataset, make an ASD of the displacement of said HoQI, and if you lose all the relevant peaks, then the windowsize is to small.
 if choices_dict["window_ellipse_data"] == True:
-    window_sizes_list = [500, 500, 500, 300, 300, 300]
-    step_size_list = [50, 50, 50, 50, 50, 50]
     Q1_windowed_ellipse = [0]*6
     Q2_windowed_ellipse = [0]*6
     for h in range(0,6):
         print("This is HoQI number: ", h)
-        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h, :], Q2_list[h, :], window_size=window_sizes_list[h], step_size=step_size_list[h])
-        Q1_windowed_ellipse[h] = fitted_Q1[0 : (len(Q1_list[h, :]) - 2*max(window_sizes_list))]
-        Q2_windowed_ellipse[h] = fitted_Q2[0 : (len(Q1_list[h, :]) - 2*max(window_sizes_list))]
-        # print(np.shape(fitted_Q1[0 : (len(Q1_list[h, :]) - 2*max(window_sizes_list))]))  
-        # print(np.shape(fitted_Q2[0 : (len(Q2_list[h, :]) - 2*max(window_sizes_list))]))
-        # print()  
+        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h, :], Q2_list[h, :], window_size=400, step_size=50)
+        Q1_windowed_ellipse[h] = fitted_Q1
+        Q2_windowed_ellipse[h] = fitted_Q2  
     Q1_windowed_ellipse = np.array(Q1_windowed_ellipse)
     Q2_windowed_ellipse = np.array(Q2_windowed_ellipse)
     if choices_dict["Q1_Q2_data"] == True:
