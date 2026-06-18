@@ -76,8 +76,8 @@ fig, axs = plt.subplots(2, 3, figsize=(12, 8))
 for i, ax in enumerate(axs.flat):
     ax.plot(t[::1000], snelheid[::1000, i])
     ax.set_title(titels[i])
-    ax.set_xlabel('Tijd')
-    ax.set_ylabel('Snelheid')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Velocity')
 
 plt.tight_layout()
 plt.show()
