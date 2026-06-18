@@ -1,5 +1,5 @@
 import numpy as np
-from functions import *
+from scipy.optimize import least_squares
 
 def residuals(params, x, y):
     x0, y0, a, b, theta = params
@@ -35,7 +35,7 @@ def parameters_with_signal(x, y, start_parameters):
     except ValueError:
         return None, start_parameters
 
-def parameters_timeseries_interactive(x, y, window_size=None, step_size=None):
+def parameters_timeseries(x, y, window_size=None, step_size=None):
     """
     Input: Q1, Q2, window_size= , step_size=
     output: (N, 5) np array with N vectors where: vector = [x0, y0, a, b, theta]
