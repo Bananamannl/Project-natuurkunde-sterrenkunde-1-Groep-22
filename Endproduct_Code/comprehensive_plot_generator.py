@@ -214,6 +214,7 @@ if choices_dict["Timeseries_plots"] == True:
         figure, axes = plt.subplots(2, 3)
         for i in range(0,2):
             for j in range(0,3):
+                time = np.array(list(range(0, len(windowed_ellipse_HoQI_displacement[i*3+j, :]))))
                 axes[i, j].set_ylabel('Displacement (um)')
                 axes[i, j].set_xlabel('Time (ms)')
                 axes[i, j].plot(time, windowed_ellipse_HoQI_displacement[i*3+j, :], ',')
@@ -495,7 +496,7 @@ if choices_dict["ellipse_params_timeseries"] == True:
     for h in range(0,6):
         figure, axes = plt.subplots(2, 3)
         for i in range(0,2):
-            for j in range(0,3):
+            for j in range(0,3 - i):
                 time = np.array(list(range(0, len(HoQI_ellipse_parameter_list[h][:, i*3+j]))))
                 axes[i, j].set_ylabel('Displacement (um)')
                 axes[i, j].set_xlabel('Time (ms)')
