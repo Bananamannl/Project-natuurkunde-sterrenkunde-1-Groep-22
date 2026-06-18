@@ -560,4 +560,3 @@ if choices_dict["ellipse_params_timeseries"] == True:
         figure.set_figwidth(16)
         figure.savefig( f'Endproduct_Code/Plot_files/parameter_timeseries_HoQI_{HoQI_names[h]}.png' )
         plt.close()
-
