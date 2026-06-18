@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.optimize import least_squares
-import matplotlib as mt
 
 def residuals(params, x, y):
     x0, y0, a, b, theta = params
