@@ -12,20 +12,6 @@ class Hoqis1(ThreeDScene):
         )
 
         # =========================
-        # Assenstelsel
-        # =========================
-        axes = ThreeDAxes(
-            x_range=[-4, 4, 1],
-            y_range=[-4, 4, 1],
-            z_range=[-1, 2, 1],
-            x_length=8,
-            y_length=8,
-            z_length=3,
-        )
-
-        axes.set_opacity(0.45)
-
-        # =========================
         # Base
         # =========================
         base_radius = 3
@@ -140,19 +126,187 @@ class Hoqis1(ThreeDScene):
             radius=0.04,
             color=BLUE
         )
+        setup = VGroup(base, m, hoqis, center_dot)
+
+        position_setup = UP * 3.5
+
+        # =========================
+        # Linker 2D HoQI-measurement panel
+        # =========================
+        panel_title = Text("HoQI Measurements", font_size=34, weight=BOLD)
+        panel_subtitle = Text("(for 1 HoQI)", font_size=24, weight=BOLD)
+
+        panel_title.to_corner(UL).shift(RIGHT * 0.4 + DOWN * 0.3)
+        panel_subtitle.next_to(panel_title, DOWN, buff=0.15)
+
+        rows = VGroup()
+        v_groups = VGroup()
+        boxes_group = VGroup()
+
+        pd_names = ["PD1", "PD2", "PD3"]
+        start_opacities = [0.35, 0.65, 1.0]
+
+        for i in range(3):
+            pd_text = Text(pd_names[i], font_size=34, weight=BOLD)
+
+            box = Square(side_length=0.55)
+            box.set_stroke(BLACK, width=5)
+            box.set_fill(WHITE, opacity=0.8)
+
+            boxes_group.add(box)
+
+            red_circle = Circle(radius=0.15)
+            red_circle.set_stroke(RED, width=6)
+            red_circle.set_fill(opacity=0)
+
+            circle_group = VGroup(red_circle)
+
+            circle_group.set_opacity(start_opacities[i])
+
+            row = VGroup(pd_text, box, circle_group)
+            row.arrange(RIGHT, buff=0.35)
+
+            # na arrange opnieuw exact in het midden van het vierkant zetten
+            circle_group.move_to(box.get_center())
+
+            rows.add(row)
+            v_groups.add(circle_group)
+
+        rows.arrange(DOWN, buff=0.3)
+        rows.next_to(panel_subtitle, DOWN, buff=0.45)
+        rows.align_to(panel_title, LEFT).shift(RIGHT * 1.1)
+
+        left_panel = VGroup(panel_title, panel_subtitle, rows)
+
+        self.add_fixed_in_frame_mobjects(left_panel)
+        left_panel.set_opacity(0)
 
         # =========================
         # Animatie
         # =========================
-        self.play(Create(axes))
-        self.play(Create(base))
+        self.play(FadeIn(base))
         self.play(FadeIn(m))
         self.play(FadeIn(hoqis))
-        self.play(FadeIn(center_dot))
-        self.wait(2)
+        self.wait(1)
+
         self.move_camera(
             phi=65 * DEGREES,
             theta=45 * DEGREES,
             run_time=1
         )
-        self.wait(2)
+        self.wait(1)
+
+        self.move_camera(
+            phi=0 * DEGREES,
+            theta=0 * DEGREES,
+            run_time=1
+        )
+
+        self.play(
+            setup.animate.shift(position_setup),
+            left_panel.animate.set_opacity(1),
+            run_time=1
+        )
+
+        # Verplaats centrum mee
+        current_mass_center = mass_center + position_setup
+
+
+        self.play(
+            Rotate(
+                m,
+                angle=12 * DEGREES,
+                axis=OUT,
+                about_point=current_mass_center
+            ),
+            hoqis.animate.set_opacity(0.35),
+            v_groups[0].animate.set_opacity(1.0),
+            v_groups[1].animate.set_opacity(0.25),
+            v_groups[2].animate.set_opacity(0.8),
+            run_time=1
+        )
+
+        self.play(
+            Rotate(
+                m,
+                angle=-24 * DEGREES,
+                axis=OUT,
+                about_point=current_mass_center
+            ),
+            hoqis.animate.set_opacity(1.0),
+            v_groups[0].animate.set_opacity(0.4),
+            v_groups[1].animate.set_opacity(0.75),
+            v_groups[2].animate.set_opacity(0.3),
+                Circumscribe(
+                boxes_group,
+                shape=Rectangle,
+                color=YELLOW,
+                stroke_width=5,
+                buff=0.15
+            ),
+            run_time=1
+        )
+
+        self.play(
+            Rotate(
+                m,
+                angle=12 * DEGREES,
+                axis=OUT,
+                about_point=current_mass_center
+            ),
+            hoqis.animate.set_opacity(0.7),
+            v_groups[0].animate.set_opacity(0.8),
+            v_groups[1].animate.set_opacity(0.3),
+            v_groups[2].animate.set_opacity(1.0),
+                Circumscribe(
+                boxes_group,
+                shape=Rectangle,
+                color=YELLOW,
+                stroke_width=5,
+                buff=0.15
+            ),
+            run_time=1
+        )
+
+        self.play(
+            Rotate(
+                m,
+                angle=12 * DEGREES,
+                axis=OUT,
+                about_point=current_mass_center
+            ),
+            hoqis.animate.set_opacity(0.35),
+            v_groups[0].animate.set_opacity(1.0),
+            v_groups[1].animate.set_opacity(0.25),
+            v_groups[2].animate.set_opacity(0.8),
+            run_time=1
+        )
+
+        self.play(
+            Rotate(
+                m,
+                angle=-24 * DEGREES,
+                axis=OUT,
+                about_point=current_mass_center
+            ),
+            hoqis.animate.set_opacity(1.0),
+            v_groups[0].animate.set_opacity(0.4),
+            v_groups[1].animate.set_opacity(0.75),
+            v_groups[2].animate.set_opacity(0.3),
+            run_time=1
+        )
+
+        self.play(
+            Rotate(
+                m,
+                angle=12 * DEGREES,
+                axis=OUT,
+                about_point=current_mass_center
+            ),
+            hoqis.animate.set_opacity(0.7),
+            v_groups[0].animate.set_opacity(0.8),
+            v_groups[1].animate.set_opacity(0.3),
+            v_groups[2].animate.set_opacity(1.0),
+            run_time=1
+        )
+        self.wait(1)
