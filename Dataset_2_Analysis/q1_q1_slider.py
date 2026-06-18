@@ -142,4 +142,7 @@ def slider_plot_Q1_Q2(Q1, Q2, window_size=10000, point_size=3):
 Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
 
 
-slider_plot_Q1_Q2(Q1, Q2)
+Q1_1, Q2_1 = Q1[20000:50000], Q2[20000:50000]
+Qs_1 = np.column_stack((Q1_1, Q2_1))
+Q1, Q2 = Q1[1800000:1830000], Q2[1800000:1830000]
+Qs_2 = np.column_stack((Q1, Q2))
