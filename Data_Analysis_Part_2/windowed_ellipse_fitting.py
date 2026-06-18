@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 from ellipse_parameters import *
 
 # Defining the window ellipse fitting function with step size the same as windo size
-def standard_step_window_ellipse_fitting(Q1, Q2, window_size):
+def standard_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
+    if step_size is None:
+        step_size=window_size
 
     # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
-    params_matrix = parameters_timeseries(Q1,Q2, window_size=window_size, step_size=window_size)[ : , 0:5]
+    params_matrix = parameters_timeseries(Q1,Q2, window_size=window_size, step_size=step_size)[ : , 0:5]
 
 
     return_Q1 = []
