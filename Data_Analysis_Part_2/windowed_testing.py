@@ -5,7 +5,32 @@ This piece of code will be designed to take in two lists of Q1 and Q2, which wil
 import numpy as np
 import matplotlib.pyplot as plt
 from ellipse_parameters import *
+from matplotlib.ticker import LinearLocator, FormatStrFormatter
 
+
+def plot_ellipse_parameters(params, title="Ellipse parameters"):
+    names = ["x0", "y0", "a", "b", "theta"]
+
+    fig, axes = plt.subplots(5, 1, figsize=(12, 10), sharex=True)
+    axes = axes.ravel()
+
+    fig.suptitle(title, fontsize=16, fontweight="bold")
+
+    for i in range(5):
+        axes[i].plot(params[:, i], linewidth=1)
+
+        axes[i].set_ylabel(names[i], fontsize=11)
+        axes[i].set_title(f"Parameter {names[i]}", loc="left", fontsize=11)
+        axes[i].grid(True, alpha=0.3)
+
+        # precies 3 y-as aanduidingen
+        axes[i].yaxis.set_major_locator(LinearLocator(3))
+        axes[i].yaxis.set_major_formatter(FormatStrFormatter("%.2f"))
+
+    axes[-1].set_xlabel("Window index", fontsize=12)
+
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.show()
 
 # Defining the window ellipse fitting function with step size the same as windo size
 def standard_step_window_ellipse_fitting(Q1, Q2, window_size):
@@ -41,6 +66,7 @@ def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
     # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
     params_matrix = parameters_timeseries(Q1,Q2, window_size=window_size, step_size=step_size)[ : , 0:5]
 
+    plot_ellipse_parameters(params_matrix)
     return_Q1 = []
     return_Q2 = []
     for start in range(window_size-step_size, len(Q1) - window_size + 1, step_size):
@@ -71,71 +97,8 @@ def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
 
     return np.array(return_Q1).flatten(), np.array(return_Q2).flatten()
 
-# Using the function to plot the new circles
 
-# Q1_list = [np.load('Data_Analysis_Part_1/1xQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/2xQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/3xQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/1zQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/2zQ1.npy')[:3000000], np.load('Data_Analysis_Part_1/3zQ1.npy')[:3000000]]
+Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
 
-# Q2_list = [np.load('Data_Analysis_Part_1/1xQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/2xQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/3xQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/1zQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/2zQ2.npy')[:3000000], np.load('Data_Analysis_Part_1/3zQ2.npy')[:3000000]]
+variable_step_window_ellipse_fitting(Q1, Q2, window_size=500, step_size=10)
 
-# Q1_transformed = [0]*6
-# Q2_transformed = [0]*6
-# for h in range(0,6):
-#     if h < 2:
-#         fitted_Q1, fitted_Q2 = standard_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=500)
-#     elif h == 2:
-#         fitted_Q1, fitted_Q2 = standard_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=210)
-#     else:
-#         fitted_Q1, fitted_Q2 = standard_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=250)
-#     Q1_transformed[h] = fitted_Q1
-#     Q2_transformed[h] = fitted_Q2
-
-# Q1_variable_transformed = [0]*6
-# Q2_variable_transformed = [0]*6
-# for h in range(0,6):
-#     if h <= 2:
-#         fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=1000, step_size=210)
-#     else:
-#         fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h], Q2_list[h], window_size=250, step_size=210)
-#     Q1_variable_transformed[h] = fitted_Q1
-#     Q2_variable_transformed[h] = fitted_Q2
-
-# names_list = ['1x', '2x', '3x', '1z', '2z', '3z']
-
-# # Make a plot of all the ellipses on top of each other
-# figure, axes = plt.subplots(2, 3)
-# for i in range(0,2):
-#     for j in range(0,3):
-#         axes[i, j].set_ylabel('Q2')
-#         axes[i, j].set_xlabel('Q1')
-#         axes[i, j].plot(Q1_list[i*3+j], Q2_list[i*3+j], ',')
-#         axes[i, j].set_title(names_list[i*3+j])
-
-# figure.tight_layout()
-# plt.subplots_adjust(hspace=0.312, wspace=0.4)
-# plt.show()
-
-# figure, axes = plt.subplots(2, 3)
-# for i in range(0,2):
-#     for j in range(0,3):
-#         axes[i, j].set_ylabel('Q2')
-#         axes[i, j].set_xlabel('Q1')
-#         axes[i, j].plot(Q1_transformed[i*3+j], Q2_transformed[i*3+j], ',g')
-#         axes[i, j].set_title(names_list[i*3+j])
-#         axes[i, j].set_xlim(-1.43, 1.43)
-
-# figure.tight_layout()
-# plt.subplots_adjust(hspace=0.312, wspace=0.4)
-# plt.show()
-
-# figure, axes = plt.subplots(2, 3)
-# for i in range(0,2):
-#     for j in range(0,3):
-#         axes[i, j].set_ylabel('Q2')
-#         axes[i, j].set_xlabel('Q1')
-#         axes[i, j].plot(Q1_variable_transformed[i*3+j], Q2_variable_transformed[i*3+j], ',g')
-#         axes[i, j].set_title(names_list[i*3+j])
-#         axes[i, j].set_xlim(-1.43, 1.43)
-
-# figure.tight_layout()
-# plt.subplots_adjust(hspace=0.312, wspace=0.4)
-# plt.show()
