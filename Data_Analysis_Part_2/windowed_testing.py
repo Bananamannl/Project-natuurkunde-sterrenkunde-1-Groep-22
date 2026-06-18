@@ -98,7 +98,7 @@ def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
     return np.array(return_Q1).flatten(), np.array(return_Q2).flatten()
 
 
-Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
+Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\2zQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\2zQ2.npy")
 
-variable_step_window_ellipse_fitting(Q1, Q2, window_size=500, step_size=10)
+variable_step_window_ellipse_fitting(Q1, Q2, window_size=300, step_size=50)
 
