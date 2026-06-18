@@ -214,7 +214,6 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
 
     # For every window:
     for start in range(0, len(x) - window_size + 1, step_size):
-        print(start)
 
         current_window_size = window_size
 
