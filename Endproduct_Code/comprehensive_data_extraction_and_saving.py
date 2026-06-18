@@ -239,7 +239,7 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
 
             # Eerste fit altijd accepteren
             if len(vectoren) > 0:
-                delta = np.array([0.1, 0.1, 0.25, 0.25])  # zonder theta
+                delta = np.array([0.2, 0.2, 0.5, 0.5])  # zonder theta
 
                 lower_bounds = fit_parameters[:4] - delta
                 upper_bounds = fit_parameters[:4] + delta

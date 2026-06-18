@@ -51,7 +51,6 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
 
     # For every window:
     for start in range(0, len(x) - window_size + 1, step_size):
-        print(start)
 
         current_window_size = window_size
 
@@ -77,7 +76,7 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
 
             # Eerste fit altijd accepteren
             if len(vectoren) > 0:
-                delta = np.array([0.1, 0.1, 0.25, 0.25])  # zonder theta
+                delta = np.array([0.2, 0.2, 0.5, 0.5])  # zonder theta
 
                 lower_bounds = fit_parameters[:4] - delta
                 upper_bounds = fit_parameters[:4] + delta
@@ -102,3 +101,4 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
     # Repeat the parameters so almost every point has corresponding parameters (except for the last ones)
     parameters = np.repeat(vectoren, step_size, axis=0)
     return parameters
+
