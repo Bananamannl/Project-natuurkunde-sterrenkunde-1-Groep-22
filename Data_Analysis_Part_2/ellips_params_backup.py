@@ -46,6 +46,7 @@ def parameters_timeseries_backup(x, y, window_size=None, step_size=None):
         
         vector, fit_parameters = parameters(part_Q1, part_Q2, start_parameters= fit_parameters)
         vectoren.append(np.ravel(vector))
+        np.repeat(vectoren, step_size, axis=0)
     return np.array(vectoren)
 
 def period_data(data, window_size=None, step_size=None, lag=None):
