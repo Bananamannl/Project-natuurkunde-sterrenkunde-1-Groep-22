@@ -23,10 +23,8 @@ class UnitCirclePoints(Scene):
         y_label = axes.get_y_axis_label("Q2")
 
         circle = Circle(radius=1, color=BLUE).move_to(axes.c2p(0, 0))
-
-        self.play(Create(axes), Create(circle),
-                Write(x_label), Write(y_label)
-                )
+        self.add (axes, x_label, y_label)
+        self.play(Create(circle))
 
         # ─────────────────────────────
         # 2. Data laden
