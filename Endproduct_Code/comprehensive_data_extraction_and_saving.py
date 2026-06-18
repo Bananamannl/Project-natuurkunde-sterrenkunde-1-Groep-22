@@ -256,14 +256,13 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
                     continue
 
             fit_parameters = new_fit_parameters
-            vectoren.append(vector)
+            vectoren.append(np.ravel(vector))
             break
             
     vectoren = np.array(vectoren)
 
     # Repeat the parameters so almost every point has corresponding parameters (except for the last ones)
-    parameters = np.repeat(vectoren, step_size, axis=0)
-    return parameters
+    return vectoren
 
 def parameters(x, y, start_parameters=None):
     """
@@ -288,31 +287,6 @@ def parameters(x, y, start_parameters=None):
     vector = np.column_stack((x0, y0, a, b, theta))
     start_parameters = [x0, y0, a, b, theta]
     return vector, start_parameters
-
-def parameters_timeseries_backup(x, y, window_size=None, step_size=None):
-    """
-    output: lijst met 6-dim vectoren
-    """
-    if window_size is None:
-        window_size = 1000
-    if step_size is None:
-        step_size = 100
-
-    vectoren = []
-    fit_parameters = [0, 0, 1, 1, 0]
-
-    for start in range(0, len(x) - window_size + 1, step_size):
-        print(start)
-        end = start + window_size
-
-        part_Q1 = x[start:end]
-        part_Q2 = y[start:end]
-        
-        vector, fit_parameters = parameters(part_Q1, part_Q2, start_parameters= fit_parameters)
-        vectoren.append(np.ravel(vector))
-        np.repeat(vectoren, step_size, axis=0)
-    return np.array(vectoren)
-
 
 def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
     # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
@@ -352,11 +326,13 @@ def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
 if choices_dict["window_ellipse_data"] == True:
     Q1_windowed_ellipse = [0]*6
     Q2_windowed_ellipse = [0]*6
+    window_sizes_list = [500, 500, 500, 300, 300, 300]
+    step_size_list = [50, 50, 50, 50, 50, 50]
     for h in range(0,6):
         print("This is HoQI number: ", h)
-        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h, :], Q2_list[h, :], window_size=400, step_size=50)
-        Q1_windowed_ellipse[h] = fitted_Q1
-        Q2_windowed_ellipse[h] = fitted_Q2  
+        fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h, :], Q2_list[h, :], window_size=window_sizes_list[h], step_size=step_size_list[h])
+        Q1_windowed_ellipse[h] = fitted_Q1[0 : (len(Q1_list[h, :]) - 2*max(window_sizes_list))]
+        Q2_windowed_ellipse[h] = fitted_Q2[0 : (len(Q1_list[h, :]) - 2*max(window_sizes_list))]  
     Q1_windowed_ellipse = np.array(Q1_windowed_ellipse)
     Q2_windowed_ellipse = np.array(Q2_windowed_ellipse)
     if choices_dict["Q1_Q2_data"] == True:

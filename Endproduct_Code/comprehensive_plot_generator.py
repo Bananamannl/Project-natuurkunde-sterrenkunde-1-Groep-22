@@ -486,6 +486,58 @@ if choices_dict["ASD_plots"] == True:
         figure.savefig("Endproduct_Code/Plot_files/windowed_ellipse_data_DOF_ASD_plot.png")
         plt.close()
 
+    if choices_dict["raw_data"] == True and choices_dict["single_ellipse_data"] == True and choices_dict["window_ellipse_data"] == True:
+        figure, axes = plt.subplots(2, 3)
+        for i in range(0,2):
+            for j in range(0,3):
+                asd_raw = get_asd(raw_HoQI_displacement[i*3+j, :], fs_set, segment_time_set)
+                asd_raw_smooth = np.convolve(asd_raw.value, np.ones(window)/window, mode='same')
+                asd_single = get_asd(single_ellipse_HoQI_displacement[i*3+j, :], fs_set, segment_time_set)
+                asd_single_smooth = np.convolve(asd_single.value, np.ones(window)/window, mode='same')
+                asd_windowed = get_asd(windowed_ellipse_HoQI_displacement[i*3+j, :], fs_set, segment_time_set)
+                asd_windowed_smooth = np.convolve(asd_windowed.value, np.ones(window)/window, mode='same')
+
+                axes[i, j].set_ylabel('Gain')
+                axes[i, j].set_xlabel('Frequency (Hz)')
+                axes[i, j].loglog(asd_raw.frequencies.value, asd_raw_smooth, 'r')
+                axes[i, j].loglog(asd_single.frequencies.value, asd_single_smooth, 'b')
+                axes[i, j].loglog(asd_windowed.frequencies.value, asd_windowed_smooth, 'g')
+                axes[i, j].set_title(names_list[i*3+j])
+                axes[i, j].grid(True, which="both")
+
+
+        plt.subplots_adjust(hspace=0.312)
+        figure.set_figheight(8)
+        figure.set_figwidth(16)
+        figure.savefig("Endproduct_Code/Plot_files/all_three_HoQI_ASD_plot.png")
+        plt.close()
+
+        figure, axes = plt.subplots(2, 3)
+        for i in range(0,2):
+            for j in range(0,3):
+                asd_raw = get_asd(raw_DOF_displacement[i*3+j, :], fs_set, segment_time_set)
+                asd_raw_smooth = np.convolve(asd_raw.value, np.ones(window)/window, mode='same')
+                asd_single = get_asd(single_ellipse_DOF_displacement[i*3+j, :], fs_set, segment_time_set)
+                asd_single_smooth = np.convolve(asd_single.value, np.ones(window)/window, mode='same')
+                asd_windowed = get_asd(windowed_ellipse_DOF_displacement[i*3+j, :], fs_set, segment_time_set)
+                asd_windowed_smooth = np.convolve(asd_windowed.value, np.ones(window)/window, mode='same')
+
+                axes[i, j].set_ylabel('Gain')
+                axes[i, j].set_xlabel('Frequency (Hz)')
+                axes[i, j].loglog(asd_raw.frequencies.value, asd_raw_smooth, 'r')
+                axes[i, j].loglog(asd_single.frequencies.value, asd_single_smooth, 'b')
+                axes[i, j].loglog(asd_windowed.frequencies.value, asd_windowed_smooth, 'g')
+                axes[i, j].set_title(names_list_DOF[i*3+j])
+                axes[i, j].grid(True, which="both")
+
+
+        plt.subplots_adjust(hspace=0.312)
+        figure.set_figheight(8)
+        figure.set_figwidth(16)
+        figure.savefig("Endproduct_Code/Plot_files/all_three_DOF_ASD_plot.png")
+        plt.close()
+    
+
 ## Parameter Timeseries
 if choices_dict["ellipse_params_timeseries"] == True:
     HoQI_ellipse_parameter_list = [np.load('Endproduct_code/HoQI_1x_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_2x_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_3x_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_1z_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_2z_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_3z_ellipse_parameter_timeseries.npy')]
