@@ -53,8 +53,6 @@ class Hoqis1(ThreeDScene):
 
         z_hoqi_side = z_mass + 0.05
 
-        # z-positie van de HoQI's boven de kubussen
-        z_hoqi_top = z_mass + cube_size / 2 + gap
 
         for angle in [90 * DEGREES, 210 * DEGREES, 330 * DEGREES]:
             # Richting van de arm
@@ -181,6 +179,15 @@ class Hoqis1(ThreeDScene):
         self.add_fixed_in_frame_mobjects(left_panel)
         left_panel.set_opacity(0)
 
+        highlight_box = SurroundingRectangle(
+            boxes_group,
+            color=YELLOW,
+            stroke_width=5,
+            buff=0.15
+        )
+        self.add_fixed_in_frame_mobjects(highlight_box)
+        highlight_box.set_opacity(0)
+
         # =========================
         # Animatie
         # =========================
@@ -237,41 +244,14 @@ class Hoqis1(ThreeDScene):
             v_groups[0].animate.set_opacity(0.4),
             v_groups[1].animate.set_opacity(0.75),
             v_groups[2].animate.set_opacity(0.3),
-                Circumscribe(
-                boxes_group,
-                shape=Rectangle,
-                color=YELLOW,
-                stroke_width=5,
-                buff=0.15
-            ),
+            highlight_box.animate.set_opacity(1),
             run_time=1
         )
 
         self.play(
             Rotate(
                 m,
-                angle=12 * DEGREES,
-                axis=OUT,
-                about_point=current_mass_center
-            ),
-            hoqis.animate.set_opacity(0.7),
-            v_groups[0].animate.set_opacity(0.8),
-            v_groups[1].animate.set_opacity(0.3),
-            v_groups[2].animate.set_opacity(1.0),
-                Circumscribe(
-                boxes_group,
-                shape=Rectangle,
-                color=YELLOW,
-                stroke_width=5,
-                buff=0.15
-            ),
-            run_time=1
-        )
-
-        self.play(
-            Rotate(
-                m,
-                angle=12 * DEGREES,
+                angle=24 * DEGREES,
                 axis=OUT,
                 about_point=current_mass_center
             ),
@@ -281,6 +261,8 @@ class Hoqis1(ThreeDScene):
             v_groups[2].animate.set_opacity(0.8),
             run_time=1
         )
+
+        self.play(highlight_box.animate.set_opacity(0), run_time=0.2)
 
         self.play(
             Rotate(
