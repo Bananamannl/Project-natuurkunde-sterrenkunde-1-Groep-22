@@ -182,12 +182,12 @@ class intro_q(Scene):
             MathTex(
                 r"Q_1",
                 r"\propto",
-                r"\cos\left(\phi+\frac{\pi}{4}\right)"
+                r"\sin\left(\phi-\frac{\pi}{4}\right)"
             ),
             MathTex(
                 r"Q_2",
                 r"\propto",
-                r"\sin\left(\phi+\frac{\pi}{4}\right)"
+                r"\cos\left(\phi-\frac{\pi}{4}\right)"
             )
         )
 

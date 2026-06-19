@@ -85,5 +85,58 @@ class single_ellipse_fit(Scene):
         self.wait(0.5)
 
         self.play(Transform(dots, transformed_dots), run_time=3)
-        self.play(FadeOut(unit_ellipse, circle))
+        self.play(FadeOut(unit_ellipse, circle, ellipse))
+        self.wait(2)
+        self.play(scene_group.animate.shift(LEFT * 5), params_text.animate.shift(LEFT * 6))
+        self.play(FadeOut(params_text))
+
+        Q_formulas = VGroup(
+            MathTex(
+                r"Q_1",
+                r"\propto",
+                r"\sin\left(\phi-\frac{\pi}{4}\right)"
+            ),
+            MathTex(
+                r"Q_2",
+                r"\propto",
+                r"\cos\left(\phi-\frac{\pi}{4}\right)"
+            )
+        )
+
+        tan_text = MathTex(
+            r"\frac{Q_1}{Q_2}"
+            r"="
+            r"\frac{\sin\left(\phi-\frac{\pi}{4}\right)}"
+            r"{\cos\left(\phi-\frac{\pi}{4}\right)}"
+            r"="
+            r"\tan\left(\phi-\frac{\pi}{4}\right)"
+        )
+
+        arctan_text = MathTex(
+            r"\arctan\left(\frac{Q_1}{Q_2}\right)"
+            r"="
+            r"\phi_{\mathrm{rel}}"
+        )
+
+        all_formulas = VGroup(
+            Q_formulas,
+            tan_text,
+            arctan_text
+        )
+
+        Q_formulas.arrange(DOWN, aligned_edge=LEFT, buff=0.35)
+
+        all_formulas.arrange(DOWN, aligned_edge=LEFT, buff=0.65)
+        all_formulas.scale(0.8)
+        all_formulas.to_edge(RIGHT, buff=0.5)
+        all_formulas.shift(UP * 0.3)
+
+        all_gone = VGroup(tan_text, Q_formulas, scene_group)
+        self.play(Write(Q_formulas)) 
+        self.play(Write(tan_text))
+        self.wait(1)
+        self.play(Write(arctan_text))
+        self.wait(2)
+        self.play(FadeOut(all_gone))
+        self.play(arctan_text.animate.move_to([0, 1.5, 0]))
         self.wait(2)
