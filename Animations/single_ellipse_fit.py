@@ -38,10 +38,52 @@ class single_ellipse_fit(Scene):
             y = y0 + a * np.cos(t) * np.sin(theta) + b * np.sin(t) * np.cos(theta)
             ellipse_points.append(axes.c2p(x, y))
 
-        ellipse = VMobject(color=BLUE)
+        ellipse = VMobject(color=WHITE)
         ellipse.set_points_smoothly(ellipse_points)
+
+        params_text = VGroup(
+            MathTex(r"Ellipse parameters:").scale(1),
+            MathTex(r"x_0 = -0.220").scale(0.6),
+            MathTex(r"y_0 = -0.501").scale(0.6),
+            MathTex(r"a = 2.902").scale(0.6),
+            MathTex(r"b = 2.578").scale(0.6),
+            MathTex(r"\theta = 2.160").scale(0.6),
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.25)
+
+        scene_group = VGroup(axes, circle, x_label, y_label, dots, ellipse)
 
         self.add(axes, circle, x_label, y_label, dots)
         self.wait(1)
         self.play(Create(ellipse))
+        self.wait(1)
+
+        params_text.to_corner(UL).shift(DOWN * 0.9 + RIGHT * 0.6)
+
+        self.play(
+            scene_group.animate.shift(RIGHT * 1.5),
+            FadeIn(params_text)
+        )
+        self.wait(1)
+
+        def ellipse_to_circle(x, y):
+            xp = (x - x0) * np.cos(theta) + (y - y0) * np.sin(theta)
+            yp = -(x - x0) * np.sin(theta) + (y - y0) * np.cos(theta)
+            return xp / a, yp / b
+
+        unit_ellipse = circle.copy().set_color(WHITE)
+
+        transformed_dots = VGroup(*[
+            Dot(
+                point=circle.get_center() + np.array([*ellipse_to_circle(x, y), 0]),
+                radius=0.03,
+                color=RED
+            )
+            for x, y in Qs
+        ])
+
+        self.play(Transform(ellipse, unit_ellipse), run_time=2)
+        self.wait(0.5)
+
+        self.play(Transform(dots, transformed_dots), run_time=3)
+        self.play(FadeOut(unit_ellipse, circle))
         self.wait(2)
