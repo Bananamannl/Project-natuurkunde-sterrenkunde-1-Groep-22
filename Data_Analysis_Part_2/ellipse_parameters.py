@@ -32,7 +32,8 @@ def parameters_with_signal(x, y, start_parameters):
 
         return vector, vector
 
-    except ValueError:
+    except ValueError as e:
+        print(e)
         return None, start_parameters
 
 def parameters_timeseries(x, y, window_size=None, step_size=None):
@@ -102,3 +103,11 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
     parameters = np.repeat(vectoren, step_size, axis=0)
     return parameters
 
+Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
+
+Q1_1 = Q1[30000:35000]
+Q2_1 = Q2[30000:35000]
+
+params, params_2 = parameters_with_signal(Q1_1, Q2_1, start_parameters=[0, 0, 1, 1, 0])
+
+print(params)
