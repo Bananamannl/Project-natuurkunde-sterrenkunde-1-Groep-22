@@ -242,7 +242,7 @@ class Hoqis1(ThreeDScene):
         self.play(
             Rotate(
                 m,
-                angle=12 * DEGREES,
+                angle=8 * DEGREES,
                 axis=OUT,
                 about_point=current_mass_center
             ),
@@ -256,7 +256,7 @@ class Hoqis1(ThreeDScene):
         self.play(
             Rotate(
                 m,
-                angle=-24 * DEGREES,
+                angle=-16 * DEGREES,
                 axis=OUT,
                 about_point=current_mass_center
             ),
@@ -271,7 +271,7 @@ class Hoqis1(ThreeDScene):
         self.play(
             Rotate(
                 m,
-                angle=24 * DEGREES,
+                angle=16 * DEGREES,
                 axis=OUT,
                 about_point=current_mass_center
             ),
@@ -287,7 +287,7 @@ class Hoqis1(ThreeDScene):
         self.play(
             Rotate(
                 m,
-                angle=-24 * DEGREES,
+                angle=-16 * DEGREES,
                 axis=OUT,
                 about_point=current_mass_center
             ),
@@ -301,7 +301,7 @@ class Hoqis1(ThreeDScene):
         self.play(
             Rotate(
                 m,
-                angle=12 * DEGREES,
+                angle=8 * DEGREES,
                 axis=OUT,
                 about_point=current_mass_center
             ),
