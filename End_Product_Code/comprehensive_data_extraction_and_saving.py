@@ -322,12 +322,12 @@ def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
 
     return np.array(return_Q1).flatten(), np.array(return_Q2).flatten()
 
-# For this next part, you will unfortunatly have to experiment somewhat depending on which dataset you use, as the smallest window size that works differs between data sets. For now, they will be put at 500 datapoints as that should work on most normal datasets. To check if a windowsize works for a specific HoQI and dataset, make an ASD of the displacement of said HoQI, and if you lose all the relevant peaks, then the windowsize is to small.
+# For this next part, you will unfortunatly have to experiment somewhat depending on which dataset you use, as the smallest window size that works differs between data sets. For now, they will be put at 500 datapoints for the x HoQI's and 300 for 1z and 3z, with 500 for 2z. The step sizes are 50 for all but 2z, which has stepsize 100. This works on our dataset, but should be changed for different datasets. To check if a windowsize works for a specific HoQI and dataset, make an ASD of the displacement of said HoQI for different window- and step sizes and see which one reduces the noise the most.
 if choices_dict["window_ellipse_data"] == True:
     Q1_windowed_ellipse = [0]*6
     Q2_windowed_ellipse = [0]*6
-    window_sizes_list = [500, 500, 500, 300, 300, 300]
-    step_size_list = [50, 50, 50, 50, 50, 50]
+    window_sizes_list = [500, 500, 500, 300, 500, 300]
+    step_size_list = [50, 50, 50, 50, 100, 50]
     for h in range(0,6):
         print("This is HoQI number: ", h)
         fitted_Q1, fitted_Q2 = variable_step_window_ellipse_fitting(Q1_list[h, :], Q2_list[h, :], window_size=window_sizes_list[h], step_size=step_size_list[h])
