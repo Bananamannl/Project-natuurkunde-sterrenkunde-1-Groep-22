@@ -10,6 +10,7 @@ class Hoqis1(ThreeDScene):
             phi=0 * DEGREES,
             theta=-90 * DEGREES
         )
+        self.begin_ambient_camera_rotation()
 
         # =========================
         # Base
@@ -119,12 +120,7 @@ class Hoqis1(ThreeDScene):
 
         hoqis = VGroup(hoqis_side, hoqis_top)
 
-        center_dot = Dot3D(
-            point=mass_center,
-            radius=0.04,
-            color=BLUE
-        )
-        setup = VGroup(base, m, hoqis, center_dot)
+        setup = VGroup(base, m, hoqis)
 
         position_setup = UP * 3.5
 
