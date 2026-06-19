@@ -28,7 +28,7 @@ class SetupScene(ThreeDScene):
             phi=65 * DEGREES,
             theta=45 * DEGREES
         )
-        self.begin_ambient_camera_rotation()
+        self.begin_ambient_camera_rotation(rate=0)
 
         base_radius = 3
         base_height = 0.5

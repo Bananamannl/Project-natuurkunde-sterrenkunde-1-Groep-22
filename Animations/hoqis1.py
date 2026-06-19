@@ -10,7 +10,7 @@ class Hoqis1(ThreeDScene):
             phi=0 * DEGREES,
             theta=-90 * DEGREES
         )
-        self.begin_ambient_camera_rotation()
+        self.begin_ambient_camera_rotation(rate=0)
 
         # =========================
         # Base
