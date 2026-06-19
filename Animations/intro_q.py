@@ -113,7 +113,7 @@ class intro_q(Scene):
                 return updater
 
             red_dot.add_updater(make_opacity_updater(i))
-
+        self.wait(1)
         self.play(
             Create(graph_group),
             Write(formula_group),
@@ -126,17 +126,116 @@ class intro_q(Scene):
 
         self.play(
             phi.animate.set_value(TAU),
-            run_time=6,
+            run_time=4,
             rate_func=linear
         )
 
-        self.wait(2)
+        self.wait(1)
 
         self.play(
-            left_panel.animate.shift(LEFT * 6),
-            graphs.animate.shift(LEFT * 3.5),
+            left_panel.animate.shift(LEFT * 10),
+            graphs.animate.shift(LEFT * 4),
             run_time=1.5
         )
 
         self.remove(left_panel)
+        
+        # Nu gaan we Q1 en Q2 maken:
+        difference_formulas = VGroup(
+            MathTex(
+                r"Q_1"
+                r":="
+                r"\text{PD1}-\text{PD2}"
+                r"="
+                r"\frac{\sqrt{2}aP_{\text{in}}}{8}"
+                r"\sin\left(\phi-\frac{\pi}{4}\right),"
+            ),
+            MathTex(
+                r"Q_2"
+                r":="
+                r"\text{PD1}-\text{PD3}"
+                r"="
+                r"\frac{\sqrt{2}aP_{\text{in}}}{8}"
+                r"\sin\left(\phi+\frac{\pi}{4}\right),"
+            )
+        )
+
+        difference_formulas.arrange(DOWN, aligned_edge=LEFT, buff=0.65)
+        difference_formulas.scale(0.5)
+        difference_formulas.move_to(RIGHT * 3.5 + DOWN * 0.5)
+
+        self.play(
+            Write(difference_formulas),
+            run_time=2
+        )
+
+        self.wait(1)
+
+        self.play(
+            graphs.animate.shift(LEFT * 6),
+            difference_formulas.animate.scale(1.5).shift(LEFT * 3.5 + UP * 2.5)
+        )
+        self.remove(graphs)
+        self.wait(1)
+
+        Q_formulas = VGroup(
+            MathTex(
+                r"Q_1",
+                r"\propto",
+                r"\cos\left(\phi+\frac{\pi}{4}\right)"
+            ),
+            MathTex(
+                r"Q_2",
+                r"\propto",
+                r"\sin\left(\phi+\frac{\pi}{4}\right)"
+            )
+        )
+
+        Q_formulas.arrange(DOWN, aligned_edge=LEFT, buff=0.65)
+        Q_formulas.shift(DOWN * 1)
+
+        self.play(
+            Write(Q_formulas),
+            run_time=1.5
+        )
+        self.wait(1)
+
+        # =========================
+        # Alleen assenstelsel
+        # =========================
+        axes = Axes(
+            x_range=[-4, 4, 0.5],
+            y_range=[-4, 4, 0.5],
+            x_length=6,
+            y_length=6,
+            axis_config={"include_tip": False, "font_size": 15},
+        )
+
+        # Q1 en Q2 uit de formules pakken
+        Q1_part = Q_formulas[0][0]
+        Q2_part = Q_formulas[1][0]
+
+        # Alles behalve Q1 en Q2
+        Q_rest = VGroup(
+            Q_formulas[0][1:],
+            Q_formulas[1][1:]
+        )
+
+        # Doelposities als aslabels
+        Q1_target = axes.get_x_axis_label(MathTex(r"Q_1"))
+        Q2_target = axes.get_y_axis_label(MathTex(r"Q_2"))
+
+        self.play(
+            Transform(Q1_part, Q1_target),
+            Transform(Q2_part, Q2_target),
+            FadeOut(Q_rest),
+            FadeOut(difference_formulas),
+            run_time=1.5
+        )
+
+        self.play(
+            Create(axes),
+            run_time=1.5
+        )
+
         self.wait(1)

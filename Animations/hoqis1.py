@@ -8,7 +8,7 @@ class Hoqis1(ThreeDScene):
         # Bovenaanzicht
         self.set_camera_orientation(
             phi=0 * DEGREES,
-            theta=0 * DEGREES
+            theta=-90 * DEGREES
         )
 
         # =========================
@@ -185,16 +185,40 @@ class Hoqis1(ThreeDScene):
             stroke_width=5,
             buff=0.15
         )
-        self.add_fixed_in_frame_mobjects(highlight_box)
-        highlight_box.set_opacity(0)
 
+        highlight_box.set_fill(opacity=0)          # geen gevulde rechthoek
+        highlight_box.set_stroke(YELLOW, width=5, opacity=0)  # begin onzichtbare rand
+
+        self.add_fixed_in_frame_mobjects(highlight_box)
+
+        HoQI_title = Text("HoQI", font_size=34, weight=BOLD)
+        HoQI_subtitle = Text("(Homodyne Quadrature Interferometer)", font_size=24, weight=BOLD)
+
+        title_and_subtitle = VGroup(HoQI_title, HoQI_subtitle)
+
+        title_and_subtitle.arrange(DOWN, buff=0.15)
+        title_and_subtitle.to_edge(UP, buff=0.4)
+        title_and_subtitle.set_opacity(0)
+        self.add_fixed_in_frame_mobjects(title_and_subtitle)
         # =========================
         # Animatie
         # =========================
-        self.play(FadeIn(base))
-        self.play(FadeIn(m))
-        self.play(FadeIn(hoqis))
+        self.add(base, m)
         self.wait(1)
+        self.play(
+            FadeIn(hoqis), 
+            run_time=2,
+        )
+        all = VGroup(base, m, hoqis)
+        self.play(
+            all.animate.shift(DOWN * 0.5),
+            title_and_subtitle.animate.set_opacity(1)
+        )
+        self.wait(2)
+        self.play(
+            all.animate.shift(UP * 0.5),
+            title_and_subtitle.animate.set_opacity(0) 
+        )
 
         self.move_camera(
             phi=65 * DEGREES,
@@ -244,7 +268,7 @@ class Hoqis1(ThreeDScene):
             v_groups[0].animate.set_opacity(0.4),
             v_groups[1].animate.set_opacity(0.75),
             v_groups[2].animate.set_opacity(0.3),
-            highlight_box.animate.set_opacity(1),
+            highlight_box.animate.set_stroke(opacity=1),
             run_time=1
         )
 
@@ -262,7 +286,7 @@ class Hoqis1(ThreeDScene):
             run_time=1
         )
 
-        self.play(highlight_box.animate.set_opacity(0), run_time=0.2)
+        self.play(highlight_box.animate.set_stroke(opacity=0), run_time=0.2)
 
         self.play(
             Rotate(
@@ -290,5 +314,10 @@ class Hoqis1(ThreeDScene):
             v_groups[1].animate.set_opacity(0.3),
             v_groups[2].animate.set_opacity(1.0),
             run_time=1
+        )
+        self.wait(2)
+        self.play(
+            FadeOut(all),
+            left_panel.animate.move_to(LEFT * 4)
         )
         self.wait(1)

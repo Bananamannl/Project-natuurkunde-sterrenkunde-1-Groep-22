@@ -86,10 +86,13 @@ class SetupScene(ThreeDScene):
         all_objects = VGroup(base, setup, m)
         all_objects.rotate(20 * DEGREES, axis=OUT, about_point=ORIGIN)
 
+        self.wait(2)
         self.play(Create(base))
+        self.wait(4)
         self.play(Create(setup))
+        self.wait(4)
         self.play(FadeIn(m))
-        self.wait(1)
+        self.wait(2)
         self.play(
             Rotate(
                 m, 
@@ -108,15 +111,12 @@ class SetupScene(ThreeDScene):
                 run_time=1
             )
         )
-        # self.play(
-        #     Rotate(
-        #         all_objects,
-        #         angle=360 * DEGREES,
-        #         axis=OUT,          # z-as
-        #         about_point=ORIGIN
-        #     ),
-        #     run_time=2,
-        #     rate_func=linear
-        # )
-
+        self.wait(2)
+        self.move_camera(
+            phi=0 * DEGREES,
+            theta=0 * DEGREES,
+            run_time=1
+        )
+        self.wait(1)
+        self.play(FadeOut(setup))
         self.wait(2)
