@@ -25,8 +25,7 @@ class q_plot(Scene):
         # ─────────────────────────────
         # 2. Data laden
         # ─────────────────────────────
-        Q1, Q2 = np.load(r"C:\Users\janne\OneDrive\Documenten\Studie Natuur- Sterrenkunde\Jaar 1\N&S_Project\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), \
-                np.load(r"C:\Users\janne\OneDrive\Documenten\Studie Natuur- Sterrenkunde\Jaar 1\N&S_Project\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
+        Q1, Q2 = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"), np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy")
 
         # interval met nette elips 
         Q1_1 = Q1 [30000:35000]
