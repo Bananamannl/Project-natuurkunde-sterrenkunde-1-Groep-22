@@ -50,6 +50,8 @@ class dof(Scene):
 
         times = MathTex(r"\cdot").scale(0.9)
 
+        x_label = MathTex(r"\vec{x}=").scale(0.8)
+
         product_vector = MathTex(
             r"\vec{x}="
             r"\begin{pmatrix}"
@@ -95,6 +97,7 @@ class dof(Scene):
         # Maak er een nette matrix-vector vermenigvuldiging van:
         # label "d =" verdwijnt, matrix en vector schuiven netjes naast elkaar
         target_layout = VGroup(
+            x_label.copy(),
             M.copy(),
             times.copy(),
             d_vector.copy()
@@ -102,11 +105,14 @@ class dof(Scene):
 
         target_layout.move_to(UP * 1.2)
 
+        x_label.move_to(target_layout[0].get_center())
+
         self.play(
             FadeOut(d_label),
-            M.animate.move_to(target_layout[0].get_center()),
-            FadeIn(times.move_to(target_layout[1].get_center())),
-            d_vector.animate.move_to(target_layout[2].get_center()),
+            FadeIn(x_label),
+            M.animate.move_to(target_layout[1].get_center()),
+            FadeIn(times.move_to(target_layout[2].get_center())),
+            d_vector.animate.move_to(target_layout[3].get_center()),
             run_time=1.2
         )
 
