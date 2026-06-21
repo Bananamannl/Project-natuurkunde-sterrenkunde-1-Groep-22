@@ -8,7 +8,9 @@ class introduction(Scene):
         shin = Line(knee, ankle, stroke_width=8, color=color)
 
         return VGroup(thigh, shin)
-
+    def arrow_and_text(self):
+        text = Text("Gravitational wave detector (arm)", font_size=24, weight=BOLD)
+        arrow = 
     def make_impact(self, contact_point):
         return VGroup(
             Line(contact_point + LEFT * 0.15, contact_point + LEFT * 0.55 + UP * 0.25),
