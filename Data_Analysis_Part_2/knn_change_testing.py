@@ -23,18 +23,18 @@ Q2 = np.load("Data_Analysis_Part_1\\1xQ2.npy")
 # Settings
 # =========================
 
-window_size = 250
+window_size = 500
 step_size = 1
 
 start = 0
-length = 50000
+length = 200000
 
 best_k = 200
 best_weights = "distance"
 best_p = 1
 
-train_size = 10000
-block_size = 5000
+train_size = 20000
+block_size = 10000
 gap = window_size
 
 labels = ["x0", "y0", "a", "b", "theta"]
@@ -168,6 +168,56 @@ baseline_rmses = np.array(baseline_rmses)
 fixed_rmse_per_param = np.array(fixed_rmse_per_param)
 local_rmse_per_param = np.array(local_rmse_per_param)
 
+
+# =========================
+# Poster summary metrics
+# =========================
+
+fixed_mean = np.mean(fixed_rmses)
+local_mean = np.mean(local_rmses)
+baseline_mean = np.mean(baseline_rmses)
+
+fixed_std = np.std(fixed_rmses)
+local_std = np.std(local_rmses)
+baseline_std = np.std(baseline_rmses)
+
+fixed_improvement = 100 * (1 - fixed_mean / baseline_mean)
+local_improvement = 100 * (1 - local_mean / baseline_mean)
+
+active_vs_passive = 100 * (1 - local_mean / fixed_mean)
+local_better_blocks = 100 * np.mean(local_rmses < fixed_rmses)
+
+print("\n================ POSTER RESULTS ================")
+
+print(f"Baseline RMSE:        {baseline_mean:.5f} ± {baseline_std:.5f}")
+print(f"Passive/static RMSE:  {fixed_mean:.5f} ± {fixed_std:.5f}")
+print(f"Active/local RMSE:    {local_mean:.5f} ± {local_std:.5f}")
+
+print("\nImprovement compared to baseline:")
+print(f"Passive/static model: {fixed_improvement:.1f}% lower RMSE")
+print(f"Active/local model:   {local_improvement:.1f}% lower RMSE")
+
+print("\nActive vs passive:")
+print(f"Active model has {active_vs_passive:.1f}% lower RMSE than passive model")
+print(f"Active model is better in {local_better_blocks:.1f}% of test blocks")
+
+print("\nRMSE per ellipse parameter:")
+print("parameter | passive RMSE | active RMSE | active improvement")
+for i, label in enumerate(labels):
+    fixed_param = np.mean(fixed_rmse_per_param[:, i])
+    local_param = np.mean(local_rmse_per_param[:, i])
+    improvement = 100 * (1 - local_param / fixed_param)
+
+    print(
+        f"{label:8s} | "
+        f"{fixed_param:.5f}      | "
+        f"{local_param:.5f}    | "
+        f"{improvement:6.1f}%"
+    )
+
+print("================================================")
+
+exit()
 
 # =========================
 # Print summary
