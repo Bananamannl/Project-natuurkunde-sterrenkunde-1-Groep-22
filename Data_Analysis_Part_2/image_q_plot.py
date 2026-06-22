@@ -132,16 +132,16 @@ Q2_lists = [
 # Titles
 # =========================
 column_titles = [
-    "Static model",
-    "Active model",
-    "Windowed fit"
+    "Non-fited (a)",
+    "Single fitted (b)",
+    "Windowed fitted (c)"
 ]
 
 row_titles = [
-    r"$x_0$",
-    r"$y_0$",
-    r"$a$",
-    r"$b$"
+    r"1x",
+    r"3x",
+    r"1z",
+    r"3z"
 ]
 
 # =========================
@@ -219,18 +219,19 @@ for row in range(4):
                 row_titles[row],
                 color="white",
                 fontsize=28,
-                fontweight="bold",
+                fontstyle="normal",
                 rotation=0,
-                labelpad=45,
+                labelpad=20,  #HIER
                 va="center"
             )
 
 # Grote figuurtitel
 fig.suptitle(
-    "Q1-Q2 ellipse plots",
+    "(Q1, Q2) plots",
     fontsize=34,
     fontweight="bold",
-    color="white"
+    color="white",
+    y = 0.965 # HIER
 )
 
 plt.tight_layout(rect=[0, 0, 1, 0.96])
