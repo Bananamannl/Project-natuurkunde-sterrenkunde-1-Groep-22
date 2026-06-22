@@ -115,7 +115,7 @@ class SetupScene(ThreeDScene):
         self.wait(2)
         self.move_camera(
             phi=0 * DEGREES,
-            theta=0 * DEGREES,
+            theta=50 * DEGREES,
             run_time=1
         )
         self.wait(1)

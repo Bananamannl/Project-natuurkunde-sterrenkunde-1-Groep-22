@@ -94,11 +94,10 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
                     continue
 
             fit_parameters = new_fit_parameters
-            vectoren.append(vector)
+            vectoren.append(np.ravel(vector))
             break
             
     vectoren = np.array(vectoren)
 
     # Repeat the parameters so almost every point has corresponding parameters (except for the last ones)
-    parameters = np.repeat(vectoren, step_size, axis=0)
-    return parameters
+    return vectoren
