@@ -1,6 +1,9 @@
 import numpy as np
 import pyvista as pv
 
+# Settings:
+HoQI = ""
+
 # the transformation matrix for HoQI 1x
 matrix_1x = np.array([
     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0],
@@ -268,3 +271,5 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
     plotter.add_key_event("n", next_parameter)
 
     plotter.show()
+
+slider_plot_parameters()

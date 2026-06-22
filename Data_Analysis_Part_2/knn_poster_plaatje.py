@@ -16,10 +16,7 @@ from orthogonal_matrices import *
 # Settings
 # ============================================================
 
-DATA_FOLDER = Path("Data_Analysis_Part_1")
 
-HOQI_FILE = DATA_FOLDER / "HoQI_fitted_six_vct_list.npy"
-PARAMETER_FILE = Path("parameters_for_knn_test.npy")
 
 window_size = 500
 start = 0
@@ -112,8 +109,8 @@ def test_center_shifts():
     return best_shift
 
 def load_and_align_data(center_shift):
-    HoQIs = np.load(r"Data_Analysis_Part_1\\HoQI_fitted_six_vct_list.npy")
-    parameters = np.load(r"Data_Analysis_Part_2\parameters_for_knn_test_1x.npy")
+    HoQIs = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\fitted_six_vct_list.npy")
+    parameters = np.load(r"Data_Analysis_Part_2\parameters_for_knn_test.npy")
 
     parameters = parameters[:length]
 
@@ -450,6 +447,19 @@ def plot_poster_figure(X, y, center_shift, results, passive_train_size):
     )
 
     x = np.arange(len(X)) + center_shift
+
+    image_format_data = {
+        "x": x,
+        "y_true": y,
+        "y_pred_passive": y_pred_passive_all,
+        "y_pred_active": y_pred_active_all,
+        "labels": np.array(labels),
+        "center_shift": center_shift,
+        "passive_train_size": passive_train_size,
+    }
+
+    np.save("image_format_test.npy", image_format_data)
+    print("\nSaved plot data as: image_format_test.npy")
 
     for i, label in enumerate(labels):
         ax = axes[i]
