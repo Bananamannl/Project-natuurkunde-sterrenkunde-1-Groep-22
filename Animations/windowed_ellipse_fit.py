@@ -45,15 +45,15 @@ class windowed_ellipse_fit(Scene):
 
         ellipse_params = [
 
-            (-0.22743413, -0.50297871,  2.89857111,  2.57752728,  2.15924495), # WINDOW 1
+            (-0.22743413, -0.50297871, 2.89857111, 2.57752728, 2.15924495),  # WINDOW 1
 
-            (-0.22506378, -0.50100047,  2.88244602,  2.56059351,  2.16067717),   # WINDOW 2
+            (-0.22506378, -0.50100047, 2.88244602, 2.56059351, 2.16067717),  # WINDOW 2
 
-            (-0.21104056, -0.5005457,   2.87346276,  2.54911861,  2.16634957),   # WINDOW 3
+            (-0.21104056, -0.5005457, 2.87346276, 2.54911861, 2.16634957),   # WINDOW 3
 
-            (-0.22051271, -0.50469906,  2.54160085,  2.85980108,  0.59443688 + PI),   # WINDOW 4
+            (-0.22051271, -0.50469906, 2.54160085, 2.85980108, 0.59443688 + PI),  # WINDOW 4
 
-            (-0.24281496, -0.49736554,  2.40651206,  2.6897109,   0.61042734 + PI),   # WINDOW 5
+            (-0.24281496, -0.49736554, 2.40651206, 2.6897109, 0.61042734 + PI),   # WINDOW 5
         ]
 
         # Hier blijven alle getransformeerde punten staan
@@ -66,6 +66,9 @@ class windowed_ellipse_fit(Scene):
             ORANGE,
             PURPLE,
         ]
+
+        # NIEUW: parametertekst onthouden tussen windows
+        old_params_text = None
 
         for i in range(n_windows):
 
@@ -102,20 +105,37 @@ class windowed_ellipse_fit(Scene):
 
             x0, y0, a, b, theta = ellipse_params[i]
 
+            params_text = VGroup(
+                MathTex(r"Ellipse parameters:").scale(0.7),
+                MathTex(r"x_0 = " + f"{x0:.3f}").scale(0.5),
+                MathTex(r"y_0 = " + f"{y0:.3f}").scale(0.5),
+                MathTex(r"a = " + f"{a:.3f}").scale(0.5),
+                MathTex(r"b = " + f"{b:.3f}").scale(0.5),
+                MathTex(r"\theta = " + f"{theta:.3f}").scale(0.5),
+            ).arrange(
+                DOWN,
+                aligned_edge=LEFT,
+                buff=0.1
+            )
+
+            params_text.to_corner(UL).shift(
+                DOWN * 0.5 + RIGHT * 0.3
+            )
+
             ellipse_points = []
 
             for t in np.linspace(0, TAU, 300):
 
                 x = (
                     x0
-                    + a*np.cos(t)*np.cos(theta)
-                    - b*np.sin(t)*np.sin(theta)
+                    + a * np.cos(t) * np.cos(theta)
+                    - b * np.sin(t) * np.sin(theta)
                 )
 
                 y = (
                     y0
-                    + a*np.cos(t)*np.sin(theta)
-                    + b*np.sin(t)*np.cos(theta)
+                    + a * np.cos(t) * np.sin(theta)
+                    + b * np.sin(t) * np.cos(theta)
                 )
 
                 ellipse_points.append(
@@ -127,10 +147,27 @@ class windowed_ellipse_fit(Scene):
                 ellipse_points
             )
 
-            self.play(
-                Create(ellipse),
-                run_time=0.8 #run_time=1.5
-            )
+            # --------------------------------------------------
+            # Ellipse + parametertekst
+            # --------------------------------------------------
+
+            if old_params_text is None:
+                self.play(
+                    Create(ellipse),
+                    FadeIn(params_text),
+                    run_time=0.8
+                )
+            else:
+                self.play(
+                    Create(ellipse),
+                    ReplacementTransform(
+                        old_params_text,
+                        params_text
+                    ),
+                    run_time=0.8
+                )
+
+            old_params_text = params_text
 
             # --------------------------------------------------
             # Transform ellipse -> unit circle
@@ -141,12 +178,11 @@ class windowed_ellipse_fit(Scene):
             )
 
             self.play(
-                # Rotate(dots, angle = -theta),
                 Transform(
                     ellipse,
                     unit_ellipse
                 ),
-                run_time=0.8 #run_time=1.5
+                run_time=0.8
             )
 
             # --------------------------------------------------
@@ -155,16 +191,16 @@ class windowed_ellipse_fit(Scene):
 
             def ellipse_to_circle(x, y):
                 xp = (
-                    (x - x0)*np.cos(theta)
-                    + (y - y0)*np.sin(theta)
+                    (x - x0) * np.cos(theta)
+                    + (y - y0) * np.sin(theta)
                 )
 
                 yp = (
-                    -(x - x0)*np.sin(theta)
-                    + (y - y0)*np.cos(theta)
+                    -(x - x0) * np.sin(theta)
+                    + (y - y0) * np.cos(theta)
                 )
 
-                return xp/a, yp/b
+                return xp / a, yp / b
 
             transformed_dots = VGroup(*[
                 Dot(
@@ -181,18 +217,17 @@ class windowed_ellipse_fit(Scene):
             ])
 
             self.play(
-                # Rotate(dots, angle = - theta),
                 Transform(
                     dots,
                     transformed_dots
                 ),
-                run_time=1 #run_time=2
+                run_time=1
             )
 
             accumulated_circle_points.add(*dots)
 
             self.remove(ellipse)
 
-            self.wait (0.3)#self.wait(0.5)
+            self.wait(0.3)
 
         self.wait(3)
