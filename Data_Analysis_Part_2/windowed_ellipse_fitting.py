@@ -37,6 +37,30 @@ def standard_step_window_ellipse_fitting(Q1, Q2, window_size):
     return np.array(return_Q1).flatten(), np.array(return_Q2).flatten()
 
 # Defining function with overlap
+def parameters(x, y, start_parameters=None):
+    """
+    Takes Q1 and Q2 data (np.array's) and spits out the fitting parameters
+    the output is in the form of a 5-dim vector:
+    (x0, y0, a, b, theta)
+    """
+    
+    if start_parameters is None:
+        start_parameters = [0, 0, 1, 1, 0]
+    results = least_squares(
+        residuals,
+        x0 = start_parameters,
+        args = (x, y)
+    )
+    x0, y0, a, b, theta = results.x
+    if b > a:
+        a, b = b, a
+        theta += np.pi / 2
+    if a > 10:
+        raise ValueError("a > 10, kies een groter window_size")
+    vector = np.column_stack((x0, y0, a, b, theta))
+    start_parameters = [x0, y0, a, b, theta]
+    return vector, start_parameters
+
 def variable_step_window_ellipse_fitting(Q1, Q2, window_size, step_size):
     # This outputs a 6 x floor(len(Q1) / window_size) matrix with the parameters of the differen ellipses. The bottom row is area, which we don't need, so we remove it
     params_matrix = parameters_timeseries(Q1,Q2, window_size=window_size, step_size=step_size)[ : , 0:5]
