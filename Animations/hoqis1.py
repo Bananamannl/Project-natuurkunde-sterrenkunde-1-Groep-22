@@ -127,7 +127,7 @@ class Hoqis1(ThreeDScene):
         # =========================
         # Linker 2D HoQI-measurement panel
         # =========================
-        panel_title = Text("HoQI Measurements", font_size=34, weight=BOLD)
+        panel_title = Text("HoQI measurements", font_size=34, weight=BOLD)
         panel_subtitle = Text("(for one HoQI)", font_size=24, weight=BOLD)
 
         panel_title.to_corner(UL).shift(RIGHT * 0.4 + DOWN * 0.3)
