@@ -42,13 +42,37 @@ class single_ellipse_fit(Scene):
         ellipse.set_points_smoothly(ellipse_points)
 
         params_text = VGroup(
-            MathTex(r"Ellipse parameters:").scale(1),
+            MathTex(r"\text{Ellipse parameters:}").scale(1),
             MathTex(r"x_0 = -0.220").scale(0.6),
             MathTex(r"y_0 = -0.501").scale(0.6),
             MathTex(r"a = 2.902").scale(0.6),
             MathTex(r"b = 2.578").scale(0.6),
             MathTex(r"\theta = 2.160").scale(0.6),
-        ).arrange(DOWN, aligned_edge=LEFT, buff=0.25)
+        ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+
+        function_text = VGroup(
+            MathTex(r"\text{Elliptical model:}").scale(1),
+            MathTex(
+                r"\begin{pmatrix} x \\ y \end{pmatrix}"
+                r"="
+                r"\begin{pmatrix} x_0 \\ y_0 \end{pmatrix}"
+                r"+"
+                r"\begin{pmatrix}"
+                r"\cos(\theta) & -\sin(\theta)\\"
+                r"\sin(\theta) & \cos(\theta)"
+                r"\end{pmatrix}"
+                r"\begin{pmatrix}"
+                r"a\cos(\phi)\\"
+                r"b\sin(\phi)"
+                r"\end{pmatrix}"
+            ).scale(0.55)
+                ).arrange(DOWN, aligned_edge=LEFT, buff=0.25)
+
+        text = VGroup(params_text, function_text).arrange(
+            DOWN,
+            aligned_edge=LEFT,
+            buff=0.75
+        )
 
         scene_group = VGroup(axes, circle, x_label, y_label, dots, ellipse)
 
@@ -57,11 +81,11 @@ class single_ellipse_fit(Scene):
         self.play(Create(ellipse))
         self.wait(1)
 
-        params_text.to_corner(UL).shift(DOWN * 0.9 + RIGHT * 0.6)
+        text.to_corner(UL).shift(DOWN * 0.9 + RIGHT * 0.6)
 
         self.play(
-            scene_group.animate.shift(RIGHT * 1.5),
-            FadeIn(params_text)
+            scene_group.animate.shift(RIGHT * 2.6),
+            FadeIn(text)
         )
         self.wait(1)
 
@@ -87,8 +111,8 @@ class single_ellipse_fit(Scene):
         self.play(Transform(dots, transformed_dots), run_time=3)
         self.play(FadeOut(unit_ellipse, circle, ellipse))
         self.wait(2)
-        self.play(scene_group.animate.shift(LEFT * 5), params_text.animate.shift(LEFT * 6))
-        self.play(FadeOut(params_text))
+        self.play(scene_group.animate.shift(LEFT * 6.1), text.animate.shift(LEFT * 6.1))
+        self.play(FadeOut(text))
 
         Q_formulas = VGroup(
             MathTex(
