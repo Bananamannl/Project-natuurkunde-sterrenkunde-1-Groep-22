@@ -81,22 +81,22 @@ if all_data == "n":
 
 ## Import relevant data
 if choices_dict["raw_data"] == True:
-    Q1_raw = np.load("Endproduct_Code/raw_Q1_data.npy")
-    Q2_raw = np.load("Endproduct_Code/raw_Q2_data.npy")
-    raw_HoQI_displacement = np.load("Endproduct_Code/raw_HoQI_displacement_data.npy")
-    raw_DOF_displacement = np.load("Endproduct_Code/raw_DOF_displacement_data.npy")
+    Q1_raw = np.load("End_Product_Code/raw_Q1_data.npy")
+    Q2_raw = np.load("End_Product_Code/raw_Q2_data.npy")
+    raw_HoQI_displacement = np.load("End_Product_Code/raw_HoQI_displacement_data.npy")
+    raw_DOF_displacement = np.load("End_Product_Code/raw_DOF_displacement_data.npy")
 
 if choices_dict["single_ellipse_data"] == True:
-    Q1_single_ellipse = np.load("Endproduct_Code/single_ellipse_Q1_data.npy")
-    Q2_single_ellipse = np.load("Endproduct_Code/single_ellipse_Q2_data.npy")
-    single_ellipse_HoQI_displacement = np.load("Endproduct_Code/single_ellipse_HoQI_displacement_data.npy")
-    single_ellipse_DOF_displacement = np.load("Endproduct_Code/single_ellipse_DOF_displacement_data.npy")
+    Q1_single_ellipse = np.load("End_Product_Code/single_ellipse_Q1_data.npy")
+    Q2_single_ellipse = np.load("End_Product_Code/single_ellipse_Q2_data.npy")
+    single_ellipse_HoQI_displacement = np.load("End_Product_Code/single_ellipse_HoQI_displacement_data.npy")
+    single_ellipse_DOF_displacement = np.load("End_Product_Code/single_ellipse_DOF_displacement_data.npy")
 
 if choices_dict["window_ellipse_data"] == True:
-    Q1_windowed_ellipse = np.load("Endproduct_Code/windowed_ellipse_Q1_data.npy")
-    Q2_windowed_ellipse = np.load("Endproduct_Code/windowed_ellipse_Q2_data.npy")
-    windowed_ellipse_HoQI_displacement = np.load("Endproduct_Code/windowed_ellipse_HoQI_displacement_data.npy")
-    windowed_ellipse_DOF_displacement = np.load("Endproduct_Code/windowed_ellipse_DOF_displacement_data.npy")
+    Q1_windowed_ellipse = np.load("End_Product_Code/windowed_ellipse_Q1_data.npy")
+    Q2_windowed_ellipse = np.load("End_Product_Code/windowed_ellipse_Q2_data.npy")
+    windowed_ellipse_HoQI_displacement = np.load("End_Product_Code/windowed_ellipse_HoQI_displacement_data.npy")
+    windowed_ellipse_DOF_displacement = np.load("End_Product_Code/windowed_ellipse_DOF_displacement_data.npy")
 
 ## Q1-Q2 plots
 if choices_dict["Q1_Q2_plots"] == True:
@@ -112,7 +112,7 @@ if choices_dict["Q1_Q2_plots"] == True:
                 axes[i, j].set_title(names_list[i*3+j])
 
         figure.tight_layout()
-        figure.savefig("Endproduct_Code/Plot_files/raw_data_Q1_Q2_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/raw_data_Q1_Q2_plot.png")
         plt.close()
 
     if choices_dict["single_ellipse_data"] == True:
@@ -125,7 +125,7 @@ if choices_dict["Q1_Q2_plots"] == True:
                 axes[i, j].set_title(names_list[i*3+j])
 
         figure.tight_layout()
-        figure.savefig("Endproduct_Code/Plot_files/single_ellipse_data_Q1_Q2_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/single_ellipse_data_Q1_Q2_plot.png")
         plt.close()
 
     if choices_dict["window_ellipse_data"] == True:
@@ -138,7 +138,7 @@ if choices_dict["Q1_Q2_plots"] == True:
                 axes[i, j].set_title(names_list[i*3+j])
 
         figure.tight_layout()
-        figure.savefig("Endproduct_Code/Plot_files/windowed_ellipse_data_Q1_Q2_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/windowed_ellipse_data_Q1_Q2_plot.png")
         plt.close()
 
 ## Time-series
@@ -158,7 +158,7 @@ if choices_dict["Timeseries_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/raw_data_HoQI_displacement_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/raw_data_HoQI_displacement_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -175,7 +175,7 @@ if choices_dict["Timeseries_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/raw_data_DOF_displacement_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/raw_data_DOF_displacement_plot.png")
         plt.close()
 
     if choices_dict["single_ellipse_data"] == True:
@@ -190,7 +190,7 @@ if choices_dict["Timeseries_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/single_ellipse_data_HoQI_displacement_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/single_ellipse_data_HoQI_displacement_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -207,7 +207,7 @@ if choices_dict["Timeseries_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/single_ellipse_data_DOF_displacement_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/single_ellipse_data_DOF_displacement_plot.png")
         plt.close()
 
     if choices_dict["window_ellipse_data"] == True:
@@ -223,7 +223,7 @@ if choices_dict["Timeseries_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/windowed_ellipse_data_HoQI_displacement_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/windowed_ellipse_data_HoQI_displacement_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -240,7 +240,7 @@ if choices_dict["Timeseries_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/windowed_ellipse_data_DOF_displacement_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/windowed_ellipse_data_DOF_displacement_plot.png")
         plt.close()
     
 ## ASD plots
@@ -296,7 +296,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/raw_data_HoQI_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/raw_data_HoQI_ASD_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -333,7 +333,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/raw_data_DOF_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/raw_data_DOF_ASD_plot.png")
         plt.close()
 
     if choices_dict["single_ellipse_data"] == True:
@@ -371,7 +371,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/single_ellipse_HoQI_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/single_ellipse_HoQI_ASD_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -408,7 +408,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/single_ellipse_data_DOF_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/single_ellipse_data_DOF_ASD_plot.png")
         plt.close()
 
     if choices_dict["window_ellipse_data"] == True:
@@ -446,7 +446,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/windowed_ellipse_HoQI_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/windowed_ellipse_HoQI_ASD_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -483,7 +483,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/windowed_ellipse_data_DOF_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/windowed_ellipse_data_DOF_ASD_plot.png")
         plt.close()
 
     if choices_dict["raw_data"] == True and choices_dict["single_ellipse_data"] == True and choices_dict["window_ellipse_data"] == True:
@@ -509,7 +509,7 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/all_three_HoQI_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/all_three_HoQI_ASD_plot.png")
         plt.close()
 
         figure, axes = plt.subplots(2, 3)
@@ -534,13 +534,13 @@ if choices_dict["ASD_plots"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig("Endproduct_Code/Plot_files/all_three_DOF_ASD_plot.png")
+        figure.savefig("End_Product_Code/Plot_files/all_three_DOF_ASD_plot.png")
         plt.close()
     
 
 ## Parameter Timeseries
 if choices_dict["ellipse_params_timeseries"] == True:
-    HoQI_ellipse_parameter_list = [np.load('Endproduct_code/HoQI_1x_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_2x_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_3x_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_1z_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_2z_ellipse_parameter_timeseries.npy'), np.load('Endproduct_code/HoQI_3z_ellipse_parameter_timeseries.npy')]
+    HoQI_ellipse_parameter_list = [np.load('End_Product_Code/HoQI_1x_ellipse_parameter_timeseries.npy'), np.load('End_Product_Code/HoQI_2x_ellipse_parameter_timeseries.npy'), np.load('End_Product_Code/HoQI_3x_ellipse_parameter_timeseries.npy'), np.load('End_Product_Code/HoQI_1z_ellipse_parameter_timeseries.npy'), np.load('End_Product_Code/HoQI_2z_ellipse_parameter_timeseries.npy'), np.load('End_Product_Code/HoQI_3z_ellipse_parameter_timeseries.npy')]
 
     HoQI_names = ["1x", "2x", "3x", "1z", "2z", "3z"]
     names_list = ["x0", "y0", "a", "b", "theta", "area"]
@@ -558,5 +558,5 @@ if choices_dict["ellipse_params_timeseries"] == True:
         plt.subplots_adjust(hspace=0.312)
         figure.set_figheight(8)
         figure.set_figwidth(16)
-        figure.savefig( f'Endproduct_Code/Plot_files/parameter_timeseries_HoQI_{HoQI_names[h]}.png' )
+        figure.savefig( f'End_Product_Code/Plot_files/parameter_timeseries_HoQI_{HoQI_names[h]}.png' )
         plt.close()

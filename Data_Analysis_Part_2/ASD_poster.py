@@ -19,9 +19,9 @@ hoqi_index = 2
 # =========================
 # Load saved data van Script 1
 # =========================
-raw_HoQI_disp       = np.load('Endproduct_code/raw_HoQI_displacement_data.npy', allow_pickle=True)[hoqi_index]
-single_ellipse_disp = np.load('Endproduct_code/single_ellipse_HoQI_displacement_data.npy', allow_pickle=True)[hoqi_index]
-windowed_ellipse_disp = np.load('Endproduct_code/windowed_ellipse_HoQI_displacement_data.npy', allow_pickle=True)[hoqi_index]
+raw_HoQI_disp       = np.load('End_Product_Code/raw_HoQI_displacement_data.npy', allow_pickle=True)[hoqi_index]
+single_ellipse_disp = np.load('End_Product_Code/single_ellipse_HoQI_displacement_data.npy', allow_pickle=True)[hoqi_index]
+windowed_ellipse_disp = np.load('End_Product_Code/windowed_ellipse_HoQI_displacement_data.npy', allow_pickle=True)[hoqi_index]
 
 # =========================
 # ASD Berekeningen & Smoothing
@@ -122,7 +122,7 @@ plt.tight_layout()
 
 # Opslaan als transparante high-res PNG
 plt.savefig(
-    'Endproduct_code/ASD_plot_HoQI_displacements.png',
+    'End_Product_Code/ASD_plot_HoQI_displacements.png',
     dpi=300,
     bbox_inches="tight",
     transparent=True

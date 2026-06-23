@@ -117,8 +117,8 @@ Q2_list = np.array((Q2_1x, Q2_2x, Q2_3x, Q2_1z, Q2_2z, Q2_3z))
 
 if choices_dict["Q1_Q2_data"] == True:
     # This will save two 6xlen(Q1) np.arrays of all the relevant Q1 and Q2 values for each HoQI, in the order that these lists were constructed in the code on the two lines above here. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/raw_Q1_data.npy', Q1_list)
-    np.save('Endproduct_code/raw_Q2_data.npy', Q2_list)
+    np.save('End_Product_Code/raw_Q1_data.npy', Q1_list)
+    np.save('End_Product_Code/raw_Q2_data.npy', Q2_list)
 
 ## Single ellipse fitting Q1 and Q2
 def residuals(params, x, y):
@@ -160,8 +160,8 @@ if choices_dict["single_ellipse_data"] == True:
     single_ellipse_Q2 = np.array(single_ellipse_Q2)
     if choices_dict["Q1_Q2_data"] == True:
         # This will save two 6xlen(Q1) np.arrays of all the relevant Q1 and Q2 values for each HoQI, in the order that these lists were constructed in the code on the two lines above here. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-        np.save('Endproduct_code/single_ellipse_Q1_data.npy', single_ellipse_Q1)
-        np.save('Endproduct_code/single_ellipse_Q2_data.npy', single_ellipse_Q2)
+        np.save('End_Product_Code/single_ellipse_Q1_data.npy', single_ellipse_Q1)
+        np.save('End_Product_Code/single_ellipse_Q2_data.npy', single_ellipse_Q2)
 
 ## Windowed ellipse fitting
 def residuals(params, x, y):
@@ -337,8 +337,8 @@ if choices_dict["window_ellipse_data"] == True:
     Q2_windowed_ellipse = np.array(Q2_windowed_ellipse)
     if choices_dict["Q1_Q2_data"] == True:
         # This will save two 6xlen(Q1) np.arrays of all the relevant Q1 and Q2 values for each HoQI, in the order that these lists were constructed in the code on the lines above here. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-        np.save('Endproduct_code/windowed_ellipse_Q1_data.npy', Q1_windowed_ellipse)
-        np.save('Endproduct_code/windowed_ellipse_Q2_data.npy', Q2_windowed_ellipse)
+        np.save('End_Product_Code/windowed_ellipse_Q1_data.npy', Q1_windowed_ellipse)
+        np.save('End_Product_Code/windowed_ellipse_Q2_data.npy', Q2_windowed_ellipse)
 
 ## HoQI displacement lists
 def Q1_Q2_Length(Q1, Q2):
@@ -358,17 +358,17 @@ def Q1_Q2_Length(Q1, Q2):
 if choices_dict["raw_data"] == True:
     raw_HoQI_displacement = np.array([Q1_Q2_Length(Q1_list[0, :], Q2_list[0, :]), Q1_Q2_Length(Q1_list[1, :], Q2_list[1, :]), Q1_Q2_Length(Q1_list[2, :], Q2_list[2, :]), Q1_Q2_Length(Q1_list[3, :], Q2_list[3, :]), Q1_Q2_Length(Q1_list[4, :], Q2_list[4, :]), Q1_Q2_Length(Q1_list[5, :], Q2_list[5, :])])
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each HoQI, in the order that these lists were constructed in the code on the line above here. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/raw_HoQI_displacement_data.npy', raw_HoQI_displacement)
+    np.save('End_Product_Code/raw_HoQI_displacement_data.npy', raw_HoQI_displacement)
 
 if choices_dict["single_ellipse_data"] == True:
     single_ellipse_HoQI_displacement = np.array([Q1_Q2_Length(single_ellipse_Q1[0, :], single_ellipse_Q2[0, :]), Q1_Q2_Length(single_ellipse_Q1[1, :], single_ellipse_Q2[1, :]), Q1_Q2_Length(single_ellipse_Q1[2, :], single_ellipse_Q2[2, :]), Q1_Q2_Length(single_ellipse_Q1[3, :], single_ellipse_Q2[3, :]), Q1_Q2_Length(single_ellipse_Q1[4, :], single_ellipse_Q2[4, :]), Q1_Q2_Length(single_ellipse_Q1[5, :], single_ellipse_Q2[5, :])])
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each HoQI, in the order that these lists were constructed in the code on the line above here. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/single_ellipse_HoQI_displacement_data.npy', single_ellipse_HoQI_displacement)
+    np.save('End_Product_Code/single_ellipse_HoQI_displacement_data.npy', single_ellipse_HoQI_displacement)
 
 if choices_dict["window_ellipse_data"] == True:
     windowed_ellipse_HoQI_displacement = np.array([Q1_Q2_Length(Q1_windowed_ellipse[0, :], Q2_windowed_ellipse[0, :]), Q1_Q2_Length(Q1_windowed_ellipse[1, :], Q2_windowed_ellipse[1, :]), Q1_Q2_Length(Q1_windowed_ellipse[2, :], Q2_windowed_ellipse[2, :]), Q1_Q2_Length(Q1_windowed_ellipse[3, :], Q2_windowed_ellipse[3, :]), Q1_Q2_Length(Q1_windowed_ellipse[4, :], Q2_windowed_ellipse[4, :]), Q1_Q2_Length(Q1_windowed_ellipse[5, :], Q2_windowed_ellipse[5, :])])
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each HoQI, in the order that these lists were constructed in the code on the line above here. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/windowed_ellipse_HoQI_displacement_data.npy', windowed_ellipse_HoQI_displacement)
+    np.save('End_Product_Code/windowed_ellipse_HoQI_displacement_data.npy', windowed_ellipse_HoQI_displacement)
 
 ## DOF displacement lists
 def transformation_matrix (ax, bx, cx, az, bz, cz):
@@ -390,23 +390,23 @@ def transformation_matrix (ax, bx, cx, az, bz, cz):
 if choices_dict["raw_data"] == True:
     raw_DOF_displacement = transformation_matrix(raw_HoQI_displacement[0, :], raw_HoQI_displacement[1, :], raw_HoQI_displacement[2, :], raw_HoQI_displacement[3, :], raw_HoQI_displacement[4, :], raw_HoQI_displacement[5, :])
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each DOF, in the order that these lists were constructed in is x, y, z, Rx, Ry, Rz. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/raw_DOF_displacement_data.npy', raw_DOF_displacement)
+    np.save('End_Product_Code/raw_DOF_displacement_data.npy', raw_DOF_displacement)
 
 if choices_dict["single_ellipse_data"] == True:
     single_ellipse_DOF_displacement = transformation_matrix(single_ellipse_HoQI_displacement[0, :], single_ellipse_HoQI_displacement[1, :], single_ellipse_HoQI_displacement[2, :], single_ellipse_HoQI_displacement[3, :], single_ellipse_HoQI_displacement[4, :], single_ellipse_HoQI_displacement[5, :])
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each DOF, in the order that these lists were constructed in is x, y, z, Rx, Ry, Rz. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/single_ellipse_DOF_displacement_data.npy', single_ellipse_DOF_displacement)
+    np.save('End_Product_Code/single_ellipse_DOF_displacement_data.npy', single_ellipse_DOF_displacement)
 
 if choices_dict["window_ellipse_data"] == True:
     windowed_ellipse_DOF_displacement = transformation_matrix(windowed_ellipse_HoQI_displacement[0, :], windowed_ellipse_HoQI_displacement[1, :], windowed_ellipse_HoQI_displacement[2, :], windowed_ellipse_HoQI_displacement[3, :], windowed_ellipse_HoQI_displacement[4, :], windowed_ellipse_HoQI_displacement[5, :])
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each DOF, in the order that these lists were constructed in is x, y, z, Rx, Ry, Rz. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
-    np.save('Endproduct_code/windowed_ellipse_DOF_displacement_data.npy', windowed_ellipse_DOF_displacement)
+    np.save('End_Product_Code/windowed_ellipse_DOF_displacement_data.npy', windowed_ellipse_DOF_displacement)
 
 ## Parameter timeseries per HoQI
 if choices_dict["ellipse_params_timeseries"] == True:
-    np.save('Endproduct_code/HoQI_1x_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[0, :], Q2_list[0, :], window_size=1000, step_size=100))
-    np.save('Endproduct_code/HoQI_2x_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[1, :], Q2_list[1, :], window_size=1000, step_size=100))
-    np.save('Endproduct_code/HoQI_3x_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[2, :], Q2_list[2, :], window_size=1000, step_size=100))
-    np.save('Endproduct_code/HoQI_1z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[3, :], Q2_list[3, :], window_size=1000, step_size=100))
-    np.save('Endproduct_code/HoQI_2z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[4, :], Q2_list[4, :], window_size=1000, step_size=100))
-    np.save('Endproduct_code/HoQI_3z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[5, :], Q2_list[5, :], window_size=1000, step_size=100))
+    np.save('End_Product_Code/HoQI_1x_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[0, :], Q2_list[0, :], window_size=1000, step_size=100))
+    np.save('End_Product_Code/HoQI_2x_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[1, :], Q2_list[1, :], window_size=1000, step_size=100))
+    np.save('End_Product_Code/HoQI_3x_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[2, :], Q2_list[2, :], window_size=1000, step_size=100))
+    np.save('End_Product_Code/HoQI_1z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[3, :], Q2_list[3, :], window_size=1000, step_size=100))
+    np.save('End_Product_Code/HoQI_2z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[4, :], Q2_list[4, :], window_size=1000, step_size=100))
+    np.save('End_Product_Code/HoQI_3z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[5, :], Q2_list[5, :], window_size=1000, step_size=100))

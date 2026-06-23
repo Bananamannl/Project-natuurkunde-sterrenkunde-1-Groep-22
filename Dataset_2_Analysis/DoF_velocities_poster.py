@@ -5,7 +5,7 @@ from matplotlib.ticker import MaxNLocator
 # =========================
 # Load saved plot data
 # =========================
-windowed_ellipse_DOF_displacement = np.load('Endproduct_code/windowed_ellipse_DOF_displacement_data.npy', allow_pickle=True)
+windowed_ellipse_DOF_displacement = np.load('End_Product_Code/windowed_ellipse_DOF_displacement_data.npy', allow_pickle=True)
 
 x  = windowed_ellipse_DOF_displacement[0]
 y  = windowed_ellipse_DOF_displacement[1]
@@ -93,7 +93,7 @@ plt.tight_layout()
 
 # Opgeslagen onder een nieuwe, logische naam: 'timeseries_windowed_dof_velocity.png'
 plt.savefig(
-    'Endproduct_code/timeseries_windowed_dof_velocity.png',
+    'End_Product_Code/timeseries_windowed_dof_velocity.png',
     dpi=300,
     bbox_inches="tight",
     transparent=True
