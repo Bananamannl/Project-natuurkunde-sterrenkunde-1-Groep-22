@@ -2,7 +2,7 @@ from manim import *
 
 def make_left_panel():
     panel_title = Text("HoQI measurements", font_size=34, weight=BOLD)
-    panel_subtitle = Text("(for 1 HoQI)", font_size=24, weight=BOLD)
+    panel_subtitle = Text("(for one HoQI)", font_size=24, weight=BOLD)
 
     panel_title.to_corner(UL).shift(RIGHT * 0.4 + DOWN * 0.3)
     panel_subtitle.next_to(panel_title, DOWN, buff=0.15)
