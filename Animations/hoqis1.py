@@ -288,7 +288,6 @@ class Hoqis1(ThreeDScene):
             run_time=1
         )
 
-        self.play(highlight_box.animate.set_stroke(opacity=0), run_time=0.2)
 
         self.play(
             Rotate(
