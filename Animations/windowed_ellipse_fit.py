@@ -22,11 +22,11 @@ class windowed_ellipse_fit(Scene):
         self.add(axes, x_label, y_label, circle)
 
         Q1 = np.load(
-            r"C:\Users\janne\OneDrive\Documenten\Studie Natuur- Sterrenkunde\Jaar 1\N&S_Project\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"
+            r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ1.npy"
         )
 
         Q2 = np.load(
-            r"C:\Users\janne\OneDrive\Documenten\Studie Natuur- Sterrenkunde\Jaar 1\N&S_Project\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy"
+            r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\1xQ2.npy"
         )
 
         # ==========================================================
@@ -106,7 +106,7 @@ class windowed_ellipse_fit(Scene):
             x0, y0, a, b, theta = ellipse_params[i]
 
             params_text = VGroup(
-                MathTex(r"Ellipse parameters:").scale(0.7),
+                Tex(r"Ellipse parameters:").scale(0.7),
                 MathTex(r"x_0 = " + f"{x0:.3f}").scale(0.5),
                 MathTex(r"y_0 = " + f"{y0:.3f}").scale(0.5),
                 MathTex(r"a = " + f"{a:.3f}").scale(0.5),
