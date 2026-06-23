@@ -2,8 +2,9 @@ import numpy as np
 import pyvista as pv
 
 # Settings:
-HoQI = ""
 
+HoQIs = np.load("Endproduct_Code/single_ellipse_HoQI_displacement_data.npy")
+parameters = np.load("Endproduct_Code/HoQI_1x_ellipse_parameter_timeseries.npy")
 # the transformation matrix for HoQI 1x
 matrix_1x = np.array([
     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0],
@@ -54,14 +55,26 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
         "3z": matrix_3z,
     }
 
+    step_sizes = {
+        "1x": 50,
+        "2x": 50,
+        "3x": 50,
+        "1z": 50,
+        "2z": 100,
+        "3z": 50,
+    }
+
     matrix = matrices[HoQI]
 
+    print(HoQIs.shape)
+    print(matrix.shape)
     # Calculating orthogonal movement 
-    orthogonal_movement = HoQIs @ matrix.T
+    orthogonal_movement = HoQIs.T @ matrix.T
 
     # Shortening the longer data
     N = min(len(orthogonal_movement), len(parameters))
     orthogonal_movement = orthogonal_movement[:N]
+    parameters = np.repeat(parameters, step_sizes[HoQI], axis=0)
     parameters = parameters[:N]
 
     # Defining the parameter names and scalars for each parameter
@@ -272,4 +285,4 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
 
     plotter.show()
 
-slider_plot_parameters()
+slider_plot_parameters("1x", HoQIs=HoQIs, parameters=parameters)
