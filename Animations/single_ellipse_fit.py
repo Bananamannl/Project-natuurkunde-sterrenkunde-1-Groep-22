@@ -139,7 +139,7 @@ class single_ellipse_fit(Scene):
         arctan_text = MathTex(
             r"\arctan\left(\frac{Q_1}{Q_2}\right)"
             r"="
-            r"\phi_{\mathrm{rel}}"
+            r"\phi_{\mathrm{opt}}"
         )
 
         all_formulas = VGroup(
