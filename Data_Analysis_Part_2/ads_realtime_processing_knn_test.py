@@ -1,8 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 from windowed_ellipse_fitting import Q1_Q2_Length, get_asd
 from orthogonal_matrices import *
 from knn_functions import *
+from functions import *
+
 Q1, Q2 = np.load("Data_Analysis_Part_1\\1xQ1.npy"), np.load("Data_Analysis_Part_1\\1xQ2.npy")
 HoQIs = np.load(r"Data_Analysis_Part_1\HoQI_fitted_six_vct_list.npy")
 orth_plane = HoQIs @ matrix_1x.T

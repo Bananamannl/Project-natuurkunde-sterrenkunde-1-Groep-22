@@ -231,7 +231,7 @@ for i, frequency in enumerate(f_raw[f_raw <= 100][peaks]):
         va='center',
         rotation=0)
 
-# we can do the exact same analysis for the raw data
+# we can do the exact same analysis for the pre-analysed data
 gwpy = get_asd(x_list_dataset, fs_set, segment_time_set); asd_x_raw, f_x_raw = gwpy.value, gwpy.frequencies.value
 gwpy = get_asd(y_list_dataset, fs_set, segment_time_set); asd_y_raw, f_y_raw = gwpy.value, gwpy.frequencies.value
 gwpy = get_asd(z_list_dataset, fs_set, segment_time_set); asd_z_raw, f_z_raw = gwpy.value, gwpy.frequencies.value
