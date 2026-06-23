@@ -111,7 +111,7 @@ class single_ellipse_fit(Scene):
         self.play(Transform(dots, transformed_dots), run_time=3)
         self.play(FadeOut(unit_ellipse, circle, ellipse))
         self.wait(2)
-        self.play(scene_group.animate.shift(LEFT * 6.1), text.animate.shift(LEFT * 6.1))
+        self.play(scene_group.animate.shift(LEFT * 7.5), text.animate.shift(LEFT * 7.5))
         self.play(FadeOut(text))
 
         Q_formulas = VGroup(
