@@ -2,9 +2,9 @@ import numpy as np
 import pyvista as pv
 
 # Settings:
-
-HoQIs = np.load("Endproduct_Code/single_ellipse_HoQI_displacement_data.npy")
-parameters = np.load("Endproduct_Code/HoQI_1x_ellipse_parameter_timeseries.npy")
+HoQI = "1x"
+HoQIs = np.load("End_Product_Code/single_ellipse_HoQI_displacement_data.npy")
+parameters = np.load("End_Product_Code/HoQI_1x_ellipse_parameter_timeseries.npy")
 # the transformation matrix for HoQI 1x
 matrix_1x = np.array([
     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0],
@@ -287,4 +287,4 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
 
     plotter.show()
 
-slider_plot_parameters("1x", HoQIs=HoQIs, parameters=parameters)
+slider_plot_parameters(HoQI, HoQIs=HoQIs, parameters=parameters)
