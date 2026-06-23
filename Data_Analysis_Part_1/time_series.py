@@ -13,7 +13,7 @@ data_20260421 = Data_Extract('Data_Analysis_Part_1/20260421_HoQIs.txt')
 ## We use the saved Q1 and Q2 lists to import the data
 unfitted_Q1_1x, unfitted_Q2_1x, unfitted_Q1_2x, unfitted_Q2_2x, unfitted_Q1_3x, unfitted_Q2_3x, unfitted_Q1_1z, unfitted_Q2_1z, unfitted_Q1_2z, unfitted_Q2_2z, unfitted_Q1_3z, unfitted_Q2_3z = np.load('Data_Analysis_Part_1/1xQ1.npy'), np.load('Data_Analysis_Part_1/1xQ2.npy'), np.load('Data_Analysis_Part_1/2xQ1.npy'), np.load('Data_Analysis_Part_1/2xQ2.npy'), np.load('Data_Analysis_Part_1/3xQ1.npy'), np.load('Data_Analysis_Part_1/3xQ2.npy'), np.load('Data_Analysis_Part_1/1zQ1.npy'), np.load('Data_Analysis_Part_1/1zQ2.npy'), np.load('Data_Analysis_Part_1/2zQ1.npy'), np.load('Data_Analysis_Part_1/2zQ2.npy'), np.load('Data_Analysis_Part_1/3zQ1.npy'), np.load('Data_Analysis_Part_1/3zQ2.npy')
 
-## We then use the ellips fitting to adjust this data
+## We then use the ellipse fitting to adjust this data
 fitted_Q1_1x, fitted_Q2_1x = transform(unfitted_Q1_1x, unfitted_Q2_1x)
 fitted_Q1_2x, fitted_Q2_2x = transform(unfitted_Q1_2x, unfitted_Q2_2x)
 fitted_Q1_3x, fitted_Q2_3x = transform(unfitted_Q1_3x, unfitted_Q2_3x) 
