@@ -7,9 +7,11 @@ from ellipse_parameters import *
 
 "This code takes two lists (Q1 and Q2) of a certain HoQI, both with three million elements."
 "The data is then split up into 300 chunks, which makes the chunk size equal to 10.000."
-"For each of these chunks, there are 9.901 windows (window size = 100), of which everyime the five ellipse parameters are being calculated."
-"After this real-time ellipse fitting, the code fits an rbf (an interpolating function) through the 9901 relevant data points."
+"For each of these chunks, there are 9.901 windows (window size = 100, step size = 1), of which everytime the five ellipse parameters are being calculated."
+"After this real-time ellipse fitting, the code fits an rbf (an interpolating function) through the 9.901 relevant data points."
+# NOT TRUE ANYMORE! CURRENT CODE FITS A LOCAL RBF THROUGH THE NEAREAST 100 DATA POINTS OF THE PREVIOUS CHUNK, FOR EACH INDIVIDUAL DATA POINT
 "This rbf is used to predict the ellipse parameters of the next chunk of data, after which the (Q1, Q2) points get transformed real-time."
+# NOT TRUE AS WELL! THE CODE NOW USES LOCAL RBF'S INSTEAD OF A GLOBAL ONE.
 "So, except for chunk 0, the (Q1, Q2) points of each chunk are transformed using the rbf of the previous chunk."
 
 # importing the HoQI data, and the Q1 and Q2 lists

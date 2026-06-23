@@ -12,8 +12,8 @@ from frequency_dependent_smoothing import *
 segment_time_set = 1000
 fs_set = 1000
 
-# Index 2 komt overeen met HoQI 3x (volgorde: 1x, 2x, 3x, 1z, 2z, 3z)
-hoqi_index = 2 
+# Index volgorde 1x, 2x, 3x, 1z, 2z, 3z (0, 1, 2, 3, 4, 5)
+hoqi_index = 0
 
 # =========================
 # Load saved data van Script 1
@@ -68,7 +68,7 @@ ax.patch.set_alpha(0)
 # De drie ASD lijnen log-log plotten
 ax.loglog(f_raw, asd_raw, color='red', linewidth=1.5, label='Non-fitted data')
 ax.loglog(f_single, asd_single, color='deepskyblue', linewidth=1.5, label='Single ellipse fitted data')
-ax.loglog(f_windowed, asd_windowed, color='limegreen', linewidth=1.5, label='Windowed ellipse fitted data')
+ax.loglog(f_windowed, asd_windowed, color='limegreen', linewidth=1.5, label='Windowed ellipse fitted data', alpha=0.5)
 
 # Hoogtepunten van de pieken toevoegen (Groen: "gv")
 f_peaks_100 = f_windowed_filtered[peaks]
@@ -96,7 +96,7 @@ ax.set_xlabel("Frequency (Hz)", color="white", fontsize=20, labelpad=10)
 
 # Echte exponent via mathtext, maar dankzij 'regular' in 100% hetzelfde lettertype als de rest
 ax.set_ylabel(r"Displacement ASD (µm Hz$^{-1/2}$)", color="white", fontsize=20, labelpad=10)
-ax.set_title("Smoothened ASD diagram for HoQI displacements (3x)", color="white", fontsize=31, fontweight="bold", pad=20, loc='center')
+ax.set_title("Smoothened ASD diagram for HoQI displacements (1x)", color="white", fontsize=31, fontweight="bold", pad=20, loc='center')
 ax.tick_params(axis="both", colors="white", labelsize=14, width=2, length=6, which='both')
 
 # Grenzen van de assen
@@ -120,7 +120,7 @@ plt.tight_layout()
 
 # Opslaan als transparante (high-resolution_) PNG
 plt.savefig(
-    'End_Product_Code/ASD_plot_HoQI_displacements.png',
+    'End_Product_Code/ASD_plot_HoQI_displacements_1x.png',
     dpi=300,
     bbox_inches="tight",
     transparent=True
