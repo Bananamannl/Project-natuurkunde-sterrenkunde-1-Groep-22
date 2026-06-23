@@ -42,7 +42,7 @@ class single_ellipse_fit(Scene):
         ellipse.set_points_smoothly(ellipse_points)
 
         params_text = VGroup(
-            MathTex(r"\text{Ellipse parameters:}").scale(1),
+            Tex(r"\text{Ellipse parameters:}").scale(1),
             MathTex(r"x_0 = -0.220").scale(0.6),
             MathTex(r"y_0 = -0.501").scale(0.6),
             MathTex(r"a = 2.902").scale(0.6),
@@ -139,7 +139,7 @@ class single_ellipse_fit(Scene):
         arctan_text = MathTex(
             r"\arctan\left(\frac{Q_1}{Q_2}\right)"
             r"="
-            r"\phi_{\mathrm{rel}}"
+            r"\phi_{\mathrm{opt}}"
         )
 
         all_formulas = VGroup(
