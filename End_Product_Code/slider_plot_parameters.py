@@ -3,8 +3,19 @@ import pyvista as pv
 
 # Settings:
 HoQI = "1x"
+
 HoQIs = np.load("End_Product_Code/single_ellipse_HoQI_displacement_data.npy")
-parameters = np.load("End_Product_Code/HoQI_1x_ellipse_parameter_timeseries.npy")
+
+parameter_files = {
+    "1x": "HoQI_1x_ellipse_parameter_timeseries.npy",
+    "2x": "HoQI_2x_ellipse_parameter_timeseries.npy",
+    "3x": "HoQI_3x_ellipse_parameter_timeseries.npy",
+    "1z": "HoQI_1z_ellipse_parameter_timeseries.npy",
+    "2z": "HoQI_2z_ellipse_parameter_timeseries.npy",
+    "3z": "HoQI_3z_ellipse_parameter_timeseries.npy",
+}
+
+parameters = np.load(f"End_Product_Code/{parameter_files[HoQI]}")
 # the transformation matrix for HoQI 1x
 matrix_1x = np.array([
     [0, -np.sqrt(1/3), np.sqrt(1/3), 0, 0, 0],
