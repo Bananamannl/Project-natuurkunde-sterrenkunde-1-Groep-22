@@ -71,10 +71,12 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
     # Calculating orthogonal movement 
     orthogonal_movement = HoQIs.T @ matrix.T
 
+
+    # Repeating parameters
+    parameters = np.repeat(parameters, step_sizes[HoQI], axis=0)
     # Shortening the longer data
     N = min(len(orthogonal_movement), len(parameters))
     orthogonal_movement = orthogonal_movement[:N]
-    parameters = np.repeat(parameters, step_sizes[HoQI], axis=0)
     parameters = parameters[:N]
 
     # Defining the parameter names and scalars for each parameter
@@ -155,7 +157,7 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
     cloud = pv.PolyData(data[0:window_size])
 
     # Color gradient in each window
-    time_colors = np.linspace(0, 1, window_size)
+    time_colors = np.linspace(0, 1, len(cloud.points))
     cloud["time"] = time_colors
 
     plotter.add_mesh(
