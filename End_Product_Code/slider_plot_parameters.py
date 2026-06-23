@@ -7,12 +7,12 @@ HoQI = "1x"
 HoQIs = np.load("End_Product_Code/single_ellipse_HoQI_displacement_data.npy")
 
 parameter_files = {
-    "1x": "HoQI_1x_ellipse_parameter_timeseries.npy",
-    "2x": "HoQI_2x_ellipse_parameter_timeseries.npy",
-    "3x": "HoQI_3x_ellipse_parameter_timeseries.npy",
-    "1z": "HoQI_1z_ellipse_parameter_timeseries.npy",
-    "2z": "HoQI_2z_ellipse_parameter_timeseries.npy",
-    "3z": "HoQI_3z_ellipse_parameter_timeseries.npy",
+    "1x": "HoQI_1x_ellipse_parameter_timeseries_stepsize_1.npy",
+    "2x": "HoQI_2x_ellipse_parameter_timeseries_stepsize_1.npy",
+    "3x": "HoQI_3x_ellipse_parameter_timeseries_stepsize_1.npy",
+    "1z": "HoQI_1z_ellipse_parameter_timeseries_stepsize_1.npy",
+    "2z": "HoQI_2z_ellipse_parameter_timeseries_stepsize_1.npy",
+    "3z": "HoQI_3z_ellipse_parameter_timeseries_stepsize_1.npy",
 }
 
 parameters = np.load(f"End_Product_Code/{parameter_files[HoQI]}")
