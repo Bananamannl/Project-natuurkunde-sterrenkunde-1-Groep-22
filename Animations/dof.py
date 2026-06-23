@@ -6,13 +6,13 @@ class dof(Scene):
         arctan_text = MathTex(
             r"\arctan\left(\frac{Q_1}{Q_2}\right)"
             r"="
-            r"\phi_{\mathrm{rel}}"
+            r"\phi_{\mathrm{opt}}"
         )
         arctan_text.move_to(UP * 1.5)
         self.add(arctan_text)
 
         displacements = MathTex(
-            r"d = \frac{\lambda\phi_{rel}}{4\pi}"
+            r"d = \frac{\lambda\phi_{opt}}{4\pi}"
         )
         self.wait(1)
         self.play(Write(displacements))
