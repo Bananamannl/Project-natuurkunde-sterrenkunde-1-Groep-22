@@ -14,7 +14,7 @@ Rx = windowed_ellipse_DOF_displacement[3]
 Ry = windowed_ellipse_DOF_displacement[4]
 Rz = windowed_ellipse_DOF_displacement[5]
 
-# Sampling frequency in Hz
+# Sample rate in Hz
 fs = 1000
 t = np.arange(len(x)) / fs
 
@@ -33,7 +33,7 @@ subplot_titles = ["X", "Y", "Z", "RX", "RY", "RZ"]
 colors = ["deepskyblue", "red", "gold", "orange", "limegreen", "violet"]
 
 # =========================
-# Plot settings (sharex=True is hier weggehaald)
+# Plot settings 
 # =========================
 fig, axes = plt.subplots(2, 3, figsize=(18, 9))
 axes = axes.flatten()
@@ -56,7 +56,6 @@ for i, (label, color, title) in enumerate(zip(dof_labels, colors, subplot_titles
     
     ax.set_ylabel(label, color="white", fontsize=20, labelpad=2)
     
-    # Dit zet nu verplicht op ELKE subplot de x-as label en zorgt dat de ticks zichtbaar zijn
     ax.set_xlabel("Time (ms)", color="white", fontsize=16)
     ax.tick_params(axis="both", colors="white", labelsize=12, width=2, length=6, labelbottom=True)
 

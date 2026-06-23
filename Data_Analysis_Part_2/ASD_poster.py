@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from gwpy.timeseries import TimeSeries
 from scipy.signal import find_peaks
 
-# Omdat deze functies in jouw omgeving staan, importeren we ze hier:
 from functions import *
 from frequency_dependent_smoothing import *
 
@@ -58,7 +57,6 @@ print("Prominences:", np.array2string(properties["prominences"], separator=", ")
 # =========================
 # Plot instellingen (Exacte Style Match)
 # =========================
-# Foutloze methode om mathtext (zoals exponenten) exact het reguliere lettertype te laten overnemen
 plt.rcParams['mathtext.default'] = 'regular'
 
 fig, ax = plt.subplots(figsize=(12, 8))
@@ -101,7 +99,7 @@ ax.set_ylabel(r"Displacement ASD (µm Hz$^{-1/2}$)", color="white", fontsize=20,
 ax.set_title("Smoothened ASD diagram for HoQI displacements (3x)", color="white", fontsize=31, fontweight="bold", pad=20, loc='center')
 ax.tick_params(axis="both", colors="white", labelsize=14, width=2, length=6, which='both')
 
-# Grenzen instellen conform jouw wens
+# Grenzen van de assen
 ax.set_xlim(1e-3, 5e2)
 ax.set_ylim(1e-7, 1e3)
 
@@ -110,7 +108,7 @@ for spine in ax.spines.values():
     spine.set_color("white")
     spine.set_linewidth(2.5)
 
-# Grid instellen (Doorgetrokken lijnen "-" met licht aangepaste alpha voor balans)
+# Grid instellen (Doorgetrokken lijnen "-" met aangepaste alpha
 ax.grid(color="white", alpha=0.25, which="both", linestyle="-")
 
 # Legenda stylen (fontsize=14, Transparante box, witte letters)
@@ -120,7 +118,7 @@ for text in legend.get_texts():
 
 plt.tight_layout()
 
-# Opslaan als transparante high-res PNG
+# Opslaan als transparante (high-resolution_) PNG
 plt.savefig(
     'End_Product_Code/ASD_plot_HoQI_displacements.png',
     dpi=300,
