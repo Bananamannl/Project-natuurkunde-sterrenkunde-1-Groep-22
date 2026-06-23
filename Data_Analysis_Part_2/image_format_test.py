@@ -69,7 +69,7 @@ for i, label in enumerate(labels):
     )
 
     # Witte labels, ticks, assen en grid
-    ax.set_ylabel(label, color="white", fontsize=24)
+    ax.set_ylabel(label, color="white", fontsize=26)
     ax.tick_params(axis="both", colors="white")
 
     for spine in ax.spines.values():
@@ -84,12 +84,14 @@ for i, label in enumerate(labels):
     if i == 0:
         ax.set_title(
             "Ellipse parameter predictions for static and active kNN model",
-            fontsize=34,
+            fontsize=36,
             fontweight="bold",
-            color="white"
+            color="white",
+            x=0.65,
+            pad=10
         )
 
-axes[-1].set_xlabel("Time (ms)", color="white", fontsize=24)
+axes[-1].set_xlabel("Time (ms)", color="white", fontsize=26)
 
 # Legenda wit maken
 lines, legend_labels = axes[0].get_legend_handles_labels()
@@ -109,7 +111,7 @@ for text in legend.get_texts():
 plt.tight_layout(rect=[0, 0, 0.88, 0.96])
 
 plt.savefig(
-    "replotted_image_format_test_transparent.png",
+    "replotted_image_format_test_transparent.svg",
     dpi=300,
     bbox_inches="tight",
     transparent=True

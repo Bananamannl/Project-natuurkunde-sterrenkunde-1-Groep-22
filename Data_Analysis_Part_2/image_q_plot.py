@@ -237,7 +237,7 @@ fig.suptitle(
 plt.tight_layout(rect=[0, 0, 1, 0.96])
 
 plt.savefig(
-    "Q1_Q2_subplot_grid_transparent.png",
+    "Q1_Q2_subplot_grid_transparent.svg",
     dpi=300,
     bbox_inches="tight",
     transparent=True
