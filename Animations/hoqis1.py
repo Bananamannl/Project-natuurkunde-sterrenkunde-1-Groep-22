@@ -175,17 +175,17 @@ class Hoqis1(ThreeDScene):
         self.add_fixed_in_frame_mobjects(left_panel)
         left_panel.set_opacity(0)
 
-        highlight_box = SurroundingRectangle(
+        focus_box = SurroundingRectangle(
             boxes_group,
-            color=YELLOW,
-            stroke_width=5,
             buff=0.15
         )
 
-        highlight_box.set_fill(opacity=0)          # geen gevulde rechthoek
-        highlight_box.set_stroke(YELLOW, width=5, opacity=0)  # begin onzichtbare rand
+        # De box zelf volledig onzichtbaar maken
+        focus_box.set_fill(opacity=0)
+        focus_box.set_stroke(opacity=0)
 
-        self.add_fixed_in_frame_mobjects(highlight_box)
+        self.add_fixed_in_frame_mobjects(focus_box)
+
 
         HoQI_title = Text("HoQI", font_size=34, weight=BOLD)
         HoQI_subtitle = Text("(Homodyne Quadrature Interferometer)", font_size=24, weight=BOLD)
@@ -264,7 +264,13 @@ class Hoqis1(ThreeDScene):
             v_groups[0].animate.set_opacity(0.4),
             v_groups[1].animate.set_opacity(0.75),
             v_groups[2].animate.set_opacity(0.3),
-            highlight_box.animate.set_stroke(opacity=1),
+            Circumscribe(
+                focus_box,
+                shape=Rectangle,
+                color=YELLOW,
+                stroke_width=6,
+                buff=0,
+            ),
             run_time=1
         )
 
