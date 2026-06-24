@@ -148,7 +148,7 @@ class intro_q(Scene):
                 r"\text{PD1}-\text{PD2}"
                 r"="
                 r"\frac{\sqrt{2}aP_{\text{in}}}{8}"
-                r"\sin\left(\phi-\frac{\pi}{4}\right),"
+                r"\sin\left(\phi-\frac{\pi}{4}\right)"
             ),
             MathTex(
                 r"Q_2"
@@ -156,7 +156,7 @@ class intro_q(Scene):
                 r"\text{PD1}-\text{PD3}"
                 r"="
                 r"\frac{\sqrt{2}aP_{\text{in}}}{8}"
-                r"\sin\left(\phi+\frac{\pi}{4}\right),"
+                r"\sin\left(\phi+\frac{\pi}{4}\right)"
             )
         )
 
