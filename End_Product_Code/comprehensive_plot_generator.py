@@ -598,7 +598,7 @@ if choices_dict["velocity_data"] == True:
 
         fig.suptitle("Time series of raw HoQI velocities")
         plt.tight_layout()
-        figure.savefig('End_Product_Code/Plot_files/raw_HoQI_velocity_timeseries.png')
+        fig.savefig('End_Product_Code/Plot_files/raw_HoQI_velocity_timeseries.png')
         plt.close()
 
         subplot_titles = ["x", "y", "z", "Rx", "Ry", "Rz"]
@@ -616,7 +616,7 @@ if choices_dict["velocity_data"] == True:
 
         fig.suptitle("Time series of raw DOF velocities")
         plt.tight_layout()
-        figure.savefig('End_Product_Code/Plot_files/raw_DOF_velocity_timeseries.png')
+        fig.savefig('End_Product_Code/Plot_files/raw_DOF_velocity_timeseries.png')
         plt.close()
     
     if choices_dict["single_ellipse_data"] == True:
@@ -635,7 +635,7 @@ if choices_dict["velocity_data"] == True:
 
         fig.suptitle("Time series of single_ellipse HoQI velocities")
         plt.tight_layout()
-        figure.savefig('End_Product_Code/Plot_files/single_ellipse_HoQI_velocity_timeseries.png')
+        fig.savefig('End_Product_Code/Plot_files/single_ellipse_HoQI_velocity_timeseries.png')
         plt.close()
 
         subplot_titles = ["x", "y", "z", "Rx", "Ry", "Rz"]
@@ -653,7 +653,7 @@ if choices_dict["velocity_data"] == True:
 
         fig.suptitle("Time series of single_ellipse DOF velocities")
         plt.tight_layout()
-        figure.savefig('End_Product_Code/Plot_files/single_ellipse_DOF_velocity_timeseries.png')
+        fig.savefig('End_Product_Code/Plot_files/single_ellipse_DOF_velocity_timeseries.png')
         plt.close()
     
     if choices_dict["window_ellipse_data"] == True:
@@ -672,7 +672,7 @@ if choices_dict["velocity_data"] == True:
 
         fig.suptitle("Time series of windowed_ellipse HoQI velocities")
         plt.tight_layout()
-        figure.savefig('End_Product_Code/Plot_files/windowed_ellipse_HoQI_velocity_timeseries.png')
+        fig.savefig('End_Product_Code/Plot_files/windowed_ellipse_HoQI_velocity_timeseries.png')
         plt.close()
 
         subplot_titles = ["x", "y", "z", "Rx", "Ry", "Rz"]
@@ -690,6 +690,6 @@ if choices_dict["velocity_data"] == True:
 
         fig.suptitle("Time series of windowed_ellipse DOF velocities")
         plt.tight_layout()
-        figure.savefig('End_Product_Code/Plot_files/windowed_ellipse_DOF_velocity_timeseries.png')
+        fig.savefig('End_Product_Code/Plot_files/windowed_ellipse_DOF_velocity_timeseries.png')
         plt.close()
     

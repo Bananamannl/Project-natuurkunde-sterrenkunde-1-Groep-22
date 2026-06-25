@@ -397,17 +397,17 @@ def transformation_matrix (ax, bx, cx, az, bz, cz):
     return x, y, z, Rx, Ry, Rz
 
 if choices_dict["raw_data"] == True:
-    raw_DOF_displacement = transformation_matrix(raw_HoQI_displacement[0, :], raw_HoQI_displacement[1, :], raw_HoQI_displacement[2, :], raw_HoQI_displacement[3, :], raw_HoQI_displacement[4, :], raw_HoQI_displacement[5, :])
+    raw_DOF_displacement = np.array(transformation_matrix(raw_HoQI_displacement[0, :], raw_HoQI_displacement[1, :], raw_HoQI_displacement[2, :], raw_HoQI_displacement[3, :], raw_HoQI_displacement[4, :], raw_HoQI_displacement[5, :]))
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each DOF, in the order that these lists were constructed in is x, y, z, Rx, Ry, Rz. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
     np.save('End_Product_Code/raw_DOF_displacement_data.npy', raw_DOF_displacement)
 
 if choices_dict["single_ellipse_data"] == True:
-    single_ellipse_DOF_displacement = transformation_matrix(single_ellipse_HoQI_displacement[0, :], single_ellipse_HoQI_displacement[1, :], single_ellipse_HoQI_displacement[2, :], single_ellipse_HoQI_displacement[3, :], single_ellipse_HoQI_displacement[4, :], single_ellipse_HoQI_displacement[5, :])
+    single_ellipse_DOF_displacement = np.array(transformation_matrix(single_ellipse_HoQI_displacement[0, :], single_ellipse_HoQI_displacement[1, :], single_ellipse_HoQI_displacement[2, :], single_ellipse_HoQI_displacement[3, :], single_ellipse_HoQI_displacement[4, :], single_ellipse_HoQI_displacement[5, :]))
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each DOF, in the order that these lists were constructed in is x, y, z, Rx, Ry, Rz. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
     np.save('End_Product_Code/single_ellipse_DOF_displacement_data.npy', single_ellipse_DOF_displacement)
 
 if choices_dict["window_ellipse_data"] == True:
-    windowed_ellipse_DOF_displacement = transformation_matrix(windowed_ellipse_HoQI_displacement[0, :], windowed_ellipse_HoQI_displacement[1, :], windowed_ellipse_HoQI_displacement[2, :], windowed_ellipse_HoQI_displacement[3, :], windowed_ellipse_HoQI_displacement[4, :], windowed_ellipse_HoQI_displacement[5, :])
+    windowed_ellipse_DOF_displacement = np.array(transformation_matrix(windowed_ellipse_HoQI_displacement[0, :], windowed_ellipse_HoQI_displacement[1, :], windowed_ellipse_HoQI_displacement[2, :], windowed_ellipse_HoQI_displacement[3, :], windowed_ellipse_HoQI_displacement[4, :], windowed_ellipse_HoQI_displacement[5, :]))
     # This will save a 6xlen(Q1) np.array of all the relevant displacement values for each DOF, in the order that these lists were constructed in is x, y, z, Rx, Ry, Rz. Each row of the np.array will thus be a specific HoQI, wheras each colum is a specific point in time
     np.save('End_Product_Code/windowed_ellipse_DOF_displacement_data.npy', windowed_ellipse_DOF_displacement)
 
@@ -482,7 +482,7 @@ if choices_dict["velocity_data"] == True:
 
         np.save('End_Product_Code/single_ellipse_DOF_velocity_data.npy', single_ellipse_DOF_vel_data)
     
-    if choices_dict["windowed_ellipse_data"] == True:
+    if choices_dict["window_ellipse_data"] == True:
         # HoQI velocities
         windowed_ellipse_vel_1x = np.diff(windowed_ellipse_HoQI_displacement[0, :]) * fs
         windowed_ellipse_vel_2x = np.diff(windowed_ellipse_HoQI_displacement[1, :]) * fs
