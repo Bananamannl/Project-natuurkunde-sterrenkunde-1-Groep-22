@@ -13,9 +13,13 @@ Ellipse-parameter order:
 [x0, y0, a, b, theta]
 
 Note, you might need to first make the right parameter timeseries. The code for this will be at the start of this file.
+<<<<<<< Updated upstream
 Make sure to set LOAD_PARAMETERS_TIMESERIES to True when running this file for the first tima and set it to
 False after the correct files are saved. Alse make sure to load them again (set to True) when you want to change the length,
 
+=======
+Make sure to uncomment this when this when the np.array's are saved correctly.
+>>>>>>> Stashed changes
 
 """
 
@@ -33,7 +37,11 @@ from scipy.optimize import least_squares
 # ============================================================
 # Settings
 # ============================================================
+<<<<<<< Updated upstream
 LOAD_PARAMETERS_TIMESERIES = True # Set to true for the first run and set to false if the files are already exported
+=======
+LOAD_PARAMETERS_TIMESERIES = True # Set to true for the first run]
+>>>>>>> Stashed changes
 
 # Choose which HoQI to analyse: "1x", "2x", "3x", "1z", "2z", or "3z".
 SELECTED_HOQI = "3z"
@@ -61,7 +69,11 @@ BASE_DIR = Path(
     r"\Project-natuurkunde-sterrenkunde-1-Groep-22"
 )
 
+<<<<<<< Updated upstream
 HOQI_FILE = BASE_DIR / "End_Product_Code" / "single_ellipse_HoQI_displacement_data.npy"
+=======
+HOQI_FILE = BASE_DIR / "Data_Analysis_Part_1" / "fitted_six_vct_list.npy"
+>>>>>>> Stashed changes
 PARAMETER_FILE = BASE_DIR / "End_Product_Code" / (
     f"HoQI_{SELECTED_HOQI}_ellipse_parameter_timeseries_stepsize_{PARAMETER_STEP_SIZE}.npy"
 )
@@ -301,7 +313,11 @@ def load_and_align_data(center_shift: int) -> tuple[np.ndarray, np.ndarray]:
     x_start = START + center_shift
     x_end = x_start + len(y)
 
+<<<<<<< Updated upstream
     X = hoqis[x_start:x_end].T @ matrix.T
+=======
+    X = hoqis[x_start:x_end] @ matrix.T
+>>>>>>> Stashed changes
 
     n_samples = min(len(X), len(y))
     X = X[:n_samples]
