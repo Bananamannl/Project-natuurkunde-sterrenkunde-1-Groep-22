@@ -110,7 +110,8 @@ def test_center_shifts():
 
 def load_and_align_data(center_shift):
     HoQIs = np.load(r"C:\Users\timob\OneDrive - UvA\Project 1\GitHub Map\Project-natuurkunde-sterrenkunde-1-Groep-22\Data_Analysis_Part_1\fitted_six_vct_list.npy")
-    parameters = np.load(r"Data_Analysis_Part_2\parameters_for_knn_test.npy")
+    parameters = np.load(r"param_timeseries_3z_step_size_10_window_size_500.npy")
+    parameters = np.repeat(parameters, 10, axis=0)
 
     parameters = parameters[:length]
 
@@ -118,7 +119,7 @@ def load_and_align_data(center_shift):
 
     X = HoQIs[
         start + center_shift : start + center_shift + len(y)
-    ] @ matrix_1x.T
+    ] @ matrix_3z.T
 
     N = min(len(X), len(y))
     X = X[:N]
@@ -382,13 +383,9 @@ def print_final_summary(results, best_k, best_weights, best_p, passive_train_siz
     passive_rmse_per_param = results["passive_rmse_per_param"]
     active_rmse_per_param = results["active_rmse_per_param"]
 
-    passive_mean = np.mean(passive_rmses)
-    active_mean = np.mean(active_rmses)
-    baseline_mean = np.mean(baseline_rmses)
-
-    passive_std = np.std(passive_rmses)
-    active_std = np.std(active_rmses)
-    baseline_std = np.std(baseline_rmses)
+    passive_mean, passive_std = np.mean(passive_rmses), np.std(passive_rmses)
+    active_mean, active_std = np.mean(active_rmses), np.std(active_rmses)
+    baseline_mean, baseline_std = np.mean(baseline_rmses), np.std(baseline_rmses)
 
     passive_improvement = 100 * (1 - passive_mean / baseline_mean)
     active_improvement = 100 * (1 - active_mean / baseline_mean)
@@ -396,43 +393,40 @@ def print_final_summary(results, best_k, best_weights, best_p, passive_train_siz
     active_vs_passive = 100 * (1 - active_mean / passive_mean)
     active_better_blocks = 100 * np.mean(active_rmses < passive_rmses)
 
-    print("\n================ POSTER RESULTS ================")
+    print("\n================ SUMMARY ================")
 
-    print("Chosen kNN parameters:")
-    print(f"k = {best_k}, weights = {best_weights}, p = {best_p}")
+    print(
+        f"kNN: k={best_k}, weights={best_weights}, p={best_p} | "
+        f"blocks={len(passive_rmses)}, block_size={block_size}"
+    )
 
-    print("\nChosen training sizes:")
-    print(f"Passive/static train size = {passive_train_size}")
-    print(f"Active/local train size   = {active_train_size}")
+    print(
+        f"Training: passive={passive_train_size}, "
+        f"active/local={active_train_size}, gap={gap}"
+    )
 
-    print("\nAverage RMSE over test blocks:")
-    print(f"Baseline RMSE:        {baseline_mean:.5f} ± {baseline_std:.5f}")
-    print(f"Passive/static RMSE:  {passive_mean:.5f} ± {passive_std:.5f}")
-    print(f"Active/local RMSE:    {active_mean:.5f} ± {active_std:.5f}")
-
-    print("\nImprovement compared to baseline:")
-    print(f"Passive/static model: {passive_improvement:.1f}% lower RMSE")
-    print(f"Active/local model:   {active_improvement:.1f}% lower RMSE")
+    print("\nRMSE over test blocks:")
+    print(f"Baseline : {baseline_mean:.5f} ± {baseline_std:.5f}")
+    print(f"Passive  : {passive_mean:.5f} ± {passive_std:.5f}  ({passive_improvement:.1f}% lower than baseline)")
+    print(f"Active   : {active_mean:.5f} ± {active_std:.5f}  ({active_improvement:.1f}% lower than baseline)")
 
     print("\nActive vs passive:")
-    print(f"Active model has {active_vs_passive:.1f}% lower RMSE than passive model")
-    print(f"Active model is better in {active_better_blocks:.1f}% of test blocks")
+    print(f"RMSE difference: {active_vs_passive:.1f}%")
+    print(f"Active better in {active_better_blocks:.1f}% of test blocks")
 
-    print("\nRMSE per ellipse parameter:")
-    print("parameter | passive RMSE | active RMSE | active improvement")
+    print("\nPer parameter RMSE, passive -> active:")
     for i, label in enumerate(labels):
         passive_param = np.mean(passive_rmse_per_param[:, i])
         active_param = np.mean(active_rmse_per_param[:, i])
         improvement = 100 * (1 - active_param / passive_param)
 
         print(
-            f"{label:8s} | "
-            f"{passive_param:.5f}      | "
-            f"{active_param:.5f}    | "
-            f"{improvement:6.1f}%"
+            f"{label:5s}: "
+            f"{passive_param:.5f} -> {active_param:.5f} "
+            f"({improvement:+.1f}%)"
         )
 
-    print("================================================")
+    print("=========================================\n")
 
 
 def plot_poster_figure(X, y, center_shift, results, passive_train_size):
@@ -458,8 +452,8 @@ def plot_poster_figure(X, y, center_shift, results, passive_train_size):
         "passive_train_size": passive_train_size,
     }
 
-    np.save("image_format_test.npy", image_format_data)
-    print("\nSaved plot data as: image_format_test.npy")
+    # np.save("knn_plot_3x.npy", image_format_data)
+    # print("\nSaved plot data as: knn_plot_3x.npy")
 
     for i, label in enumerate(labels):
         ax = axes[i]
@@ -564,11 +558,6 @@ best_active_train_size = test_active_train_sizes(
     common_test_start
 )
 
-print("\n================ FINAL SETTINGS ================")
-print(f"Passive/static train size = {best_passive_train_size}")
-print(f"Active/local train size   = {best_active_train_size}")
-print(f"First test index          = {common_test_start}")
-print("================================================")
 
 final_results = evaluate_final_models(
     X,
