@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import least_squares
 
-## User Input: This will allow the user to select which outputs they want the program to have, and specifically select between different types of outputs (This might eventually be replaced with an actual GUI if I have time)
+## User Input: This will allow the user to select which outputs they want the program to have, and specifically select between different types of outputs 
 valid_input = True
 print("You can decide what types of data the program outputs into .npy files with the inputs below, afterwards it will run and output the ones you've selected into .npy quickaccess files. Please only answer with y for yes and n for no.")
 while valid_input == True:
@@ -69,7 +69,7 @@ if all_data == "n":
             print("Wrong input, please only input y for yes or n for no")
     if input_var == "n": choices_dict["velocity_data"] = False
 
-## Extracting the data from the raw data file and adding it to the HoQI_data dictionary 
+## Extracting the data from the raw data file and adding it to the HoQI_data dictionary. This can take any HoQI datafile, as long as the column names are consistent with the ones in the code.
 name = input("Please copy and paste the relative file path to the data file into this input line: ")
 with open(name, 'r') as file:
         column_line = file.readline()
@@ -172,7 +172,7 @@ if choices_dict["single_ellipse_data"] == True:
         np.save('End_Product_Code/single_ellipse_Q1_data.npy', single_ellipse_Q1)
         np.save('End_Product_Code/single_ellipse_Q2_data.npy', single_ellipse_Q2)
 
-## Windowed ellipse fitting
+## Windowed ellipse fitting: This takes windows of the Q1 and Q2 data, and fits an ellipse onto those windows, then transforms the points onto a circle using the parameters of these ellipses
 def residuals(params, x, y):
     x0, y0, a, b, theta = params
     xp = (x - x0) * np.cos(theta) + (y - y0) * np.sin(theta)
@@ -230,7 +230,7 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
         while True:
             end = start + current_window_size
             if end > len(x):
-                print(f"Geen grotere window meer mogelijk bij start={start}")
+                print(f"No bigger window possible at start={start}")
                 break
             part_Q1 = x[start:end]
             part_Q2 = y[start:end]
@@ -246,7 +246,7 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
 
             vector = np.ravel(vector)
 
-            # Eerste fit altijd accepteren
+            # Allways accept first fit
             if len(vectoren) > 0:
                 delta = np.array([0.2, 0.2, 0.5, 0.5])  # zonder theta
 
@@ -259,7 +259,7 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
                 if np.any(vector[:4] < lower_bounds) or np.any(vector[:4] > upper_bounds):
                     current_window_size += 50
                     print(
-                        f"Fit buiten toegestane sprong bij start={start}, probeer opnieuw met "
+                        f"Fit outside allowed jump at start={start}, trying again with "
                         f"window_size={current_window_size}"
                     )
                     continue
@@ -292,7 +292,7 @@ def parameters(x, y, start_parameters=None):
         a, b = b, a
         theta += np.pi / 2
     if a > 10:
-        raise ValueError("a > 10, kies een groter window_size")
+        raise ValueError("a > 10, chose a larger window_size")
     vector = np.column_stack((x0, y0, a, b, theta))
     start_parameters = [x0, y0, a, b, theta]
     return vector, start_parameters
