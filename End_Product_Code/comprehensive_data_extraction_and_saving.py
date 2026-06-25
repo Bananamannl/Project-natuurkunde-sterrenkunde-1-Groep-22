@@ -13,7 +13,7 @@ while valid_input == True:
     else:
         print("Wrong input, please only input y for yes or n for no")
 
-choices_dict = {"Q1_Q2_data": True, "raw_data": True, "single_ellipse_data": True, "window_ellipse_data": True, "ellipse_params_timeseries": True,}
+choices_dict = {"Q1_Q2_data": True, "raw_data": True, "single_ellipse_data": True, "window_ellipse_data": True, "ellipse_params_timeseries": True, "velocity_data": True}
 if all_data == "n":
     valid_input = True
     while valid_input == True:
@@ -59,6 +59,15 @@ if all_data == "n":
         else:
             print("Wrong input, please only input y for yes or n for no")
     if input_var == "n": choices_dict["ellipse_params_timeseries"] = False
+
+    valid_input = True
+    while valid_input == True:
+        input_var = input("Do you want the program to output the velocity data as .npy files? Input y for yes and n for no besides here: ").lower()
+        if input_var == "y" or input_var == "n": 
+            valid_input = False
+        else:
+            print("Wrong input, please only input y for yes or n for no")
+    if input_var == "n": choices_dict["velocity_data"] = False
 
 ## Extracting the data from the raw data file and adding it to the HoQI_data dictionary 
 name = input("Please copy and paste the relative file path to the data file into this input line: ")
@@ -410,3 +419,94 @@ if choices_dict["ellipse_params_timeseries"] == True:
     np.save('End_Product_Code/HoQI_1z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[3, :], Q2_list[3, :], window_size=1000, step_size=100))
     np.save('End_Product_Code/HoQI_2z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[4, :], Q2_list[4, :], window_size=1000, step_size=100))
     np.save('End_Product_Code/HoQI_3z_ellipse_parameter_timeseries.npy', parameters_timeseries(Q1_list[5, :], Q2_list[5, :], window_size=1000, step_size=100))
+
+## Velocity timeseries
+fs = 1000
+
+if choices_dict["velocity_data"] == True:
+    if choices_dict["raw_data"] == True:
+        # HoQI velocities
+        raw_vel_1x = np.diff(raw_HoQI_displacement[0, :]) * fs
+        raw_vel_2x = np.diff(raw_HoQI_displacement[1, :]) * fs
+        raw_vel_3x = np.diff(raw_HoQI_displacement[2, :]) * fs
+        raw_vel_1z = np.diff(raw_HoQI_displacement[3, :]) * fs
+        raw_vel_2z = np.diff(raw_HoQI_displacement[4, :]) * fs
+        raw_vel_3z = np.diff(raw_HoQI_displacement[5, :]) * fs
+
+        raw_t_vel = np.arange(len(raw_vel_1x)) / fs
+
+        raw_HoQI_vel_data = np.array([raw_vel_1x, raw_vel_2x, raw_vel_3x, raw_vel_1z, raw_vel_2z, raw_vel_3z])
+
+        np.save('End_Product_Code/raw_HoQI_velocity_data.npy', raw_HoQI_vel_data)
+
+        # DOF velocities
+        raw_vel_x = np.diff(raw_DOF_displacement[0, :]) * fs
+        raw_vel_y = np.diff(raw_DOF_displacement[1, :]) * fs
+        raw_vel_z = np.diff(raw_DOF_displacement[2, :]) * fs
+        raw_vel_Rx = np.diff(raw_DOF_displacement[3, :]) * fs
+        raw_vel_Ry = np.diff(raw_DOF_displacement[4, :]) * fs
+        raw_vel_Rz = np.diff(raw_DOF_displacement[5, :]) * fs
+
+        raw_t_vel = np.arange(len(raw_vel_x)) / fs
+
+        raw_DOF_vel_data = np.array([raw_vel_x, raw_vel_y, raw_vel_z, raw_vel_Rx, raw_vel_Ry, raw_vel_Rz])
+
+        np.save('End_Product_Code/raw_DOF_velocity_data.npy', raw_DOF_vel_data)
+    
+    if choices_dict["single_ellipse_data"] == True:
+        # HoQI velocities
+        single_ellipse_vel_1x = np.diff(single_ellipse_HoQI_displacement[0, :]) * fs
+        single_ellipse_vel_2x = np.diff(single_ellipse_HoQI_displacement[1, :]) * fs
+        single_ellipse_vel_3x = np.diff(single_ellipse_HoQI_displacement[2, :]) * fs
+        single_ellipse_vel_1z = np.diff(single_ellipse_HoQI_displacement[3, :]) * fs
+        single_ellipse_vel_2z = np.diff(single_ellipse_HoQI_displacement[4, :]) * fs
+        single_ellipse_vel_3z = np.diff(single_ellipse_HoQI_displacement[5, :]) * fs
+
+        single_ellipse_t_vel = np.arange(len(single_ellipse_vel_1x)) / fs
+
+        single_ellipse_HoQI_vel_data = np.array([single_ellipse_vel_1x, single_ellipse_vel_2x, single_ellipse_vel_3x, single_ellipse_vel_1z, single_ellipse_vel_2z, single_ellipse_vel_3z])
+
+        np.save('End_Product_Code/single_ellipse_HoQI_velocity_data.npy', single_ellipse_HoQI_vel_data)
+
+        # DOF velocities
+        single_ellipse_vel_x = np.diff(single_ellipse_DOF_displacement[0, :]) * fs
+        single_ellipse_vel_y = np.diff(single_ellipse_DOF_displacement[1, :]) * fs
+        single_ellipse_vel_z = np.diff(single_ellipse_DOF_displacement[2, :]) * fs
+        single_ellipse_vel_Rx = np.diff(single_ellipse_DOF_displacement[3, :]) * fs
+        single_ellipse_vel_Ry = np.diff(single_ellipse_DOF_displacement[4, :]) * fs
+        single_ellipse_vel_Rz = np.diff(single_ellipse_DOF_displacement[5, :]) * fs
+
+        single_ellipse_t_vel = np.arange(len(single_ellipse_vel_x)) / fs
+
+        single_ellipse_DOF_vel_data = np.array([single_ellipse_vel_x, single_ellipse_vel_y, single_ellipse_vel_z, single_ellipse_vel_Rx, single_ellipse_vel_Ry, single_ellipse_vel_Rz])
+
+        np.save('End_Product_Code/single_ellipse_DOF_velocity_data.npy', single_ellipse_DOF_vel_data)
+    
+    if choices_dict["windowed_ellipse_data"] == True:
+        # HoQI velocities
+        windowed_ellipse_vel_1x = np.diff(windowed_ellipse_HoQI_displacement[0, :]) * fs
+        windowed_ellipse_vel_2x = np.diff(windowed_ellipse_HoQI_displacement[1, :]) * fs
+        windowed_ellipse_vel_3x = np.diff(windowed_ellipse_HoQI_displacement[2, :]) * fs
+        windowed_ellipse_vel_1z = np.diff(windowed_ellipse_HoQI_displacement[3, :]) * fs
+        windowed_ellipse_vel_2z = np.diff(windowed_ellipse_HoQI_displacement[4, :]) * fs
+        windowed_ellipse_vel_3z = np.diff(windowed_ellipse_HoQI_displacement[5, :]) * fs
+
+        windowed_ellipse_t_vel = np.arange(len(windowed_ellipse_vel_1x)) / fs
+
+        windowed_ellipse_HoQI_vel_data = np.array([windowed_ellipse_vel_1x, windowed_ellipse_vel_2x, windowed_ellipse_vel_3x, windowed_ellipse_vel_1z, windowed_ellipse_vel_2z, windowed_ellipse_vel_3z])
+
+        np.save('End_Product_Code/windowed_ellipse_HoQI_velocity_data.npy', windowed_ellipse_HoQI_vel_data)
+
+        # DOF velocities
+        windowed_ellipse_vel_x = np.diff(windowed_ellipse_DOF_displacement[0, :]) * fs
+        windowed_ellipse_vel_y = np.diff(windowed_ellipse_DOF_displacement[1, :]) * fs
+        windowed_ellipse_vel_z = np.diff(windowed_ellipse_DOF_displacement[2, :]) * fs
+        windowed_ellipse_vel_Rx = np.diff(windowed_ellipse_DOF_displacement[3, :]) * fs
+        windowed_ellipse_vel_Ry = np.diff(windowed_ellipse_DOF_displacement[4, :]) * fs
+        windowed_ellipse_vel_Rz = np.diff(windowed_ellipse_DOF_displacement[5, :]) * fs
+
+        windowed_ellipse_t_vel = np.arange(len(windowed_ellipse_vel_x)) / fs
+
+        windowed_ellipse_DOF_vel_data = np.array([windowed_ellipse_vel_x, windowed_ellipse_vel_y, windowed_ellipse_vel_z, windowed_ellipse_vel_Rx, windowed_ellipse_vel_Ry, windowed_ellipse_vel_Rz])
+
+        np.save('End_Product_Code/windowed_ellipse_DOF_velocity_data.npy', windowed_ellipse_DOF_vel_data)

@@ -14,7 +14,7 @@ while valid_input == True:
     else:
         print("Wrong input, please only input y for yes or n for no")
 
-choices_dict = {"Q1_Q2_plots": True, "Timeseries_plots": True, "ASD_plots": True, "raw_data": True, "single_ellipse_data": True, "window_ellipse_data": True, "ellipse_params_timeseries": True,}
+choices_dict = {"Q1_Q2_plots": True, "Timeseries_plots": True, "ASD_plots": True, "raw_data": True, "single_ellipse_data": True, "window_ellipse_data": True, "ellipse_params_timeseries": True, "velocity_data": True}
 if all_data == "n":
     valid_input = True
     while valid_input == True:
@@ -78,6 +78,15 @@ if all_data == "n":
         else:
             print("Wrong input, please only input y for yes or n for no")
     if input_var == "n": choices_dict["ellipse_params_timeseries"] = False
+
+    valid_input = True
+    while valid_input == True:
+        input_var = input("Do you want the program to output the velocity data plots? Input y for yes and n for no besides here: ").lower()
+        if input_var == "y" or input_var == "n": 
+            valid_input = False
+        else:
+            print("Wrong input, please only input y for yes or n for no")
+    if input_var == "n": choices_dict["velocity_data"] = False
 
 ## Import relevant data
 if choices_dict["raw_data"] == True:
@@ -560,3 +569,127 @@ if choices_dict["ellipse_params_timeseries"] == True:
         figure.set_figwidth(16)
         figure.savefig( f'End_Product_Code/Plot_files/parameter_timeseries_HoQI_{HoQI_names[h]}.png' )
         plt.close()
+    
+## Velocity Data plots
+if choices_dict["velocity_data"] == True:
+    if choices_dict["raw_data"] == True:
+        raw_HoQI_velocity = np.load('End_Product_Code/raw_HoQI_velocity_data.npy')
+        raw_DOF_velocity = np.load('End_Product_Code/raw_DOF_velocity_data.npy')
+    if choices_dict["single_ellipse_data"] == True:
+        single_ellipse_HoQI_velocity = np.load('End_Product_Code/single_ellipse_HoQI_velocity_data.npy')
+        single_ellipse_DOF_velocity = np.load('End_Product_Code/single_ellipse_DOF_velocity_data.npy')
+    if choices_dict["window_ellipse_data"] == True:
+        windowed_ellipse_HoQI_velocity = np.load('End_Product_Code/windowed_ellipse_HoQI_velocity_data.npy')
+        windowed_ellipse_DOF_velocity = np.load('End_Product_Code/windowed_ellipse_DOF_velocity_data.npy')
+
+    if choices_dict["raw_data"] == True:
+        subplot_titles = ["1x", "2x", "3x", "1z", "2z", "3z"]
+
+        fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+        axes = axes.flatten()
+
+        time = np.array(range(0, len(raw_HoQI_velocity[0, :])))
+
+        for i, title in enumerate(subplot_titles):
+            axes[i].plot(time, raw_HoQI_velocity[i, :])
+            axes[i].set_title(title)
+            axes[i].set_xlabel("Time (s)")
+            axes[i].set_ylabel(r"Velocity ($\mu$m/s)")
+
+        fig.suptitle("Time series of raw HoQI velocities")
+        plt.tight_layout()
+        figure.savefig('End_Product_Code/Plot_files/raw_HoQI_velocity_timeseries.png')
+        plt.close()
+
+        subplot_titles = ["x", "y", "z", "Rx", "Ry", "Rz"]
+
+        fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+        axes = axes.flatten()
+
+        time = np.array(range(0, len(raw_DOF_velocity[0, :])))
+
+        for i, title in enumerate(subplot_titles):
+            axes[i].plot(time, raw_DOF_velocity[i, :])
+            axes[i].set_title(title)
+            axes[i].set_xlabel("Time (s)")
+            axes[i].set_ylabel(r"Velocity ($\mu$m/s)")
+
+        fig.suptitle("Time series of raw DOF velocities")
+        plt.tight_layout()
+        figure.savefig('End_Product_Code/Plot_files/raw_DOF_velocity_timeseries.png')
+        plt.close()
+    
+    if choices_dict["single_ellipse_data"] == True:
+        subplot_titles = ["1x", "2x", "3x", "1z", "2z", "3z"]
+
+        fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+        axes = axes.flatten()
+
+        time = np.array(range(0, len(single_ellipse_HoQI_velocity[0, :])))
+
+        for i, title in enumerate(subplot_titles):
+            axes[i].plot(time, single_ellipse_HoQI_velocity[i, :])
+            axes[i].set_title(title)
+            axes[i].set_xlabel("Time (s)")
+            axes[i].set_ylabel(r"Velocity ($\mu$m/s)")
+
+        fig.suptitle("Time series of single_ellipse HoQI velocities")
+        plt.tight_layout()
+        figure.savefig('End_Product_Code/Plot_files/single_ellipse_HoQI_velocity_timeseries.png')
+        plt.close()
+
+        subplot_titles = ["x", "y", "z", "Rx", "Ry", "Rz"]
+
+        fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+        axes = axes.flatten()
+
+        time = np.array(range(0, len(single_ellipse_DOF_velocity[0, :])))
+
+        for i, title in enumerate(subplot_titles):
+            axes[i].plot(time, single_ellipse_DOF_velocity[i, :])
+            axes[i].set_title(title)
+            axes[i].set_xlabel("Time (s)")
+            axes[i].set_ylabel(r"Velocity ($\mu$m/s)")
+
+        fig.suptitle("Time series of single_ellipse DOF velocities")
+        plt.tight_layout()
+        figure.savefig('End_Product_Code/Plot_files/single_ellipse_DOF_velocity_timeseries.png')
+        plt.close()
+    
+    if choices_dict["window_ellipse_data"] == True:
+        subplot_titles = ["1x", "2x", "3x", "1z", "2z", "3z"]
+
+        fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+        axes = axes.flatten()
+
+        time = np.array(range(0, len(windowed_ellipse_HoQI_velocity[0, :])))
+
+        for i, title in enumerate(subplot_titles):
+            axes[i].plot(time, windowed_ellipse_HoQI_velocity[i, :])
+            axes[i].set_title(title)
+            axes[i].set_xlabel("Time (s)")
+            axes[i].set_ylabel(r"Velocity ($\mu$m/s)")
+
+        fig.suptitle("Time series of windowed_ellipse HoQI velocities")
+        plt.tight_layout()
+        figure.savefig('End_Product_Code/Plot_files/windowed_ellipse_HoQI_velocity_timeseries.png')
+        plt.close()
+
+        subplot_titles = ["x", "y", "z", "Rx", "Ry", "Rz"]
+
+        fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+        axes = axes.flatten()
+
+        time = np.array(range(0, len(windowed_ellipse_DOF_velocity[0, :])))
+
+        for i, title in enumerate(subplot_titles):
+            axes[i].plot(time, windowed_ellipse_DOF_velocity[i, :])
+            axes[i].set_title(title)
+            axes[i].set_xlabel("Time (s)")
+            axes[i].set_ylabel(r"Velocity ($\mu$m/s)")
+
+        fig.suptitle("Time series of windowed_ellipse DOF velocities")
+        plt.tight_layout()
+        figure.savefig('End_Product_Code/Plot_files/windowed_ellipse_DOF_velocity_timeseries.png')
+        plt.close()
+    

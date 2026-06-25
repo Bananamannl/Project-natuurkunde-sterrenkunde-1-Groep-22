@@ -102,12 +102,12 @@ def parameters_timeseries(x, y, window_size=None, step_size=None):
     return vectoren
 
 ## Q1 Q2 import
-Q1_list = np.load("End_Product_Code/raw_Q1_data.npy")
-Q2_list = np.load("End_Product_Code/raw_Q2_data.npy")
+Q1_list = np.load("End_Product_Code/raw_Q1_data.npy")[:, 0:1000000]
+Q2_list = np.load("End_Product_Code/raw_Q2_data.npy")[:, 0:1000000]
 
-np.save('End_Product_Code/HoQI_1x_ellipse_parameter_timeseries_stepsize_1.npy', parameters_timeseries(Q1_list[0, :], Q2_list[0, :], window_size=500, step_size=1))
-np.save('End_Product_Code/HoQI_2x_ellipse_parameter_timeseries_stepsize_1.npy', parameters_timeseries(Q1_list[1, :], Q2_list[1, :], window_size=500, step_size=1))
-np.save('End_Product_Code/HoQI_3x_ellipse_parameter_timeseries_stepsize_1.npy', parameters_timeseries(Q1_list[2, :], Q2_list[2, :], window_size=500, step_size=1))
-np.save('End_Product_Code/HoQI_1z_ellipse_parameter_timeseries_stepsize_1.npy', parameters_timeseries(Q1_list[3, :], Q2_list[3, :], window_size=300, step_size=1))
-np.save('End_Product_Code/HoQI_2z_ellipse_parameter_timeseries_stepsize_1.npy', parameters_timeseries(Q1_list[4, :], Q2_list[4, :], window_size=500, step_size=1))
-np.save('End_Product_Code/HoQI_3z_ellipse_parameter_timeseries_stepsize_1.npy', parameters_timeseries(Q1_list[5, :], Q2_list[5, :], window_size=300, step_size=1))
+np.save('End_Product_Code/HoQI_1x_ellipse_parameter_timeseries_stepsize_1.npy', np.repeat(parameters_timeseries(Q1_list[0, :], Q2_list[0, :], window_size=500, step_size=10), 10, axis=0))
+np.save('End_Product_Code/HoQI_2x_ellipse_parameter_timeseries_stepsize_1.npy', np.repeat(parameters_timeseries(Q1_list[1, :], Q2_list[1, :], window_size=500, step_size=10), 10, axis=0))
+np.save('End_Product_Code/HoQI_3x_ellipse_parameter_timeseries_stepsize_1.npy', np.repeat(parameters_timeseries(Q1_list[2, :], Q2_list[2, :], window_size=500, step_size=10), 10, axis=0))
+np.save('End_Product_Code/HoQI_1z_ellipse_parameter_timeseries_stepsize_1.npy', np.repeat(parameters_timeseries(Q1_list[3, :], Q2_list[3, :], window_size=300, step_size=10), 10, axis=0))
+np.save('End_Product_Code/HoQI_2z_ellipse_parameter_timeseries_stepsize_1.npy', np.repeat(parameters_timeseries(Q1_list[4, :], Q2_list[4, :], window_size=500, step_size=10), 10, axis=0))
+np.save('End_Product_Code/HoQI_3z_ellipse_parameter_timeseries_stepsize_1.npy', np.repeat(parameters_timeseries(Q1_list[5, :], Q2_list[5, :], window_size=300, step_size=10), 10, axis=0))
