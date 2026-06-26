@@ -15,9 +15,13 @@ Ellipse-parameter order:
 Note, you might need to first make the right parameter timeseries. The code for this will be at the start of this file.
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Make sure to set LOAD_PARAMETERS_TIMESERIES to True when running this file for the first tima and set it to
 False after the correct files are saved. Alse make sure to load them again (set to True) when you want to change the length,
 
+=======
+Make sure to uncomment this when this when the np.array's are saved correctly.
+>>>>>>> Stashed changes
 =======
 Make sure to uncomment this when this when the np.array's are saved correctly.
 >>>>>>> Stashed changes
@@ -43,7 +47,11 @@ from scipy.optimize import least_squares
 # ============================================================
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 LOAD_PARAMETERS_TIMESERIES = True # Set to true for the first run and set to false if the files are already exported
+=======
+LOAD_PARAMETERS_TIMESERIES = True # Set to true for the first run]
+>>>>>>> Stashed changes
 =======
 LOAD_PARAMETERS_TIMESERIES = True # Set to true for the first run]
 >>>>>>> Stashed changes
@@ -77,17 +85,21 @@ BASE_DIR = Path(
     r"\Project-natuurkunde-sterrenkunde-1-Groep-22"
 )
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+#<<<<<<< Updated upstream
+#<<<<<<< Updated upstream
+#<<<<<<< Updated upstream
 HOQI_FILE = BASE_DIR / "End_Product_Code" / "single_ellipse_HoQI_displacement_data.npy"
-=======
+#=======
 HOQI_FILE = BASE_DIR / "Data_Analysis_Part_1" / "fitted_six_vct_list.npy"
->>>>>>> Stashed changes
-=======
+#>>>>>>> Stashed changes
+#=======
 HOQI_FILE = BASE_DIR / "Data_Analysis_Part_1" / "fitted_six_vct_list.npy"
->>>>>>> Stashed changes
+#>>>>>>> Stashed changes
+#=======
+HOQI_FILE = BASE_DIR / "Data_Analysis_Part_1" / "fitted_six_vct_list.npy"
+#>>>>>>> Stashed changes
 PARAMETER_FILE = BASE_DIR / "End_Product_Code" / (
-    f"HoQI_{SELECTED_HOQI}_ellipse_parameter_timeseries_stepsize_{PARAMETER_STEP_SIZE}.npy"
+    f"HoQI_{SELECTED_HOQI}_ellipse_parameter_timeseries_stepsize_1.npy"
 )
 
 RAW_Q1_FILE = BASE_DIR / "End_Product_Code" / "raw_Q1_data.npy"
@@ -283,7 +295,7 @@ if LOAD_PARAMETERS_TIMESERIES:
 
     for i, hoqi_name in enumerate(HOQI_NAMES):
         output_file = BASE_DIR / "End_Product_Code" / (
-            f"HoQI_{hoqi_name}_ellipse_parameter_timeseries_stepsize_{PARAMETER_STEP_SIZE}.npy"
+            f"HoQI_{hoqi_name}_ellipse_parameter_timeseries_stepsize_1.npy"
         )
 
         np.save(
@@ -327,7 +339,11 @@ def load_and_align_data(center_shift: int) -> tuple[np.ndarray, np.ndarray]:
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     X = hoqis[x_start:x_end].T @ matrix.T
+=======
+    X = hoqis[x_start:x_end] @ matrix.T
+>>>>>>> Stashed changes
 =======
     X = hoqis[x_start:x_end] @ matrix.T
 >>>>>>> Stashed changes
