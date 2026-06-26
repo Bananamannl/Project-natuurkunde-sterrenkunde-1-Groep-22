@@ -1,7 +1,5 @@
 """
-Clean kNN analysis script for ellipse-parameter prediction.
-
-This script:
+This file:
 1. Loads HoQI displacement data and fitted ellipse parameters.
 2. Aligns both arrays using a configurable center shift.
 3. Searches for the best kNN parameters.
@@ -9,26 +7,13 @@ This script:
 5. Evaluates the final passive and active models on common test blocks.
 6. Saves and plots the predicted ellipse parameters.
 
-Ellipse-parameter order:
+Ellipse-parameter:
 [x0, y0, a, b, theta]
 
 Note, you might need to first make the right parameter timeseries. The code for this will be at the start of this file.
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 Make sure to set LOAD_PARAMETERS_TIMESERIES to True when running this file for the first tima and set it to
-False after the correct files are saved. Alse make sure to load them again (set to True) when you want to change the length,
-
-=======
-Make sure to uncomment this when this when the np.array's are saved correctly.
->>>>>>> Stashed changes
-=======
-Make sure to uncomment this when this when the np.array's are saved correctly.
->>>>>>> Stashed changes
-=======
-Make sure to uncomment this when this when the np.array's are saved correctly.
->>>>>>> Stashed changes
-
+False after the correct files are saved. Also make sure to load them again (set to True) when you want to change the length,
 """
 
 from pathlib import Path
