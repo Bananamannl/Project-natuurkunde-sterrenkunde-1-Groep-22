@@ -1,8 +1,21 @@
 import numpy as np
 import pyvista as pv
 
+"""
+This file is mean to show the correlation between the ellipse parameters and the movement in the orthogonal plane.
+For this file to work you need the ellipse parameters timeseries saved as a numpy array. This file can be saved in the pnn_plots_and_data
+file. 
+You can select which HoQI you want to look at (1x, 2x, 3x, 1z, 2z, 3z). We made some changes to some other code and didn't have the time 
+yet to run everything and test this file, so hopefully it works right of the bat and otherwise Claude might have to do some debugging :)
+The output should be a 3d plot that has the ellipse parameter you are interested in on the z axis and the orthogonal position on the x-y plane.
+By pressing n you can switch between parameters and with the slide you can look at the change over time. 
+By changing USES_WINDOW_SIZE you can increase or decrease the amount of point in a single window.
+
+"""
 # Settings:
 HoQI = "1x"
+
+USED_WINDOW_SIZE = 5000
 
 HoQIs = np.load("End_Product_Code/single_ellipse_HoQI_displacement_data.npy")
 
@@ -298,4 +311,4 @@ def slider_plot_parameters(HoQI, HoQIs, parameters, window_size=50000, point_siz
 
     plotter.show()
 
-slider_plot_parameters(HoQI, HoQIs=HoQIs, parameters=parameters)
+slider_plot_parameters(HoQI, HoQIs=HoQIs, window_size=USED_WINDOW_SIZE, parameters=parameters)
