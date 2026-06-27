@@ -1,0 +1,190 @@
+29-05-2026 16:29 - Berichten en gesprekken worden end-to-end versleuteld. Alleen mensen in deze chat kunnen ze lezen, beluisteren of delen. *Meer informatie*
+29-05-2026 16:29 - ‎Merijn heeft de groep Astro Particle Physics Project, Bachelor year 1 gemaakt
+29-05-2026 16:29 - ‎Merijn heeft je toegevoegd
+01-06-2026 10:03 - ‎Merijn heeft Joshua Dijksman toegevoegd
+01-06-2026 10:04 - Merijn: I have now also added Joshua, so that he can see the communication between all of us in here
+01-06-2026 13:11 - Kesse: Hello Johannes Lehmann,
+
+We would like to discuss the schedule for the upcoming weeks a bit more, so that we all have a clear vision about what to expect. We understand it's a full time project and we are absolutely prepared to treat it like that, but the four of us would prefer to have some time away from location on weekdays, so that we have time for personal activities, such as work and driving lessons, as well. A day off on Wednesday would suit us the best, so please let us know if that's possible and okay with you too. Concerning the rest of the working days, we are prepared to be physically at location from 9-17. If work seems done for the day and if the program allows it, we could of course leave earlier, but the initial plan will always be to get the most out of a day. This schedule would enable us to achieve the required number of 80 hours of laboratory work / work on the experiment with a good margin.
+
+We would like to hear your opinion and possible suggestions, especially if something is not feasible or not realistic. 
+
+Thanks in advance and see you tomorrow!
+01-06-2026 13:56 - Johannes Lehmann: Hi Kesse,
+taking off the Wednesdays seems fine to me. Concerning the project schedule, from our side we wanted to treat it like our work usually goes: There is a huge amount of topics that could be investigated deeply and we just try to pick what is most relevant and see how far we get. Similarly, we came up with a few suggestions to get you started and then react based on the progress. So it would be difficult for me to define something like being "done for the day", but it gives you more flexibility too. I hope this will be a bit more clear once we get into it, but if you have comments/questions about this, of course let me know.
+01-06-2026 15:37 - Kesse: Hi,
+
+Thanks for the quick reaction! That sounds like a good schedule. We're very excited to get going and to see what topics you had in mind for us. We'll be present at Nikhef tomorrow morning at 9 o'clock. 🙂
+02-06-2026 12:55 - Johannes Lehmann: https://surfdrive.surf.nl/s/9Tp7TH9nw65oELM
+02-06-2026 13:10 - Johannes Lehmann: The other people present at the meeting were Michele Valentini, Abhay Karia, Armin Numic
+02-06-2026 13:10 - Johannes Lehmann: https://surfdrive.surf.nl/s/aTggTYkKfdoCTC4
+this link contains data
+04-06-2026 09:46 - Johannes Lehmann: Just as a little addition to our discussion: It is correct that there was also a factor 2 missing in the RX matrix. So the total factor before the brackets would be 2/(3R)
+04-06-2026 09:51 - Timo: Nice! We where just looking at that. We will correct it, thank you!
+04-06-2026 10:24 - Kesse: Yeah that was indeed what I was talking about. Thanks for double checking! And we also understand the errors we made yesterday, it was just a case of switching some cosines with 1/cosines. Thanks again!
+04-06-2026 10:27 - Johannes Lehmann: sorry, then I misunderstood! I thought you only wanted to add the factor of 2 to the second and third sensor, not the first one. Just to be clear, the entries inside of the bracket were all correct for RX.
+04-06-2026 10:52 - Timo: ‎IMG-20260604-WA0001.jpg (bestand bijgevoegd)
+Oké, so for clarity. Which one is correct? We thought the upper one, but we’re not sure
+04-06-2026 11:00 - Johannes Lehmann: The lower one is correct, because the entries of the bracket are defined by having to subtract all other degrees of freedom. All of them see Z motion similarly, so the sum of the individual factors needs to be 0. 1_z sees no RY motion and the other sensors see it the same way, with different signs, so the factors of 2_z and 3_z need to be identical. Once this is set, you insert the sensitivity of each sensor to the intended RX signal. This is R for 1_z, -0.5R for 2_z and -0.5R for 3_z. So the output of the bracket becomes (R-0.5*(-0.5R)-0.5*(-0.5R))=1.5R. So you need to divide the whole signal by this factor to calibrate it to radians.
+04-06-2026 13:11 - Kesse: Sounds very reasonable, but I still have a question. The infinitesimal arc length dl around a circle is equal to Rdφ. As we only take the component of the arm length perpendicular to the axis we're rotating around, the second and third arm are dealing with a shorter arm length (R/2, to be precise). Thus in order to rotate the same amount of radians around the regarding axis, the second and third arm will measure a shorter length, so in order to compensate for that, we need do divide by R/2 or multiple by 2/R. We used the same logic with Ry, where we have two 2/sqrt3 factors. Only in the Rx case, the coefficients don't correctly add up to zero. We don't really get how the same logic can be right one time, and false the other. Could you maybe explain where the mistake is in our thought experiment? Meant to sent this 1.5 hours ago, but forgot to press 'send', sorry 🫪 <Dit bericht is bewerkt>
+04-06-2026 13:12 - Johannes Lehmann: no problem, I will come over for this
+04-06-2026 14:06 - Timo: ‎IMG-20260604-WA0003.jpg (bestand bijgevoegd)
+Hi Johannes, I assume this is not how a Q1, Q2 plot is supposed to look like??
+04-06-2026 14:07 - Johannes Lehmann: It can be, I will come over to discuss
+04-06-2026 14:08 - Timo: Oké thank you
+04-06-2026 16:07 - Timo: Hi Johannes, can you come over for a short end discussion?
+04-06-2026 16:08 - Johannes Lehmann: yes, on my way
+05-06-2026 07:43 - Janne: Hello,
+unfortunately I have fallen ill. I will still come to Nikhef today, but I am taking it easy this morning. If possible, I would like to start around 10:00. I hope you understand. 
+I am sorry.
+Greetings, Janne
+05-06-2026 07:47 - Johannes Lehmann: Hi Janne, of course take it easy. Also, if you are ill, you may want to stay at home entirely. If you still feel eager to work at some point, there should be ways to include you remotely.
+05-06-2026 07:53 - Janne: Thank you for your understanding.
+I think it is indeed better for me to work from home, that way, I won't infect you either.
+I will coordinate with my group members what I can do remotely.
+05-06-2026 12:09 - Timo: We are going to lunch now, can you let us know when you are done? We want to show some amazing things!!
+05-06-2026 12:13 - Kesse: We're sitting at the same table as yesterday
+05-06-2026 12:23 - Johannes Lehmann: sounds good! I will probably only be able to catch up with you around 1, so I will just come to your office then
+05-06-2026 13:38 - Kesse: ‎IMG-20260605-WA0004.jpg (bestand bijgevoegd)
+Small question for you, Johannes: at frequencies > 100 Hz, we see a lot of these small peaks. Are these real peaks, or is it just noise that we're not interested in?
+05-06-2026 13:38 - Kesse: Because the amount of peak frequencies now increases quite drastically at > 100 Hz, which seems a bit strange / unwanted <Dit bericht is bewerkt>
+05-06-2026 13:40 - Johannes Lehmann: Unwanted definitely, but most of them, if not all, are real. Many mechanical structures have all sorts of bending modes in this range
+05-06-2026 13:41 - Johannes Lehmann: You are probably just measuring the platform motion there
+05-06-2026 13:50 - Kesse: Ahh okay
+05-06-2026 13:50 - Kesse: Thanks!
+05-06-2026 15:25 - Timo: Johannes, can you come by? We want to show you something an ask a few things
+05-06-2026 15:27 - Johannes Lehmann: Yes, coming in a few minutes
+05-06-2026 16:34 - Kesse: I was thinking on the way to the train, the 3z HoQI measurements had a strong negative correlation with the 2z ellipse parameters except for one. I don't remember which one, but if there's a correlation with a, there should be one with b and with the area as well, and if there's one with x0, there should be one with y0 as well, so then θ remains as the only possible exception. The then correlating parameters are all dependent on that 8 maybe not being an 8. This suggests that a strong 3z oscillation could have disturbed the beam splitters in the second arm, throwing off the perfect 50/50 split, causing the 2z ellipse to stretch and translate away from the origin
+05-06-2026 16:34 - Kesse: Is such a correlation too far-fetched or could things like this really be an option? Cause I feel like the story is quite far-fetched now haha
+05-06-2026 17:01 - Johannes Lehmann: For a vertical oscillation this should indeed not happen, because the beam splitters are hit at the same spot and the motion is surely not fast enough to cause a doppler shift. It could always be that the actual cause is correlated to both signals, e.g. a lot of things can correlate displacement signals in horizontal and vertical sensors. If it is an actual fast motion compared to your sampling time, this could also be an issue. So you may want to check if the correlation depends on the position or rather the velocity.
+05-06-2026 17:31 - Kesse: Okay, I see! We will then transform the displacement data of the direct HoQI measurments into velocity data to see if that changes the correlation matrix in any way, also allowing us to check whether the associated correlations are of dynamical or geometrical/optical nature
+05-06-2026 17:33 - Timo: Yes, sound like a good plan. Earlier I was wondering weather to use de velocity or the position, so next week we can check if it makes a difference
+05-06-2026 17:36 - Timo: I also want to check how the window and step size effects the matrix
+05-06-2026 17:36 - Kesse: Yeah I think the ellipse parameters might actually be more correlated to velocity than the actual position. At least, that's what feels more intuitive to me. We'll just have to substract every position measurement off the next measurement and divide by 0.001s to get the velocity data, so that shouldn't be a problem
+05-06-2026 17:38 - Kesse: Good one. I suggest we just take a look at some different values of the window and step size for a few matrices and see what size generally comes out the best, and then to just stick to that size considering concistency
+05-06-2026 17:55 - Timo: Yeah, we will have to look at the best way to set those parameters to get the most realistic results, I will think about that this weekend and we will try out some different things next week
+05-06-2026 18:00 - Timo: @⁨Johannes Lehmann⁩, do you think it is more useful to look at the correlation between the direct HoQI measurements and the ellips parameters or the displacements in all DOF and the ellips parm.?
+05-06-2026 20:50 - Johannes Lehmann: Concerning the question of displacement vs velocity, still most effects that I am aware of are rather displacement dependent than velocity. It is still interesting to take a look at both, but it could e.g. also be that there is no clear correlation to the velocity but rather a "critical velocity", above which things suddenly are very different. Once you have the data, there should be ways to test them against both possibilities. 
+About the last question, it is another case of either doing a blind search for effects that we did not expect (then just try everything) or the one effect (misalignment) that seems obvious and should be checked carefully because even a null-result would be a strong statement. For misalignment, you could in principle make a new matrix, which calculates the motion in the orthogonal plane (vertical and horizontal, or maybe just the total distance) to each hoqi. One direction of misalignment would just be the other hoqi sitting at the same corner station, but the other direction can also be constructed from the other sensors.
+05-06-2026 23:02 - Kesse: Alright! I guess it can never hurt to check all possibilities, so we indeed might as well just take a look at the velocity, and if there's a correlation, see if there's a critical velocity as well, or if it's just a constant velocity-dependent correlation. Since changes of the ellips parameters are mostly due to potential disturbances in the optical elements, the existence of a critical velocity would seem pretty logical.
+
+About the misalignment, I don't think we fully understand what you mean by that. I assume it has something to do with the laser beam not falling perfectly on the photo detector anymore, which would be caused by motion perpendicular to the arm - or the motion in the orthogonal plane you were talking about. However, those motions are already measured by the associated HoQI's themselves, so what exactly would that matrix be for? <Dit bericht is bewerkt>
+06-06-2026 07:53 - Johannes Lehmann: That's right. For the effect related to the critical velocity, I was mostly thinking of the detection chain (PDs, electronics, digitisation), because a fast change in the optical power might not be detected fully (low-passed). This would then also affect the ellipse, especially the radii. 
+With misalignment I mean the motion that each specific HoQI is not meant to be sensitive to (orthogonal plane to the sensitive axis). This motion shifts the reflected laser beam with respect to the laser beam in the reference arm of the interferometer, so the fringe visibility decreases, and technically the PDs could also be partly missed or the optical elements could change behaviour. It is true, that one axis of misalignment of e.g. 1_x is measured by 1_z, but misalignment can also happen in the horizontal direction and 1_x can not measure this by itself. So a matrix from 2_x and 3_x could instead tell you how much the mass moved in this direction.
+06-06-2026 14:20 - Kesse: Ahh okay now I get what you meant with the misalignment 😄 So as for the velocity, a low-passed change in optical power would affect the radii of the ellipse to a lesser extent than it should have based on the intensity of the change. The minimum velocity that would cause such a lower-than-expected change in the ellipse parameters (or radii, since they are most affected by a power change), is then what we would call the critical velocity, I assume?
+
+And as for the misalignment, that's indeed quite an interesting analysis to do now I understand it! We could then, for each of the six HoQI's, make a time series of the associated ellipse radii and compare it with a time series of the displacement in the y and z direction, both in the ortogonal plane of that particular HoQI. I'd then expect a negative correlation, since motion perpendicular to the measurement direction of the relevant HoQI would worsen the alignment of the two interfering laser beams, thus decreasing the fringe visibility and the ellipse radii (plus potential extra decreases in the radii due to the laser beams partly missing the PDs / the optical elements not working properly anymore, like you said). We could then also here check if the extent of misalignment (so the magnitude of the correlation) is dependent on displacement and/or velocity. The displacement in the z direction is of course measured by the other HoQI in the same arm; about the y direction, I think it's just a matter of shifting the y and x axis of our main coordinate system until one of them (preferably the y axis) is aligned with the relevant arm, so that our transformation matrix would stay mostly intact. Because in that case, we would just have to change the position in the matrix of some of the indices (the 1, 2 and 3) without actually changing the matrix elements completely. 
+
+Moral of the story: a lot of exciting stuff still ahead. Enjoy your weekend, all! 🙂 <Dit bericht is bewerkt>
+06-06-2026 14:20 - Kesse: Oops, that's quite a long story 😅 <Dit bericht is bewerkt>
+06-06-2026 15:30 - Johannes Lehmann: I would rather say it in this way: A change in the optical power due to a phase change in the interferometer should *not* change the radii of the ellipse at all, but if you are in the regime above the corner frequency of the lowpass (=above the critical velocity), the radii change while the mass is moving. The radii would then be velocity dependent, but only above this critical velocity. 
+
+The part about the misalignment is exactly correct! And you are right that the coordinate transformation is fairly straightforward. 
+
+Enjoy your weekend too!
+07-06-2026 19:09 - Timo: Hi Johannes, tomorrow we will start at 11. We start the day with a lecture at Science Park. 
+See you tomorrow!👋
+07-06-2026 19:12 - Johannes Lehmann: Oh right, thanks for the reminder! See you tomorrow
+08-06-2026 12:09 - Johannes Lehmann: Just fyi, I went for lunch directly. See you there
+09-06-2026 11:19 - Timo: Good morning Johannes, can you come by. We have some things to show you
+09-06-2026 11:20 - Johannes Lehmann: yes, on my way
+09-06-2026 13:02 - Timo: We are at the table tennis table, we will go back to the masters room shortly
+09-06-2026 13:03 - Johannes Lehmann: sure, no problem :)
+09-06-2026 13:07 - Timo: We are going back now
+09-06-2026 13:09 - Kesse: Also, Timo and I fixed the issue we had with the (norm, phase) diagram during the break, so we have a nice thin circle again and an oscillation around norm=1 (which is the Lissajous around the circle)
+09-06-2026 13:09 - Johannes Lehmann: ah nice, then I would drop by to take a look
+09-06-2026 15:10 - Timo: ‎IMG-20260609-WA0005.jpg (bestand bijgevoegd)
+🥳🥳🥳
+09-06-2026 15:10 - Kesse: We have a repeating oscillation of the ellipse parameters 🥳🥳🥳
+09-06-2026 15:15 - Johannes Lehmann: oh nice! 🥳
+09-06-2026 15:55 - Merijn: Okay, so we are mostly finished for today. @⁨Johannes Lehmann⁩ do you feel that it would be useful for you to come by so we can explain where we got so far, or do we do that Thursday morning?
+09-06-2026 15:57 - Johannes Lehmann: I think both are fine, but I can only come down in about 10-15 min, so maybe then it is less stressful to do it Thursday?
+09-06-2026 15:58 - Merijn: sounds good, see you Thursday morning then!
+09-06-2026 18:05 - Kesse: ‎IMG-20260609-WA0006.jpg (bestand bijgevoegd)
+I stayed a bit longer at Nikhef to work out a plan for Thursday. Here's what I came up with.
+
+@⁨Janne⁩ I hope this gives a bit more clarity of what we're actually trying to achieve, and how we're going to do that. If not, just ask a question.
+
+@⁨Timo⁩ I believe we don't actually need a position list because of this modular arithmetic trick in #2, so that simplifies the work a bit.
+
+@⁨Johannes Lehmann⁩ I thought, why not send the overview to you as well? Now you can take a look at it too. :)
+09-06-2026 19:04 - Janne: Thanks i will look at it tomorrow
+09-06-2026 19:31 - Timo: I think this won’t fully work, because we don’t have a constant oscillation for the entire dataset. We need to make the function either only dependent on the orthogonal position or we need a function that only works when the resonance movement is actually active. 
+This is because we want to make an analysis methode to analyse an entire dataset which also reduces the non-linearity’s. So we can’t just assume that some specific orthogonal movement is constantly present.
+09-06-2026 19:39 - Kesse: The spectrograms we plotted are fairly constant over time though, which means the oscillations are so too. We could check for the ellipse parameters to see if the same oscillation really repeats itself from t=0s all the way to t=3000s, but I believe it's a constant oscillation, since the peak frequencies are constant over time as well. 
+So that would mean we can just apply Fourier analysis to the time series of the ellipse parameters, which would give us a function with which we can 'predict' the ellipse parameters for a certain HoQI at a given moment in time. <Dit bericht is bewerkt>
+09-06-2026 19:41 - Timo: I am almost certain we will run into problems if we make those assumptions…
+09-06-2026 19:41 - Timo: But we will check later
+09-06-2026 19:47 - Kesse: I guess we could also apply Fourier analysis to each full oscillation separately, so that we can also account for possible changes in the frequency/period (although that doesn't really seem to be happening, like I said). Only thing then is that it isn't really a Fourier analysis anymore 😅 Wel'll discuss more on Thursday 👍🏼
+09-06-2026 19:48 - Timo: Yes, let’s do that indeed, hahahaha
+10-06-2026 09:52 - Timo: I am really sorry, I couldn’t wait for tomorrow🫣
+10-06-2026 09:52 - Timo: So Kesse’s idea is not fully correct I feel like. It states that we can plot a function parameters(t) on a part of the data to get all the parameters for every time t. But that assumes that the amplitude of a movement in the orthogonal plane is always constant and even that the movement will always stay and not change fase or anything. Those are obviously not correct assumptions, because we all saw the movements change constantly.
+The idea should be to have a function, not dependent on time, but like Johannes said, more like a “lookup table” for the parameters as a function of position in the orthogonal plane. 
+
+Can we all agree on this??
+10-06-2026 10:02 - Kesse: That's partly why I suggested to apply Fourier analysis to each full oscillation separately. In the 3D plots though, I think we did see quite a constant amplitude in the ortogonal plane, no? Not sure though.  
+But I guess we could also just plot the ellipse parameters against the movement in the orthogonal plane. My idea was mainly focused on trying to simplify the analysis, cause with the movement in the orthogonal plane instead of the time, you would have to fit a multi-variable function, which might not be one-to-one as well. But I guess, if we get the code to work, it's easier to apply on other data sets as well, and probably more trustworthy.
+10-06-2026 10:11 - Timo: No, we looked at a couple of seconds and in that timespan it was constant. I think it isn’t constant over the whole time. 
+
+I agree that it will be more difficult, but I think it is the only realizable way. We will have to think a whole lot about it how we realize it, but I’d say just try it.
+11-06-2026 14:23 - Timo: Hi @⁨Johannes Lehmann⁩, if you want we can show you some things now
+11-06-2026 14:24 - Johannes Lehmann: ok, on my way
+12-06-2026 09:19 - Timo: Good morning, we are back at Nikhef! If you want you can come by in a minute so we can show you some results!
+12-06-2026 09:20 - Johannes Lehmann: Alright, see you in a minute!
+12-06-2026 15:48 - Timo: @⁨Johannes Lehmann⁩ can you come at 16:00 as well?
+12-06-2026 16:02 - Johannes Lehmann: Still in another meeting, sorry
+12-06-2026 17:21 - Timo: No problem!!
+15-06-2026 08:33 - Johannes Lehmann: Good morning, today I am free for most of the day again, so let me know if you want to discuss anything
+15-06-2026 08:34 - Timo: Great!! I think we can start the day around 09:30 with a discussion of the meeting with Conor on Friday and then get some of your thoughts about our remaining tasks!
+15-06-2026 08:35 - Johannes Lehmann: sounds good!
+15-06-2026 10:04 - Johannes Lehmann: ‎IMG-20260615-WA0005.jpg (bestand bijgevoegd)
+This is the plot I just showed in the meeting
+15-06-2026 11:43 - Timo: Hi @⁨Johannes Lehmann⁩, can I ask you a quick question?
+15-06-2026 11:45 - Johannes Lehmann: Yes, I will come down
+15-06-2026 15:28 - Kesse: @⁨Johannes Lehmann⁩ We've created some cool plots, so maybe you can come over so that we can show you the results of today? Cause I think some of us have to leave shortly <Dit bericht is bewerkt>
+15-06-2026 15:29 - Johannes Lehmann: alright, on my way
+16-06-2026 09:54 - Kesse: Hi @⁨Johannes Lehmann⁩, could you come by to discuss a few things?
+16-06-2026 09:58 - Johannes Lehmann: yes, coming
+18-06-2026 15:47 - Timo: Hi Johannes, today we worked on a couple of different things. If you want we can show you what we did in a minute. We are in the fourth floor in the library.
+18-06-2026 15:48 - Johannes Lehmann: ok, I will come over
+18-06-2026 15:52 - Johannes Lehmann: Actually...which library do you mean? 😄
+18-06-2026 15:53 - Timo: I will come to the staircase
+18-06-2026 15:54 - Timo: We are at the veltman centre
+18-06-2026 17:14 - Kesse: ‎Project Poster (NS1) - Group 22.png (bestand bijgevoegd)
+Project Poster (NS1) - Group 22.png
+18-06-2026 17:18 - Johannes Lehmann: Thank you! I will take a look later
+18-06-2026 17:33 - Kesse: Yeah that's perfectly fine! No need to rush 🙃
+19-06-2026 09:05 - Johannes Lehmann: Good morning, I only have a few comments on the poster. Let me know when I should come over to discuss them
+19-06-2026 09:06 - Timo: Alright, that’s great! We start this morning with giving feedback to our peers, ones we are done we will message you!
+19-06-2026 09:13 - Kesse: Sounds good! I know Janne and I were stuck in the 08:41 train for 20 minutes. Train wouldn't start, the doors wouldn't open, and after a while, everything shut down (lights, screens, etc.). At like 08:55, they finally managed to open the doors, but the next train had already left at that point, so we're now both in an overcrowded train (the 09:11 one). 😅 I think 11:00 is a good time to discuss the poster? 'Cause that's when the deadline for us giving peer feedback is as well <Dit bericht is bewerkt>
+19-06-2026 09:15 - Johannes Lehmann: Oof, then good luck with this train at least! 11 sounds good
+19-06-2026 14:15 - Timo: Hi Johannes, do you have some more pictures of the setup or maybe of only the mass?
+19-06-2026 14:40 - Johannes Lehmann: Hmm, always a bit difficult to find good ones, also depends a bit on what you want to show with that. There are some nice CAD renders in the two theses I put in our shared folder (in the van Dongen thesis it would be figure 3.5 or in the mitchell thesis figure 5.2). In the mitchell thesis, also figure 5.10 are some decent photos before we added more things to the setup. Is this closer to what you were looking for?
+19-06-2026 14:56 - Timo: Ah thx!!!
+19-06-2026 15:47 - Timo: Is it correct that the setup here at nikhef will be the only active stage in the final suspention?
+19-06-2026 15:51 - Johannes Lehmann: If you call it "active isolation stage" yes. Some other stages have active damping, but this is just to reduce the quality factor of their resonances.
+22-06-2026 09:49 - Timo: Good morning @⁨Johannes Lehmann⁩, if you want we can explain our plans for today. We are at the library again.
+22-06-2026 09:57 - Johannes Lehmann: Good morning. Unfortunately, it seems that I caught a cold, so I can't be in today. We could have a call later, just need to sort out a few things first
+22-06-2026 10:03 - Kesse: Oh that's too bad! Get well soon in that case 🙂 I'm sure we can get to work on our own, we have lots of stuff to do today. We mainly wanted you to ask about the poster. We now have two versions of the poster, both with a different colouring scheme. If we sent them to you, would you mind taking a quick look at them to see which design you like more? You'd only need to look at the style of the poster, the content itself we have pretty much sorted out 👍🏼 <Dit bericht is bewerkt>
+22-06-2026 10:04 - Johannes Lehmann: yes I can do that, no problem
+22-06-2026 10:07 - Kesse: 
+22-06-2026 10:07 - Kesse: ‎IMG-20260619-WA0009.jpg (bestand bijgevoegd)
+Great, thanks so much! These are the two versions we're dealing with at the moment, and we can't really make up our mind 😅 (About the figures, we still need to let them blend in with the background, but we'll work on that later today)
+22-06-2026 10:07 - Kesse: ‎IMG-20260622-WA0001.jpg (bestand bijgevoegd)
+22-06-2026 10:19 - Johannes Lehmann: To be honest, I do not have a clear favourite. The first one might look a bit more fun because of the colour gradient, but in some places this also makes it slightly harder to read than the second one. But I think both look very good!
+22-06-2026 16:11 - Janne: Hi Johannes,
+
+Could you maybe ask Conor if it would be possible to have the presentation tomorrow afternoon?
+22-06-2026 16:45 - Johannes Lehmann: Hi Janne, 
+he is not working today, but I forwarded the previous mail, now with his correct address, so maybe he will still respond.
+23-06-2026 11:06 - Merijn: He Johannes, are you feeling better today and will be be there for our presentation at 14:30 today?
+23-06-2026 11:09 - Merijn: Or wil you be joining us online otherwise?
+23-06-2026 11:11 - Johannes Lehmann: Hi Merijn,
+I am sadly not well enough to be there in person, but I will join online. Sorry that we have to wrap this up in such an unpersonal way
+23-06-2026 11:13 - Merijn: No worries, I hope you feel better soon. And don't worry about the 'unpersonal' handoff, we already enjoyed your help throughout the whole project tremendously.
+23-06-2026 11:14 - Johannes Lehmann: thanks and I am glad to hear that :)
+25-06-2026 09:26 - Timo: Hi Johannes, 
+Are you at Nikhef today? If so, we'd be happy to drop by your office for a quick thank you!
+25-06-2026 09:47 - Johannes Lehmann: Hi Timo, yes I will be back in about 15 minutes 🙂
+25-06-2026 11:18 - Timo: Okay! Can we come by your office in a a few minutes?
+25-06-2026 11:19 - Johannes Lehmann: yes
